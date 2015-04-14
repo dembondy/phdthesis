@@ -1,17 +1,11 @@
 =================================
-Laursen's XeLaTeX thesis template
+PhD Thesis: Validation of Control Services in the Future Sustainable Power System
 =================================
 
-This is an alternative to the "LUKE'S PHD THESIS TEMPLATE 1.2" used as standard layout for the
-thesis written at DTU Compute.
+This contains the source latex files for the PhD thesis.
+The design is based on Laursen's XeLaTeX thesis template (used as standard layout for the thesis written at DTU Compute) and the Tufte-LaTeX package.
 
-The template is using the `Memoir class <http://www.ctan.org/tex-archive/macros/latex/contrib/memoir/>`_ 
-which includes a lot of useful and predefined commands. See the "Miscellaneous" chapter of the 
-`Memoir manual <http://tug.ctan.org/tex-archive/macros/latex/contrib/memoir/memman.pdf>`_. 
-Furthermore it uses XeLaTeX for maximum unicode support local fonts.
-
-An updated version of the code can be downloaded from the
-`repository at bitbucket.org <https://bitbucket.org/_laursen/laursens-xelatex-thesis-template/>`_.
+It uses XeLaTeX for maximum unicode support local fonts.
 
 
 Options
