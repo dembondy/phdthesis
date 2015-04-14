@@ -1,0 +1,256 @@
+%!TEX root = ../Thesis.tex
+\RequirePackage[l2tabu,orthodox]{nag} % Old habits die hard
+
+\documentclass[a4paper,twoside,justified]{tufte-book}
+\RequireXeTeX
+
+
+% Large environments
+%\usepackage{microtype}
+\usepackage{mathtools}
+\usepackage{listings}                 % Source code printer for LaTeX
+\usepackage{tikz}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+%\setmainfont{Junicode}
+
+\usepackage{makeidx}
+
+
+
+% Links
+%\usepackage[hyphens]{url}             % Allow hyphens in URL's
+%\makeatletter
+%%% Adjust so gatherings is allowd for single sheets too! (hacking functions in memoir.dtx)
+%%\patchcmd{\leavespergathering}{\ifnum\@memcnta<\tw@}{\ifnum\@memcnta<\@ne}{
+%%    \leavespergathering{1}
+%%    % Insert the frieze
+%%    \patchcmd{\@memensuresigpages}{\repeat}{\repeat\frieze}{}{}
+%%}{}
+%%\makeatother\usepackage[unicode=false,psdextra]{hyperref}                 % References package
+
+% Graphics and colors
+\usepackage{graphicx}                 % Including graphics and using colours
+\usepackage{xcolor}                   % Defined more color names
+\usepackage{eso-pic}                  % Watermark and other bag
+\usepackage{preamble/dtucolors}
+\graphicspath{{graphics/}}
+
+% Language
+\usepackage{polyglossia}    % multilingual typesetting and appropriate hyphenation
+\setdefaultlanguage{english}
+
+% Floating objets, captions and references
+\usepackage[noabbrev,nameinlink,capitalise]{cleveref} % Clever references. Options: "fig. !1!" --> "!Figure 1!"
+%\hangcaption
+%\captionnamefont{\bfseries}
+%\subcaptionlabelfont{\bfseries}
+%\newsubfloat{figure}
+%\newsubfloat{table}
+%\letcountercounter{figure}{table}     % Consecutive table and figure numbering
+
+% Table of contents (TOC)
+\setcounter{tocdepth}{1}              % Depth of table of content
+\setcounter{secnumdepth}{2}           % Depth of section numbering
+
+% Todos
+\usepackage{totcount}                 % For total counting of counters
+\def\todoshowing{}
+\ifnum\strcmp{\showtodos}{false}=0
+    \def\todoshowing{disable}
+\fi
+\usepackage[colorinlistoftodos,\todoshowing]{todonotes} % Todonotes package for nice todos
+\newtotcounter{todocounter}           % Creates counter in todo
+\let\oldtodo\todo
+\newcommand*{\newtodo}[2][]{\stepcounter{todocounter}\oldtodo[#1]{\thesection~(\thetodocounter)~#2}}
+\let\todo\newtodo
+\let\oldmissingfigure\missingfigure
+\newcommand*{\newmissingfigure}[2][]{\stepcounter{todocounter}\oldmissingfigure[#1]{\thesection~(\thetodocounter)~#2}}
+\let\missingfigure\newmissingfigure
+\makeatletter
+\newcommand*{\mylistoftodos}{% Only show list if there are todos
+\if@todonotes@disabled
+\else
+    \ifnum\totvalue{todocounter}>0
+        \markboth{\@todonotes@todolistname}{\@todonotes@todolistname}
+        \phantomsection\todototoc
+        \listoftodos
+    \else
+    \fi
+\fi
+}
+\makeatother
+\newcommand{\lesstodo}[2][]{\todo[color=green!40,#1]{#2}}
+\newcommand{\moretodo}[2][]{\todo[color=red!40,#1]{#2}}
+
+% Chapterstyle
+\makeatletter
+\titleformat{\chapter}%
+      [display]% shape
+      {\begin{minipage}{\linewidth}}% format applied to label+text
+      {\Huge\sffamily\allcaps\bfseries\textcolor{dtugray}{Chapter} \textcolor{dtured}{\thechapter}}% label
+      {0pt}% horizontal separation between label and title body
+      {\Huge\sffamily}% before the title body
+      [\end{minipage}]% after the title body
+\makeatother
+
+% section format
+\makeatletter
+\titleformat{\section}%
+      {\Large\sffamily\allcaps\bfseries}{\textcolor{dtured}{\thesection}}% label
+      {2pt}% horizontal separation between label and title body
+      {}
+\makeatother
+
+% subsection format
+\titleformat{\subsection}%
+  {\normalfont\sffamily}% format applied to label+text
+  {\textcolor{dtured}{\thesubsection}}
+  {1pt}
+  {}
+  []
+
+%% 
+% Formatting of the Table of Contents
+\ifthenelse{\boolean{@tufte@toc}}{%
+  \titlecontents{part}% FIXME
+    [0em] % distance from left margin
+    {\vspace{1.5\baselineskip}\begin{fullwidth}\LARGE\sffamily} % above (global formatting of entry)
+    {\contentslabel{2em}} % before w/label (label = ``II'')
+    {} % before w/o label
+    {\sffamily\upshape\qquad\thecontentspage} % filler + page (leaders and page num)
+    [\end{fullwidth}] % after
+  \titlecontents{chapter}%
+    [0em] % distance from left margin
+    {\vspace{1.5\baselineskip}\begin{fullwidth}\LARGE\sffamily} % above (global formatting of entry)
+    {\hspace*{0em}\contentslabel{2em}} % before w/label (label = ``2'')
+    {\hspace*{0em}} % before w/o label
+    {\sffamily\upshape\qquad\textcolor{dtured}{\thecontentspage}} % filler + page (leaders and page num)
+    [\end{fullwidth}] % after
+  \titlecontents{section}% FIXME
+    [0em] % distance from left margin
+    {\vspace{0\baselineskip}\begin{fullwidth}\Large\sffamily} % above (global formatting of entry)
+    {\hspace*{2em}\contentslabel{2em}} % before w/label (label = ``2.6'')
+    {\hspace*{2em}} % before w/o label
+    {\sffamily\upshape\qquad\textcolor{dtured}{\thecontentspage}} % filler + page (leaders and page num)
+    [\end{fullwidth}] % after
+  \titlecontents{subsection}% FIXME
+    [0em] % distance from left margin
+    {\vspace{0\baselineskip}\begin{fullwidth}\large\sffamily} % above (global formatting of entry)
+    {\hspace*{4em}\contentslabel{4em}} % before w/label (label = ``2.6.1'')
+    {\hspace*{4em}} % before w/o label
+    {\sffamily\upshape\qquad\textcolor{dtured}{\thecontentspage}} % filler + page (leaders and page num)
+    [\end{fullwidth}] % after
+  \titlecontents{paragraph}% FIXME
+    [0em] % distance from left margin
+    {\vspace{0\baselineskip}\begin{fullwidth}\normalsize\sffamily} % above (global formatting of entry)
+    {\hspace*{6em}\contentslabel{2em}} % before w/label (label = ``2.6.0.0.1'')
+    {\hspace*{6em}} % before w/o label
+    {\sffamily\upshape\qquad\textcolor{dtured}{\thecontentspage}} % filler + page (leaders and page num)
+    [\end{fullwidth}] % after
+}{}
+%\pagestyle{myruled}
+%\copypagestyle{cleared}{myruled}      % When \cleardoublepage, use myruled instead of empty
+%\makeevenhead{cleared}{\hffont\thepage}{}{} % Remove leftmark on cleared pages
+%
+%\makeevenfoot{plain}{}{}{}            % No page number on plain even pages (chapter begin)
+%\makeoddfoot{plain}{}{}{}             % No page number on plain odd pages (chapter begin)
+
+% Hypersetup
+\hypersetup{
+    pdfauthor={\thesisauthor{}},
+    pdftitle={\thesistitle{}},
+    pdfsubject={\thesissubtitle{}},
+    pdfdisplaydoctitle,
+    bookmarksnumbered=true,
+    bookmarksopen,
+    breaklinks,
+    linktoc=all,
+    plainpages=false,
+    unicode=true,
+    colorlinks=false,
+    citebordercolor=dtured,           % color of links to bibliography
+    filebordercolor=dtured,           % color of file links
+    linkbordercolor=dtured,           % color of internal links (change box color with linkbordercolor)
+    urlbordercolor=s13,               % color of external links
+    hidelinks,                        % Do not show boxes or colored links.
+}
+% Hack to make right pdfbookmark link. The normal behavior links just below the chapter title. This hack put the link just above the chapter like any other normal use of \chapter.
+% Another solution can be found in http://tex.stackexchange.com/questions/59359/certain-hyperlinks-memoirhyperref-placed-too-low
+%\makeatletter
+%\renewcommand{\@memb@bchap}{%
+%  \ifnobibintoc\else
+%    \phantomsection
+%    \addcontentsline{toc}{chapter}{\bibname}%
+%  \fi
+%  \chapter*{\bibname}%
+%  \bibmark
+%  \prebibhook
+%}
+%\let\oldtableofcontents\tableofcontents
+%\newcommand{\newtableofcontents}{
+%    \@ifstar{\oldtableofcontents*}{
+%        \phantomsection\addcontentsline{toc}{chapter}{\contentsname}\oldtableofcontents*}}
+%\let\tableofcontents\newtableofcontents
+%\makeatother
+
+% Confidential
+\newcommand{\confidentialbox}[1]{
+    \put(0,0){\parbox[b][\paperheight]{\paperwidth}{
+        \begin{vplace}
+            \centering
+            \scalebox{1.3}{
+                \begin{tikzpicture}
+                    \node[very thick,draw=red!#1,color=red!#1,
+                          rounded corners=2pt,inner sep=8pt,rotate=-20]
+                          {\sffamily \HUGE \MakeUppercase{Confidential}};
+                \end{tikzpicture}
+            }
+        \end{vplace}
+    }}
+}
+
+% Prefrontmatter
+\newcommand{\prefrontmatter}{
+    \pagenumbering{alph}
+    \ifnum\strcmp{\confidential}{true}=0
+        \AddToShipoutPictureBG{\confidentialbox{10}}   % 10% classified box in background on each page
+        \AddToShipoutPictureFG*{\confidentialbox{100}} % 100% classified box in foreground on first page
+    \fi
+}
+
+% DTU frieze
+\newcommand{\frieze}{%
+    \AddToShipoutPicture*{
+        \put(0,0){
+            \parbox[b][\paperheight]{\paperwidth}{%
+                \includegraphics[trim=130mm 0 0 0,width=0.9\textwidth]{DTU-frise-SH-15}
+                \vspace*{2.5cm}
+            }
+        }
+    }
+}
+
+% This is a double sided book. If there is a last empty page lets use it for some fun e.g. the frieze.
+% NB: For a fully functional hack the \clearpage used in \include does some odd thinks with the sequence numbering. Thefore use \input instead of \include at the end of the book. If bibliography is used at last everything should be ok.
+\makeatletter
+% Adjust so gatherings is allowd for single sheets too! (hacking functions in memoir.dtx)
+\patchcmd{\leavespergathering}{\ifnum\@memcnta<\tw@}{\ifnum\@memcnta<\@ne}{
+    \leavespergathering{1}
+    % Insert the frieze
+    \patchcmd{\@memensuresigpages}{\repeat}{\repeat\frieze}{}{}
+}{}
+\makeatother
+
+
+% Some stuff for tufte-book to work with all caps spacing
+\ifxetex
+  \newcommand{\textls}[2][5]{%
+    \begingroup\addfontfeatures{LetterSpace=#1}#2\endgroup
+  }
+  \renewcommand{\allcapsspacing}[1]{\textls[15]{#1}}
+  \renewcommand{\smallcapsspacing}[1]{\textls[10]{#1}}
+  \renewcommand{\allcaps}[1]{\textls[15]{\MakeTextUppercase{#1}}}
+  \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
+  \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
+\fi

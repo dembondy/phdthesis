@@ -1,0 +1,64 @@
+%!TEX root = ../Thesis.tex 
+%%\renewcommand{\maketitle}{
+%%%\thispagestyle{empty}             % No page numbers
+%%%\calccentering{\unitlength}
+%%%\begin{adjustwidth*}{\unitlength}{-\unitlength}
+%%%    \begin{adjustwidth}{-0.5cm}{-0.5cm}
+%%        \sffamily
+%%        \begin{flushright}
+%%            \thesistypeabbr{} Thesis\\*[0cm]
+%%            \thesistype{}%\\
+%%        \end{flushright}
+%%        \vspace*{\fill}
+%%        \noindent
+%%        \includegraphics[width=0.75\textwidth]{CEE_logo}\\*[0.5cm]
+%%        \Huge \thesistitle{}%\\*[0.2cm]
+%%        \LARGE \thesissubtitle{}\\*[1.2cm]
+%%        \parbox[b]{0.5\linewidth}{%
+%%            \large 
+%%            \thesisauthor{}\\*[1.2cm]
+%%            \normalsize
+%%            \thesislocation{} \the\year
+%%        }
+%%        \hfill\includegraphics[scale=0.7]{DTU-logo-CMYK}
+%%%    \end{adjustwidth}
+%%%\end{adjustwidth*}
+%%\normalfont
+%%\normalsize}
+
+\renewcommand{\maketitlepage}[0]{%
+  \cleardoublepage%
+  {%
+  \sffamily%
+  \begin{fullwidth}%
+  \includegraphics[width=0.9\textwidth]{CEE_logo} 
+%  \begin{flushright}
+%  \thesistypeabbr{} Thesis\\*[0cm]
+%  \thesistype{}\\
+%  \end{flushright}
+  \vspace{1cm}%
+  \fontsize{18}{16}\selectfont\par\noindent\textcolor{black}{\allcaps{\thesisauthor}}%
+  \vspace{11.5pc}%
+  \fontsize{24}{22}\selectfont\par\noindent\textcolor{black}{\allcaps{\thesistitle}}%
+  \vfill%
+  \fontsize{14}{16}\selectfont\par\noindent\textcolor{dtugray}{\allcaps{ \thesistypeabbr{} Thesis}}
+\fontsize{14}{16}\selectfont\par\noindent\textcolor{dtugray}{\allcaps{ \thesistype{}}}
+   \vspace*{\fill}
+        \noindent
+        \fontsize{16}{16}\selectfont\par\noindent\textcolor{dtugray}{\allcaps{\thesislocation{} \the\year}}
+  \begin{flushright}
+        \includegraphics[scale=0.7]{DTU-logo-CMYK}
+  \end{flushright}
+  \end{fullwidth}%
+  
+ 
+        
+  }
+  \thispagestyle{empty}%
+  \clearpage%
+}
+%\newsavebox{\titleimage}
+%\savebox{\titleimage}{\includegraphics[width=0.75\textwidth]{CEE_logo}
+%\title{\thesistitle}
+%\author{\thesisauthor}
+%\date{Fall 2015}
