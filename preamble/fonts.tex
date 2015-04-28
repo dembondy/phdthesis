@@ -2,8 +2,9 @@
 
 % Text fonts (http://www.macfreek.nl/memory/Fonts_in_LaTeX)
 % Install fonts from /usr/local/texlive/<version>/texmf-dist/fonts/opentype/public
-\usepackage{fontspec}
 
+\usepackage{fontspec}
+%\usepackage[protrusion=true,expansion=false,final,tracking=false]{microtype}
 % Sans-serif font
 %\setsansfont[
     %Ligatures=TeX,
@@ -18,6 +19,10 @@
 %]{texgyreadventor}
 %\setsansfont[Ligatures=TeX]{Neo Sans Intel}    % Neo Sans Intel – Like DTU font but more symbols
 \setsansfont[Ligatures=TeX]{Neo Sans Std}           % NeoSans – DTU font (missing `+' symbols and other)
+%\setromanfont[Mapping=tex-text]{Adobe Caslon Pro}
+\setromanfont[Mapping=tex-text]{Minion Pro}
+%\setmainfont{Junicode}
+
 %\setsansfont[Ligatures=TeX]{CMU Sans Serif}    % Computer Modern Unicode font
 %\setsansfont[Ligatures=TeX]{Latin Modern Sans} % Latin Modern Sans serif font
 %\setsansfont[
