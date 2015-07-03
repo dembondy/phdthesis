@@ -1,20 +1,44 @@
 %!TEX root = ../Thesis.tex
 \RequirePackage[l2tabu,orthodox]{nag} % Old habits die hard
-
-\documentclass[a4paper,twoside,justified]{tufte-book}
+\RequirePackage{fix-cm} % should be here
+\documentclass[a4paper,twoside,nobib]{tufte-book}
 \RequireXeTeX
+% To quiet figure problems with nag
+\makeatletter
+\g@addto@macro\nag@captions{,@tufte@caption}
+\makeatother
 
+\usepackage{ragged2e}
 
 % Large environments
 %\usepackage{microtype}
 \usepackage{mathtools}
 \usepackage{listings}                 % Source code printer for LaTeX
 \usepackage{tikz}
-
+\usepackage{lettrine}                 % For having the big letter at start of Chapter and section
 \usepackage{makeidx}
+\usepackage[
+	style = numeric,
+	%citestyle = abbrv,
+	%autocite = footnote,
+	backend = biber
+]{biblatex}
+\DeclareCiteCommand{\fcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \mkbibbrackets{\usebibmacro{cite}}%
+   \setunit{\addnbspace}
+   \printnames{labelname}%
+   \setunit{\labelnamepunct}
+   \printfield[citetitle]{title}%
+   \newunit
+   \printfield{year}}
+  {\addsemicolon\space}
+  {\usebibmacro{postnote}}
 
+\DeclareMultiCiteCommand{\footpartcites}[\mkbibfootnote]{\footpartcite}{\addsemicolon\space}
 
-
+\addbibresource{bibliography/Bibliography.bib}
 % Links
 %\usepackage[hyphens]{url}             % Allow hyphens in URL's
 %\makeatletter
@@ -24,7 +48,8 @@
 %%    % Insert the frieze
 %%    \patchcmd{\@memensuresigpages}{\repeat}{\repeat\frieze}{}{}
 %%}{}
-%%\makeatother\usepackage[unicode=false,psdextra]{hyperref}                 % References package
+%%\makeatother
+%\usepackage[unicode=false,psdextra]{hyperref}                 % References package
 
 % Graphics and colors
 \usepackage{graphicx}                 % Including graphics and using colours
@@ -34,9 +59,10 @@
 \graphicspath{{graphics/}}
 
 % Language
-\usepackage{polyglossia}    % multilingual typesetting and appropriate hyphenation
-\setdefaultlanguage{english}
-
+%\usepackage{polyglossia}    % multilingual typesetting and appropriate hyphenation
+%\setdefaultlanguage{english}
+%\setotherlanguage{danish}
+\usepackage[main=english,danish]{babel}
 % Floating objets, captions and references
 \usepackage[noabbrev,nameinlink,capitalise]{cleveref} % Clever references. Options: "fig. !1!" --> "!Figure 1!"
 %\hangcaption
@@ -79,6 +105,19 @@
 \makeatother
 \newcommand{\lesstodo}[2][]{\todo[color=green!40,#1]{#2}}
 \newcommand{\moretodo}[2][]{\todo[color=red!40,#1]{#2}}
+
+% Making the first letter of chapters and sections 
+\setlength{\DefaultNindent}{0pt} % read the doc about it
+
+\newcommand{\newchapter}[2]{%
+   \tuftebreak
+   \noindent\lettrine[lines=3,loversize=0.1]{\textcolor{dtured}{#1}}{#2}%loversize=0.05 the capital fluctuates with the other letters
+}
+\newcommand{\newsection}[2]{%
+   \tuftebreak
+   \noindent\lettrine[lines=2,loversize=0.1]{\textcolor{dtured}{#1}}{#2}%
+}
+
 
 % Chapterstyle
 \makeatletter
@@ -251,3 +290,59 @@
   \renewcommand{\smallcaps}[1]{\smallcapsspacing{\scshape\MakeTextLowercase{#1}}}
   \renewcommand{\textsc}[1]{\smallcapsspacing{\textsmallcaps{#1}}}
 \fi
+
+
+%% for Subfigures
+\usepackage[caption=false,font=footnotesize]{subfig}
+
+% The following is a solution to be able to break subequations. It is written by user700902 at Latex Stack Exchange: http://tex.stackexchange.com/questions/101002/interrupting-and-resuming-subequations
+\makeatletter
+\def\user@resume{resume}
+\def\user@intermezzo{intermezzo}
+%
+\newcounter{previousequation}
+\newcounter{lastsubequation}
+\newcounter{savedparentequation}
+\setcounter{savedparentequation}{1}
+% 
+\renewenvironment{subequations}[1][]{%
+      \def\user@decides{#1}%
+      \setcounter{previousequation}{\value{equation}}%
+      \ifx\user@decides\user@resume 
+           \setcounter{equation}{\value{savedparentequation}}%
+      \else  
+      \ifx\user@decides\user@intermezzo
+           \refstepcounter{equation}%
+      \else
+           \setcounter{lastsubequation}{0}%
+           \refstepcounter{equation}%
+      \fi\fi
+      \protected@edef\theHparentequation{%
+          \@ifundefined {theHequation}\theequation \theHequation}%
+      \protected@edef\theparentequation{\theequation}%
+      \setcounter{parentequation}{\value{equation}}%
+      \ifx\user@decides\user@resume 
+           \setcounter{equation}{\value{lastsubequation}}%
+         \else
+           \setcounter{equation}{0}%
+      \fi
+      \def\theequation  {\theparentequation  \alph{equation}}%
+      \def\theHequation {\theHparentequation \alph{equation}}%
+      \ignorespaces
+}{%
+%  \arabic{equation};\arabic{savedparentequation};\arabic{lastsubequation}
+  \ifx\user@decides\user@resume
+       \setcounter{lastsubequation}{\value{equation}}%
+       \setcounter{equation}{\value{previousequation}}%
+  \else
+  \ifx\user@decides\user@intermezzo
+       \setcounter{equation}{\value{parentequation}}%
+  \else
+       \setcounter{lastsubequation}{\value{equation}}%
+       \setcounter{savedparentequation}{\value{parentequation}}%
+       \setcounter{equation}{\value{parentequation}}%
+  \fi\fi
+%  \arabic{equation};\arabic{savedparentequation};\arabic{lastsubequation}
+  \ignorespacesafterend
+}
+\makeatother

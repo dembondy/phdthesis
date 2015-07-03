@@ -1,0 +1,18 @@
+\section{Introduction}
+
+%Denmark has set as an objective that by 2050 the country should be independent of fossil fuels[source!, reformulate]. The integration of Renewable Energy Sources (RES), such as wind turbines and photovoltaic cells, and Distributed Energy Resources (DERs), such as EVs and heat pumps, will be integral to achieve this goal.
+
+	The future increase in energy production from Renewable Energy Sources (RES) may lead to a power system where production is distributed, and where the Transmission System Operators (TSOs) require a larger amount of balancing services. At the same time, the increase in Distributed Energy Resources (DERs) brings new challenges to the Distribution System Operators (DSOs), which may need new kinds of ancillary services\cite{FLECH}. It is anticipated that DER owners will be able to provide services to the system operators via Demand Side Management (DSM). 
+
+An Aggregator is a market player, or market role, whose business case is to manage DER units in its portfolio and use their inherent consumption flexibility to participate in the ancillary service markets, i.e. it controls units in order to perform DSM. A general classification of different aggregation methods is presented in \cite{Kosek}, an example of direct control can be found in \cite{Biegel}, and an analysis and evaluation of indirect control architectures can be found in \cite{Heussen}.
+
+Since the Aggregator has contractual obligations with customers and system operators, it is important that the control algorithm the Aggregator uses proves suitable for the task. From a service perspective, an aggregation algorithm is considered suitable if the performance, i.e. the quality of service (QoS), it delivers is within the contractual limits. The Aggregator must therefore control its DER portfolio in such a way that it fulfills the needs of both the DER owners and the System Operator.% The bounds of the QoS delimit the acceptable service provision, which is essential to the functioning of the power grid.
+
+Little attention has been given to the problem of performance assessment of aggregator controllers seen from a service-delivery perspective. This paper approaches the problem by presenting two main ideas:
+\begin{itemize}
+	\item both ancillary services and DSM have minimum QoS requirements that need to be respected. In this work we propose a way of modeling the service requirements so that the quality of service delivery can be measured;
+	\item a performance index suitable for evaluating the quality of aggregation control algorithms from point of view of the Aggregator.
+\end{itemize}
+
+The paper is organized as follows: Section \ref{sec:method} gives a general description of concepts relevant to the definition of the index, while the index itself is defined in Section \ref{sec:index}. A case study is presented in Section \ref{sec:case} and further research is discussed in Section \ref{sec:conclusion}.
+

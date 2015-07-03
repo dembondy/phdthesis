@@ -1,9 +1,54 @@
 % TEX root = ../Thesis.tex
 \chapter{Introduction}
+
+\newchapter{E}{ncouraged by by the policy} adopted by the Danish government, research has been focused on how to integrate renewable energy sources into the power system, as well as integrating new distributed energy resources into the power system. The world energy sector is experiencing drastic changes due to environmental, health and security issues. 
+Energy is a pillar in the development of all countries. The access to energy is a necessity.
+
+Governments around world are taking steps to mitigate their vulnerability in energy supply.
+
+The Danish government has set as an interim goal to reduce the national CO2 emissions by 40\% in 2020, in order to reach the target of 80\% - 95\% reduction by 2050\fcite{regeringen2013danish}. This is to be done by covering 50\% of the national electricity consumption with wind energy by 2020, fully covering the electricity and heating supply with renewable energy by 2035, and being completely fossil fuel independent by 2050. Investing in a intelligent and flexible power system is deemed to be important if we are to reach those goals\fcite{regeringen2013smart}.
+
+\section{On the justification of research in renewable generation} % (fold)
+\label{sec:justification}
+\begin{itemize}
+	\item The climate question - The Brundtland report
+	\item Health issues/pollution
+	\item Energy security, cite the paper The concept of energy security: Beyond the four As by Cherp and Jewell
+\end{itemize}
+
+% section justification (end)
+
+
+\section{Changes in the power system}% (fold)
+\label{sec:powsysdesc}
+\newsection{I}{n order to understand} \marginnote{This section is partially based on a technical report prepared for the iPower project \cite{bondy2014a}, as well as the popular science paper presented for the course 31920, Communicating Advanced topics in Electrical Engineering.} the relevance of this research project, it is important to define how we expect the power system to change, and clarify what is the frame for the research. This section gives a general introduction\footnote{In-depth explanations will be presented as needed in subsequent chapters.} to the changes expected in the power system. The main actors in the power system and their relationships are presented, which will help scoping the problem.
+\subsection*{The Traditional Power System: Produce as we Consume}
+\label{sub:traditional}
+\input{chapters/produce.tex}
+\subsection*{The New Flexible Power System: Consume as we Produce}
+\label{sub:future}
+\input{chapters/consume.tex}
+\todo{amplify the paper to contain an analogy of the frequency as inflow and outflow of a water tank}
+% section Short introduction to the power system (end)
+
+\section{Funneling} % (fold)
+\label{sec:Funneling}
+\newsection{W}{hat is meant by} control-services? This is a broad definition, and here I will  narrow down my research to use control services to provide ancillary services, primarily through demand response, but the techniques should be able to be generalized.
+
+Scoping of the PhD, and what the rest of the thesis will contain.
+
+This thesis draws upon concepts from different fields and is multidisciplinary in its approach. Concepts from:
+\begin{itemize}
+	\item Power systems engineering
+	\item Control engineering
+	\item Software engineering
+	\item Systems engineering
+	\item Energy policy and regulation
+\end{itemize}
+
 What is meant with control services? In european context it is very much focused on Ancillary Services, while in the US Demand Response has not been used very much as AS, but rather used by ISOs as a mechanic to cope with peak consumption, or in the wholesale market. In the US context it would not make sense to call the upward service for the aggregator an ancillary service. Maybe aggregator business case?
 
 Three kinds of stability: rotor angle, frequency stability and voltage stability[maybe cite kundur here?]. This work focuses on frequency stability, although there has been done some brief work on voltage issues in Xue's paper. 
-\cite{adams1980hitchhiker}
 
 ``futures necessarily be- long to the present: they are what we imagine for ourselves now. The present is itself only made visible against a past''[cite: Marilyn Strathern, 1992]
 
@@ -16,3 +61,7 @@ Performance measurement, which is typically termed Measurement and Verification 
 \end{itemize}
  
 All resources should be held to the performance specifications established by the product. However – demand side and generation side communication requirements will usually need to be designed separately and made appropriate to each. Technical rules often proscribe the use of metered values to base performance and settlements.[from the SEDC report used in the DRAS paper]
+
+% section Funneling (end)
+
+
