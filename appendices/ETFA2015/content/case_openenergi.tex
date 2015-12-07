@@ -1,0 +1,27 @@
+\subsection{Open Energi}
+Open Energi is a British company selling flexible consumption from industrial loads as an ancillary service. The aggregator functions are distributed between an operator node at a control center and asset nodes on custom hardware deployed at customer sites. (Figure~\ref{fig:openenergi}).
+
+\subsubsection{Service interface}
+The mapping of the service to the control parameters is done manually at the operator node, but the value of some of the parameters is determined by a distributed algorithm running on the asset nodes.
+\subsubsection{Performance monitoring}
+The asset performance is evaluated at the operator node, as part of an automated fault detection system. The service performance is assessed manually at the operator node.
+\subsubsection{Supervision \& Resource handling}
+Exclusion of non-performing units is done manually at the operator node. Portfolio composition is automated through a distributed algorithm.
+\subsubsection{Operator interface}
+The operator interface is consists of a web service which also connects to the automated fault detection system. 
+\subsubsection{Control}
+The control logic is deployed on the asset nodes.
+\subsubsection{Flexibility monitoring}
+Flexibility monitoring is part of the control logic at the asset nodes and is done based upon measurements and constraints of the asset.
+\subsubsection{Client management}
+Client management is part of the automated fault detection system.
+\subsubsection{External information services}
+The only external information the aggregation architecture uses is the grid frequency, which is acquired through measurement instrumentation at the asset nodes.
+\subsubsection{Knowledge exchange}
+Knowledge exchange functionality is present at the operator node and the asset nodes. Each asset node has persistent information storage for the values of the control parameters. Data is collected from the asset nodes in a central data base at the operator node. 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\columnwidth]{"figures/stackdrawing_openenergi"}
+\caption{The distribution of the aggregator functions between the nodes.}
+\label{fig:openenergi}
+\end{figure}

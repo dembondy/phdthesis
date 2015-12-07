@@ -1,0 +1,155 @@
+\chapter{A Functional Reference Architecture for Aggregators}\label{app:etfa2015}
+
+\textbf{Authors:}\\
+	Daniel~Esteban~Morales~Bondy\\
+	Kai~Heussen\\
+	Oliver~Gehrke\\
+	Anders~Thavlov
+
+\noindent
+\textbf{Published at:}\\
+Emerging Technologies and Factory Automation (ETFA), 2015 IEEE\\
+Luxembourg, Luxembourg
+
+\noindent
+	\textbf{Abstract:}\\
+Aggregators are considered to be a key enabling technology for harvesting power system services from distributed energy resources (DER). As a precondition for more widespread use of aggregators in power systems, methods for comparing and validating aggregator designs must be established. This paper proposes a functional reference architecture for aggregators to address this requirement.
+
+
+\section{Introduction}
+\input{appendices/ETFA2015/content/introduction.tex}
+
+%#############################################
+\section{Aggregation in Smart Grids}
+\label{sec:agginsg}
+\input{appendices/ETFA2015/content/agginsg.tex}
+%#############################################
+\section{The Need for an Aggregator Reference Architecture}
+\label{sec:requirements}
+\input{appendices/ETFA2015/content/requirements.tex}
+%#############################################
+\section{Functional decomposition}
+\label{sec:funcdec}
+An aggregator is a complex system of interacting functions. In the following definitions, we abstract from implementation details, e.g. centralized vs. distributed systems, and focus purely on the purpose of the functions. 
+
+% EXTERNAL INTERFACES
+\input{appendices/ETFA2015/content/serviceinterpretation.tex}
+
+% Monitoring & Supervision modules
+\input{appendices/ETFA2015/content/performancemonitoring.tex}
+
+\input{appendices/ETFA2015/content/supervisionandresource.tex}
+
+\input{appendices/ETFA2015/content/operatorinterface.tex}
+
+% Control-related
+\input{appendices/ETFA2015/content/control.tex}
+
+\input{appendices/ETFA2015/content/flexibilityMonitoring.tex}
+
+% Communication
+\input{appendices/ETFA2015/content/aggregatorInternalComm.tex}
+
+\input{appendices/ETFA2015/content/clientmgmt.tex}
+
+\input{appendices/ETFA2015/content/informationServices.tex}
+
+\input{appendices/ETFA2015/content/deviceComm.tex}
+
+% the odd one
+\input{appendices/ETFA2015/content/knowledgeExchange.tex}
+
+
+%#############################################
+\section{The Reference Architecture} 
+\label{sec:refarch}
+% === This is where we collect the knowledge collected in the previous section into the actual architecture and discuss it and its building blocks. (Introduce complexity levels) ===
+
+We have now established a set of functions to serve as building blocks for a reference architecture, but without concern for the relations between these blocks. Next, these relations will be examined; in other words: how could a practical aggregator infrastructure be composed from these function blocks?
+
+\subsection{Function blocks and knowledge exchange diagram}
+
+% === Explain what the function blocks symbolize - and how the location in the function block diagram does not say anything about whether a block exists on the aggregator side, the client side or both. ===
+
+The functions in section \ref{sec:funcdec} generally belong to one of the following categories:
+\begin{itemize}
+\item functions dedicated to communication between physically separate parts of the aggregator infrastructure or communication with 3rd party entities, i.e. enablers of the distributed nature of the system.
+\m functions which perform decisions with regards to flexibility asset behavior and portfolio composition.
+\item functions which interpret information and support the decision making functions. 
+\end{itemize}
+These categories represent requirements for different architectural paradigms: Communication functions are layered or hierarchical, and, in the case of communication between aggregator and client, require an identically layered counterpart at the opposite end. The decision making and interpreter functions on the other hand require many hierarchical and non-hierarchical consumer-producer relations. % The interpreter functions generally exist in direct relationship with the decision making functions. %The knowledge exchange function, storing the different elements of system state, provides a link between these two worlds.  
+Figure~\ref{fig:functiondiagram} shows an overview of the relationships between functions according to the above concept.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=1.0\columnwidth]{"etfa2015/diag_simple"}
+\caption{Each function outputs distinct kinds of data which are used by the other functions in different ways according to the aggregator implementation.}
+\label{fig:functiondiagram}
+\end{figure}
+
+\subsection{Principles of distribution of functions}
+
+While figure \ref{fig:functiondiagram} depicts the relationship between aggregator functions, it does not include information about the physical distribution of these functions between the asset side and the operator side of the aggregator infrastructure. This distribution is highly specific to the individual design and e.g. its degree of centralization (see section \ref{sec:applic}).
+
+In an actual implementation, several of these functions require corresponding instances on each side, effectively forming a communication stack. 
+
+The functions exhibiting these properties are:
+\begin{itemize}
+\item the internal aggregator communication function which provides the link between the two substacks. In many cases, this function will make use of a full OSI-layered stack in which the internal aggregator communication function provides the application layer,
+\item the client management function, implementing management protocols which would typically require a corresponding instance on the client side, and
+\item the knowledge exchange function which exchanges information with its client side counterpart independent of client management mechanisms.
+\end{itemize}
+
+All other functions, with the exception of the asset interface, may appear either on the operator side, on the asset side, or shared between both sides, depending on the implementation.
+
+%#############################################
+\section{Case studies} 
+\label{sec:applic}
+
+A number of existing aggregator designs -- commercial as well as academic -- have been mapped to the model in order to test its viability. Two cases with different design philosophies are presented here in order to illustrate the distribution of functionality between the operator and the asset side, and the information flow between the functions:
+\begin{itemize}
+	\item \emph{Power Hub} is an aggregator developed by Dong Energy in Denmark. It is used to control distributed generation and load in order to sell flexibility services to the ancillary power market (Figure~\ref{fig:powerhub}).
+\item \emph{Open Energi} is a British company selling flexible consumption from industrial loads as an ancillary service. The aggregator functions are distributed between an operator node at a control center and asset nodes on custom hardware deployed at customer sites (Figure~\ref{fig:openenergi}).
+\end{itemize}
+
+The most significant difference between the two designs is the degree of autonomy of the asset node. The Power Hub concept is based on a centralized design which mainly uses the asset node as a communication gateway and places flexibility monitoring and control at the central operator site. This is also where external information such as market data is available through the information services function.
+The Open Energi controller acts on quantities measurable at the asset site and does not require external information; this allows control and flexibility monitoring to be placed at the asset node, leaving only supervisory functions at the operator site.
+
+Both designs can be split into functions according to the subdivision proposed in section \ref{sec:funcdec}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.65\columnwidth]{etfa2015/stackdrawing_powerhub.eps}
+\caption{Distribution of functions for the Power Hub aggregator}
+\label{fig:powerhub}
+\vspace*{-5mm}
+\end{figure}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.65\columnwidth]{etfa2015/stackdrawing_openenergi.eps}
+\caption{Distribution of functions for the Open Energi aggregator}
+\label{fig:openenergi}
+\vspace*{-5mm}
+\end{figure}
+
+
+
+%#############################################
+\section{Conclusion and further work}
+\label{sec:etfa2015:conclusion}
+A reference architecture for the validation and comparison of aggregators has been presented. While the general framework has been established and successful mapping tests to a number of real-world aggregator designs have been performed, many details are still work in progress.
+The next steps towards completion will be the development of performance indicators for the individual functions and the establishment of a process for aggregator comparison and performance validation.
+
+%Review 1: As the goal of the paper is to develop a reference archcture, please elaborate on reference architectures in general and on the SGAM in particular.
+
+%
+%Review 2: The WIP-paper presents a high-level reference archcture for the validation and comparison of aggregators for power system services from distributed energy resources. Based on a functional decomposition of practical implementations a reference architecture is developed. It is validated against two practical implementations (power hub and open energi). 
+%
+%The value of a reference archcture for the crucial role of aggregators such as this is obvious but the developed architecture needs to be validated with more practical examples. How and if this architecture may be used performance evaluation, comparison or even optimization of aggregators remains to be proven. But the paper definitely meets the requirements of a WIP contribution.
+
+%Review 3:	The concept of the reference archcture is nicely introduced and explained. Since it is a work in progress paper a more detailed presentation of future work would be appreciated.
+
+%#############################################
+\section*{Acknowledgment}
+Parts of this work are supported by the Programme for Energy Technology Development and Demonstration (EUDP) and Innovation Fund Denmark through the iPower project.
+

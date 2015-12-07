@@ -1,0 +1,36 @@
+\subsection{Power Hub}
+PowerHub is an aggregator developed by Dong Energy in Denmark. It is controlling distributed generation and load in order to sell flexibility services to the ancillary power market.
+(Figure~\ref{fig:powerhub}).
+\subsubsection{Service interpretation}
+Power Hub utilizes manual integration of DERs primarily based on a standardized contract in which a parameter representing the flexible demand is specified together with potential constraints. These values are defined by the DER owner together with a Power Hub consultant and entered into Power Hub as static constraints for the optimization module.
+
+\subsubsection{Operator interface}
+Power Hub provides operator interfaces for Power Hub operators, the Balancing Responsible and the Danish TSO. Power Hub also provides a user interface to DER owners.
+
+\subsubsection{Performance monitoring}
+?
+
+\subsubsection{Information services}
+Power Hub utilizes several information services, ...   
+
+\subsubsection{Knowledge exchange}
+Power Hub utilizes persistence to continuously store the state of its portfolio DERs.
+
+\subsubsection{Internal aggregator communication}
+?
+\subsubsection{Client management}
+?
+
+\subsubsection{Control}
+An optimization algorithm receives the static constraints as given in the DER contracts as well as dynamic constraints given by the DER owner through the owner. 
+
+\subsubsection{Supervision and resource handling}
+
+\subsubsection{Flexibility monitoring}
+...
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\columnwidth]{"figures/stackdrawing_powerhub"}
+\caption{The distribution of the aggregator functions between the nodes.}
+\label{fig:powerhub}
+\end{figure}

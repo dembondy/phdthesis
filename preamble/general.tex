@@ -1,7 +1,8 @@
 %!TEX root = ../Thesis.tex
 \RequirePackage[l2tabu,orthodox]{nag} % Old habits die hard
 \RequirePackage{fix-cm} % should be here
-\documentclass[a4paper,twoside,nobib]{tufte-book}
+%\documentclass[b5paper,twoside,nobib]{memoir}
+\documentclass[b5paper,twoside,nobib]{tufte-book}
 \RequireXeTeX
 % To quiet figure problems with nag
 \makeatletter
@@ -12,7 +13,12 @@
 
 % Large environments
 %\usepackage{microtype}
+\usepackage{tabularx,booktabs} % Used in the pscc paper
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{amsfonts}
+\usepackage[cmex10]{amsmath}
 \usepackage{mathtools}
+
 \usepackage{listings}                 % Source code printer for LaTeX
 \usepackage{tikz}
 \usepackage{lettrine}                 % For having the big letter at start of Chapter and section
@@ -76,35 +82,35 @@
 \setcounter{tocdepth}{1}              % Depth of table of content
 \setcounter{secnumdepth}{2}           % Depth of section numbering
 
-% Todos
-\usepackage{totcount}                 % For total counting of counters
-\def\todoshowing{}
-\ifnum\strcmp{\showtodos}{false}=0
-    \def\todoshowing{disable}
-\fi
-\usepackage[colorinlistoftodos,\todoshowing]{todonotes} % Todonotes package for nice todos
-\newtotcounter{todocounter}           % Creates counter in todo
-\let\oldtodo\todo
-\newcommand*{\newtodo}[2][]{\stepcounter{todocounter}\oldtodo[#1]{\thesection~(\thetodocounter)~#2}}
-\let\todo\newtodo
-\let\oldmissingfigure\missingfigure
-\newcommand*{\newmissingfigure}[2][]{\stepcounter{todocounter}\oldmissingfigure[#1]{\thesection~(\thetodocounter)~#2}}
-\let\missingfigure\newmissingfigure
-\makeatletter
-\newcommand*{\mylistoftodos}{% Only show list if there are todos
-\if@todonotes@disabled
-\else
-    \ifnum\totvalue{todocounter}>0
-        \markboth{\@todonotes@todolistname}{\@todonotes@todolistname}
-        \phantomsection\todototoc
-        \listoftodos
-    \else
-    \fi
-\fi
-}
-\makeatother
-\newcommand{\lesstodo}[2][]{\todo[color=green!40,#1]{#2}}
-\newcommand{\moretodo}[2][]{\todo[color=red!40,#1]{#2}}
+%% Todos
+%\usepackage{totcount}                 % For total counting of counters
+%\def\todoshowing{}
+%\ifnum\strcmp{\showtodos}{false}=0
+%    \def\todoshowing{disable}
+%\fi
+%\usepackage[colorinlistoftodos,\todoshowing]{todonotes} % Todonotes package for nice todos
+%\newtotcounter{todocounter}           % Creates counter in todo
+%\let\oldtodo\todo
+%\newcommand*{\newtodo}[2][]{\stepcounter{todocounter}\oldtodo[#1]{\thesection~(\thetodocounter)~#2}}
+%\let\todo\newtodo
+%\let\oldmissingfigure\missingfigure
+%\newcommand*{\newmissingfigure}[2][]{\stepcounter{todocounter}\oldmissingfigure[#1]{\thesection~(\thetodocounter)~#2}}
+%\let\missingfigure\newmissingfigure
+%\makeatletter
+%\newcommand*{\mylistoftodos}{% Only show list if there are todos
+%\if@todonotes@disabled
+%\else
+%    \ifnum\totvalue{todocounter}>0
+%        \markboth{\@todonotes@todolistname}{\@todonotes@todolistname}
+%        \phantomsection\todototoc
+%        \listoftodos
+%    \else
+%    \fi
+%\fi
+%}
+%\makeatother
+%\newcommand{\lesstodo}[2][]{\todo[color=green!40,#1]{#2}}
+%\newcommand{\moretodo}[2][]{\todo[color=red!40,#1]{#2}}
 
 % Making the first letter of chapters and sections 
 \setlength{\DefaultNindent}{0pt} % read the doc about it

@@ -1,0 +1,46 @@
+\section{Quality Metrics}
+
+What aspects of the aggregator influence in the performance metrics?
+
+Internal vs. external metrics: external can be used for monitoring, internal can only manipulated in test environment.
+
+Are there more metrics than in the table? E.g. robustness toward grid faults
+
+\begin{table}[!t]%% increase table row spacing, adjust to taste
+\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+\caption{System interactions can be evaluated with generalized metrics}
+\label{tab:metrics}
+\centering
+% Some packages, such as MDW tools, offer better commands for making tables
+% than the plain LaTeX2e tabular which is used here.
+\begin{tabular}{ll}
+\toprule
+System interaction & metrics\\
+\midrule
+Aggregator - power system & responsiveness w.r.t. grid conditions\\
+\\
+Aggregator - DER portfolio & responsiveness w.r.t. time\\
+ & robustness w.r.t. forecast errors\\
+ \\
+Aggregator -  ICT infrastructure & robustness w.r.t. communication faults\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.3}
+\caption{The quality metrics can be separated into two categories.}
+\label{tab:metricsclass}
+\centering
+\begin{tabular}{ll}
+\toprule
+External metrics & Internal metrics\\
+\midrule
+responsiveness w.r.t. grid &robustness w.r.t. forecast errors\\
+responsiveness w.r.t. time & robustness w.r.t. communication errors\\
+& robustness w.r.t. grid errors\\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,40 @@
+%The power system is experiencing a paradigm shift. 
+Existing concepts and methods for benchmarking and generator validation/certification cannot readily be translated from the (bulk) generator based paradigm to the distributed paradigm of aggregators and flexibility services. Historically, ancillary services have been defined using a physical understanding of generator capabilities. This definition is moving towards technology-agnostic service models.
+Service verification has been done through on-site measurements, which is infeasible with thousands of units participating in service provision.  
+
+The definition of a reference architecture for aggregators addresses these three issues, and enables benchmarking of aggregator architectures.
+A reference architecture ``captures the essence of existing architectures, and the vision of the future needs and evolution to provide guidance to assist in developing new system architectures.''\fcite{cloutier2010concept}. It should provide: 
+\begin{itemize}
+\item a common lexicon and taxonomy,
+\item modularization and the complementary context, and
+\item a common (architectural) vision.
+\end{itemize} 
+
+%1) new industry -> benchmark, kpis certification is needed, since they cannot be translated from the old industry 
+%
+%2) service verification is different -> traditionally expensive measuring equipment. new method is needed for new architecture
+%
+%3) technology agnostic service models, rather than technology based services. Need an architecture to standardize context
+%The common lexicon and taxonomy allows for precise discussion and a common understanding of what an aggregator is and can do. The establishment of these two concepts is started in Section~\ref{subsec:clarifying}, where the context of the aggregator is also discussed.% and further refined throughout the paper. 
+Various types of aggregator implementation exist, realizing different design ideas for different sets of requirements. These requirements -- and consequently the designs derived from them -- are unlikely to converge towards a single solution because of the tradeoffs involved, e.g. scalability and complexity. A common lexicon and taxonomy is a minimal precondition for aggregator comparison.
+If a reference architecture is to be used to describe many of these different designs, it must be highly modular. In practice, the \emph{general} functionality of an aggregator must be broken down into small enough functions in order for these functions to be usable as building blocks for the reconstruction of the \emph{particular} functionality of a given implementation. 
+The functions are arranged in a reference architecture such that metrics can be assigned to individual functions. In this way, the reference architecture can be used for validation of the aggregator. Our architectural vision accounts for the need for verifying distributed flexibility services.
+
+%Implementability (discuss what that means in this context?)
+
+%The methodology for the analysis is the following:
+%\begin{itemize}
+%	\item We have analyzed different aggregator architectures from the literature, as well as the experience gained through the practical implementation of an aggregator in our laboratory, and extracted the essential functionalities necessary for the working of the aggregator. These functionalities are independent from aggregator/control architecture.
+%	\item We analyze the functions and their relationships, as well as the level of complexity we can foresee.
+%	\item Synthetize the results into a reference architecture. 
+%	\item Validate by mapping different architectures into the framework.
+%\end{itemize}
+
+
+%This is still part state of the art, so this and the previous section together shouldn't be too long)
+%\begin{itemize}
+%\item \textit{The method}
+%\item Why would somebody want to evaluate aggregator performance?
+%\item Which methods/approaches for performance evaluation exist or are being discussed?
+%\item What is missing? (A reference architecture of course, but why?)
+%\end{itemize}
