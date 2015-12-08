@@ -27,7 +27,8 @@
 	style = numeric,
 	%citestyle = abbrv,
 	%autocite = footnote,
-	backend = biber
+	backend = biber,
+	maxbibnames = 99
 ]{biblatex}
 \DeclareCiteCommand{\fcite}[\mkbibfootnote]
   {\usebibmacro{prenote}}
@@ -43,7 +44,7 @@
   {\usebibmacro{postnote}}
 
 \DeclareMultiCiteCommand{\footpartcites}[\mkbibfootnote]{\footpartcite}{\addsemicolon\space}
-
+\renewcommand\thefootnote{\textcolor{dtured}{\arabic{footnote}}}
 \addbibresource{bibliography/Bibliography.bib}
 % Links
 %\usepackage[hyphens]{url}             % Allow hyphens in URL's

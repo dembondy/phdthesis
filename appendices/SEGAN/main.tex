@@ -1,0 +1,77 @@
+
+\documentclass[review]{elsarticle}
+\usepackage{blindtext}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\usepackage{amsmath,amssymb}
+\usepackage{soul,xcolor,dtucolors,todonotes}
+\newcommand{\note}[1]{{\color{red}#1}}
+\newcommand{\bondy}[1]{\sethlcolor{s13}\hl{#1\,[BONDY]}} 
+\newcommand{\bondynote}[1]{\todo[color=s13!50,inline]{BONDY: #1}}
+\newcommand{\atha}[1]{\sethlcolor{s12}\hl{#1\,[ATHA]}}
+\newcommand{\athanote}[1]{\todo[color=s12!50,inline]{ATHA: #1}}
+
+%
+\usepackage{algorithmic}
+
+\usepackage[caption=false,font=footnotesize]{subfig}
+
+
+
+\begin{document}
+
+\title{Method for Ancillary Service Modeling and Performance Assessment}
+
+%
+
+\author[risoe]{Daniel Esteban Morales Bondy\corref{cor1}}
+\ead{bondy@elektro.dtu.dk}
+
+\author[risoe]{Anders Thavlov}
+\ead{atha@elektro.dtu.dk}
+
+\author[lyngby]{Janus Bundsgaard Mosb\ae k Tougaard}
+\ead{janus@tougaard.net}
+
+\cortext[cor1]{Principal corresponding author}
+
+\address[risoe]{Department of Electrical Engineering, Technical University of Denmark, Frederiksborgvej 399, Building 776, 4000 Roskilde, Denmark}
+\address[lyngby]{Department of Electrical Engineering, Technical University of Denmark, Elektrovej, Building 325, 2800 Kgs. Lyngby, Denmark}
+
+\begin{abstract}
+\input{content/abstract.tex}
+\end{abstract}
+\begin{keyword}
+Ancillary Service Modeling \sep Performance Assessment \sep Aggregator \sep Demand Side Management
+\end{keyword}
+
+\maketitle
+
+\section{Introduction}
+\input{content/introduction.tex}
+
+\section{Background}\label{sec:background}
+\input{content/background.tex}
+
+\section{Method for service modeling}\label{sec:methodology}
+\input{content/methodology_for_service_modelling.tex}
+
+\section{Performance Assessment of Service Delivery}\label{sec:performance}
+\input{content/performanceassessment.tex}
+
+\section{Case Studies}\label{sec:casestudies}
+\input{content/casestudy.tex}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{content/conclusion.tex}
+
+\section*{Acknowledgment}
+Parts of this work are supported by the Programme for Energy Technology Development and Demonstration (EUDP) through PowerLabDK and Innovation Fund Denmark through the iPower project. The authors thank Antonio Zecchino and Henrik W. Bindner for reviewing the draft of the paper.
+
+
+\bibliographystyle{elsarticle-num}
+\bibliography{bib/references.bib}
+%
+\end{document}
+
+

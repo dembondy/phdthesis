@@ -1,0 +1,69 @@
+Currently, services requirements are defined in a contract, but there is no standardized method for transforming contractual requirements into a mathematical model (requirements model) that a computer can use for verification of service delivery. This requirements model forms the base-line against which the delivered service is benchmarked. The model incorporates both the ideal and acceptable service provision. By analysis of the TSO services defined in \cite{EnerginetAncillary}, the potential DSO services defined in \cite{ding2013development} and asset management services, we have developed a method for modeling the service delivery over time. 
+%The method presented in this section outlines the steps to transforming contractual requirements into a requirements model.
+The method consists of the following six steps:
+%form have been identified as a generic method for modeling ancillary services. The steps are exemplified by DSO services defined in  and TSO services defined in :
+\begin{enumerate}
+  \item Identify physical parameters defining the service.
+%  \begin{itemize}
+%    \item For example: Power production or consumption, measured grid frequency, time measurements. Including maximum measuring sensitivities.
+%  \end{itemize}
+  \item Identify the dynamic behaviors of the service related to system parameters (if any).
+%  \begin{itemize}
+%    \item Example: Primary frequency regulation comes with a linear behavior between grid frequency and generator set-point. Power-cap has a dynamic relationship between feeder load and the controllable load power in order to keep the total feeder load at a $P_{DSO,Ref}$ value.
+%    \item PowerMax is not dynamic. The aggregator must control $\Delta P_{Agg}$ to ensure that he does not violate $P_{max,Agg}$. But the service does not require a dynamic behavior related to a system parameter like primary frequency regulation and PowerCap.
+%  \end{itemize}
+  \item Identify the physical size of the service and the tolerated error. % Both ideal service and minimum required service.
+%  \begin{itemize}
+%    \item Physical size is for example $P_{max,Agg}$ for PowerMax service or regulation bid for primary frequency regulation.
+%    \item Tolerance is for example $P_{max,Agg}+P_{tolerance}$ for the PowerMax service and allowed dead-band for DK1 primary reserve.
+%  \end{itemize}
+  \item Identify the ideal response time of the service and acceptable response.
+%  \begin{itemize}
+%    \item Most contracts comes with some timing specifying how fast the service provider must act.
+%    \item E.g. DK1 primary reserve must provide 50 \% of service within 15 s and 100 \% within 30 s.
+%    \item The ideal service is for example an instantaneous step in power to 100 \% of set-point for DK1 primary reserve.
+%  \end{itemize}
+  \item Based on the dynamics, size and timing of the service, as well as the tolerated errors from points 1--4, develop a time series for ideal and acceptable service provision. The model will be a set of time series: $\mathbf{x}_{ideal}(t)$ for ideal response and $\mathbf{x}_{acc}(t)$ for acceptable response. Both time series can be a scalar or a vector, e.g. $\mathbf{x}_{acc}(t)$ can be formed by a set of upper and lower tolerance bounds or simply by an upper bound.
+  %§$\mathbf{x}_{ideal}(t)$ and $\mathbf{x}_{acc}(t)$ can be a pair of values, e.g. minimum and maximum tolerance limits, for some services and may be only a single value, e.g. minimum or maximum tolerance, for others. 
+  \item Identify how the service error is to be measured.
+\end{enumerate}
+
+We identify three different types of service: reference tracking, band service or a maximum/minimum cap. The error measure, $e(t) \in \mathbb{R}$, for each of the service types is defined in the following subsections. This approach was initially introduced in \cite{bondy2014performance}, and is further refined in this work. 
+
+%The error, $e(t) \in \mathbb{R}$, in the delivery of a service can be calculated using a reference tracking, band service or a maximum/minimum cap approach. The proposed approach depends on the specific service and contract.\bondynote{These last two paragraphs can probably be merged}
+
+
+\subsection*{Reference tracking}
+Reference tracking error can be calculated as:
+\begin{equation}\label{eq:ref_error}
+e(t) = x_{meas}(t) - x_{ideal}(t).
+\end{equation}
+This definition will lead $e<0$ for measured values below the ideal and $e>0$ for values above the ideal. In this case $\mathbf{x}_{acc}(t)$ will be a band around $x_{ideal}(t)$, and the values of $\mathbf{x}_{acc}(t)$ do not need to be symmetric.
+
+\subsection*{Band service}
+The ideal response in a band service is defined as $ \mathbf{x}_{ideal}(t)= [x_{min}(t),x_{max}(t)]$. The error in the band service can therefore be estimated by:
+\begin{equation}\label{eq:band_error}
+e(t)=
+\begin{cases}
+x_{meas}(t) - x_{min}(t) , & x_{meas}(t) < x_{min}(t)  \\
+0, & x_{min}(t) \leq x_{meas}(t) \leq x_{max}(t) \\
+x_{meas}(t) - x_{max}(t), & x_{meas}(t)  > x_{max}(t).  
+\end{cases}
+\end{equation}
+In this case, the $\mathbf{x}_{acc}(t)$ is a set of values that surrounds the band defined by $ \mathbf{x}_{ideal}(t)$, as seen in Fig.~\ref{fig:RefErr}. The values of $\mathbf{x}_{acc}(t)$ do not need to be symmetric around the band.
+
+\subsection*{Cap service}
+%Maximum/minimum cap error only counts the error when performance is above/below some ideal value. 
+In cap services, error is only tracked when $x_{meas}(t)$ is either above or below a given a limit value.
+Maximum cap error is calculated as shown in \eqref{eq:maxmin_cap} and minimum cap can be similarly calculated. In \eqref{eq:maxmin_cap}, $x_{max}(t)$ is the ideal maximum limit according to the service contract:
+
+\begin{equation}\label{eq:maxmin_cap}
+e(t)=
+\begin{cases}
+x_{meas}(t)-x_{max}(t), & x_{meas}(t) > x_{max}(t) \\
+0, & x_{meas}(t) \leq x_{max}(t).
+\end{cases}
+\end{equation}
+In the cap service, $x_{acc}(t)$ is a limit that either lies below $x_{min}(t)$ or above $x_{max}(t)$.
+
+Having defined the method for formulating the service models, we will show how these can be used for performance assessment of services.
