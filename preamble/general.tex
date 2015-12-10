@@ -13,7 +13,7 @@
 
 % Large environments
 %\usepackage{microtype}
-\usepackage{tabularx,booktabs,algorithmic} % Used in the pscc paper
+\usepackage{tabularx,booktabs,algorithmic,hyphenat} % Used in the pscc paper
 \usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage{amsfonts}
 \usepackage[cmex10]{amsmath}
@@ -166,15 +166,15 @@
   \titlecontents{chapter}%
     [0em] % distance from left margin
     {\vspace{1.5\baselineskip}\begin{fullwidth}\LARGE\sffamily} % above (global formatting of entry)
-    {\hspace*{0em}\contentslabel{2em}} % before w/label (label = ``2'')
-    {\hspace*{0em}} % before w/o label
+    {\hspace*{1em}\contentslabel{2em}} % before w/label (label = ``2'')
+    {\hspace*{1em}} % before w/o label
     {\sffamily\upshape\qquad\textcolor{dtured}{\thecontentspage}} % filler + page (leaders and page num)
     [\end{fullwidth}] % after
   \titlecontents{section}% FIXME
     [0em] % distance from left margin
     {\vspace{0\baselineskip}\begin{fullwidth}\Large\sffamily} % above (global formatting of entry)
-    {\hspace*{2em}\contentslabel{2em}} % before w/label (label = ``2.6'')
-    {\hspace*{2em}} % before w/o label
+    {\hspace*{3em}\contentslabel{2em}} % before w/label (label = ``2.6'')
+    {\hspace*{3em}} % before w/o label
     {\sffamily\upshape\qquad\textcolor{dtured}{\thecontentspage}} % filler + page (leaders and page num)
     [\end{fullwidth}] % after
   \titlecontents{subsection}% FIXME

@@ -47,46 +47,44 @@ This thesis addresses one of the solutions proposed to deal with the vulnerabili
 % section justification (end)
 \section{Changes in the power system}% (fold)
 \label{sec:powsysdesc}
-\newsection{I}{n order to understand} \marginnote{This section is based on an unpublished paper written for the course 31920, Communicating Advanced topics in Electrical Engineering.} the relevance of this research project, it is important to define how the power system is expected to change, and clarify the frame for the research. This section gives a general introduction\footnote[2\baselineskip]{In-depth explanations will be presented as needed in subsequent chapters.} to the changes expected in the power system. The main actors in the power system and their relationships are presented, which will help scoping the problem.
+\newsection{I}{n order to understand} \marginnote{This section is based on an unpublished paper written for the course 31920, Communicating Advanced topics in Electrical Engineering.} the relevance of this research project, it is important to define how the power system is expected to change, and clarify the frame for the research. This section gives a general introduction\footnote{In-depth explanations will be presented as needed in subsequent chapters.} to the changes expected in the power system. The main actors in the power system and their relationships (from a Danish perspective) are presented, which will help scoping the problem.
 \subsection*{The Traditional Power System: Produce as we Consume}
 \label{sub:traditional}
 \input{chapters/produce.tex}
 \subsection*{The New Flexible Power System: Consume as we Produce}
 \label{sub:future}
 \input{chapters/consume.tex}
-\todo{amplify the paper to contain an analogy of the frequency as inflow and outflow of a water tank}
+%\todo{amplify the paper to contain an analogy of the frequency as inflow and outflow of a water tank}
 % section Short introduction to the power system (end)
 
 \section{Problem statement, Delimitation and Contributions} % (fold)
 \label{sec:Funneling}
-\newsection{W}{hat is meant by} control-services? This is a broad definition, and here I will  narrow down my research to use control services to provide ancillary services, primarily through demand response, but the techniques should be able to be generalized.
+\newsection{A}{ggregators are expected to} be new providers of ancillary services, and other energy related services, to the players of the power markets. This means that they must go through the same prequalification/certification process that current providers of ancillary services must go through. Therefore, as stated in the previous section, the control algorithms and architecture that form an aggregator must be validated\footnote{The IEEE definition for validation is used: ``The assurance that a product, service, or system meets the needs of the customer and other identified stakeholders.''}. Several factors, such as the distributed nature and the modular composition of aggregators, make this problem non-trivial. The overarching question the work presented in this thesis seeks to answer is: \emph{How can aggregators be validated, such that they can be trusted by the power market participants, and hereby actively help with the secure operation of the power system?}.
+%control-services? This is a broad definition, and here I will  narrow down my research to use control services to provide ancillary services, primarily through demand response, but the techniques should be able to be generalized.
 
-Scoping of the PhD, and what the rest of the thesis will contain.
-
-This thesis draws upon concepts from different fields and is multidisciplinary in its approach. Concepts from:
+In order to delimit the scope of the problem, certain decisions with regards to the research were made.
 \begin{itemize}
-	\item Power systems engineering
-	\item Control engineering
-	\item Software engineering
-	\item Systems engineering
-	\item Energy policy and regulation
+	\item In terms of the services considered, only those related to active power were analysed. The topic of voltage related services was touched upon as a collaboration with \emph{X. Han}\fcite{han2014assessment}, but does not form part of the core the presented research.
+	\item The power system setup is assumed to be a liberalized market, such as the one in Denmark. Although some of the work is translatable to other countries, e.g. the United States, the focus has been on solutions suited to the Nordic region.
+	\item Focus has been given to the development of concepts rather than software implementation. Still, a module for service verification was developed for the laboratory.
 \end{itemize}
 
-What is meant with control services? In european context it is very much focused on Ancillary Services, while in the US Demand Response has not been used very much as AS, but rather used by ISOs as a mechanic to cope with peak consumption, or in the wholesale market. In the US context it would not make sense to call the upward service for the aggregator an ancillary service. Maybe aggregator business case?
+The original contributions of this work are:
+\begin{description}
+	\item[Aggregator reference architecture:] In order to evaluate an aggregator, it must first be clarified what is the role and the expected functioning of the aggregator. Chapter~\ref{cha:aggregator} presents a reference architecture for aggregators, which has the purpose of:
+		\begin{enumerate}
+			\item defining a standard lexicon around the aggregator, and
+			\item identifying the required functionality necessary for the effective working of an aggregator. This is important for aggregator validation and can also be used as aggregator design guidelines for new players entering the market.
+		\end{enumerate}
+	\item[Aggregator testing:] Chapter~\ref{cha:validation} presents a framework for aggregator validation testing, as well as initial thoughts on how to align tests with service requirements.
+	\item[Definition and modeling of services:] Currently, the requirement definitions for ancillary services assumes that the services will be provided by traditional units. In Chapter~\ref{cha:services} a novel approach to service definitions in terms of performance is presented. Furthermore, a new method for building service models that are useful for the performance assessment of service delivery is presented.
+	\item[Aggregator performance assessment:] In order to verify if an aggregator delivered a service according to its service contract, the performance of the aggregator must be assessed. In Chapter~\ref{cha:verification} a set of indices for performance assessment and service delivery are presented.
+\end{description}
 
-Three kinds of stability: rotor angle, frequency stability and voltage stability[maybe cite kundur here?]. This work focuses on frequency stability, although there has been done some brief work on voltage issues in Xue's paper. 
+Each chapter contains the relevant state-of-the-art analysis to that topic and corresponding sub-conclusions. Overall conclusions and perspectives on future work are presented in Chapter~\ref{cha:conclusion}, and the relevant articles forming the research content of the thesis are found as appendices. 
+%What is meant with control services? In european context it is very much focused on Ancillary Services, while in the US Demand Response has not been used very much as AS, but rather used by ISOs as a mechanic to cope with peak consumption, or in the wholesale market. In the US context it would not make sense to call the upward service for the aggregator an ancillary service. Maybe aggregator business case?
 
-``futures necessarily be- long to the present: they are what we imagine for ourselves now. The present is itself only made visible against a past''[cite: Marilyn Strathern, 1992]
-
-Product Delivery: Performance Measurement 
-Performance measurement, which is typically termed Measurement and Verification (M\&V), is the process of quantifying and validating the provision of the service according to the specifications of product. The performance measurement process usually occurs at three stages: 
-\begin{itemize}
-	\item To qualify potential resources against product specifications as an entry gate to participation 
-	\item To verify resource conformance to the product specifications during and after participation 
-	\item To calculate the amount of product delivered by the resource as part of financial settlements
-\end{itemize}
- 
-All resources should be held to the performance specifications established by the product. However – demand side and generation side communication requirements will usually need to be designed separately and made appropriate to each. Technical rules often proscribe the use of metered values to base performance and settlements.[from the SEDC report used in the DRAS paper]
+%``futures necessarily belong to the present: they are what we imagine for ourselves now. The present is itself only made visible against a past''[cite: Marilyn Strathern, 1992]
 
 % section Funneling (end)
 

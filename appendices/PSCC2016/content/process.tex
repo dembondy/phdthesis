@@ -1,6 +1,6 @@
 \section{The Validation Process Case Study}
 
-In this section we apply the concepts outlined in Sec.~\ref{sec:metrics} on a simplified example of the test method on an aggregator architecture similar to the one developed in previous work\fcite{thavlov2013aggregation}. The sample aggregator name is  DTU-FlexServices, and it wants to sell ancillary services to the TSO called RisøGrid. The rest of this section presents the reference scenario, the example of the aggregator test and the evaluation process. 
+In this section we apply the concepts outlined in Sec.~\ref{sec:metrics} on a simplified example of the test method on an aggregator architecture similar to the one developed in previous work\cite{thavlov2013aggregation}. The sample aggregator name is  DTU-FlexServices, and it wants to sell ancillary services to the TSO called RisøGrid. The rest of this section presents the reference scenario, the example of the aggregator test and the evaluation process. 
 
 \subsection{The aggregator architecture}
 The objective of the DTU-FlexServices is to allocate a given amount of power over a controllable portfolio of resistive heating systems, each providing space heating to a detached household. The objective is subject to constraints on nominal power of the heating systems and indoor comfort, which is implemented as a tolerable band in which the temperature is allowed to vary given by the interval $\left[T_{min},T_{max}\right]$. It is assumed that feedback on indoor temperature is available to the aggregator, such that the aggregator in real-time can assess the available capacity of the controlled heating system and ensure that indoor constraints are not being violated in the future. Fig. \ref{fig:flow_diagram} presents the flow of data in the aggregator simulation framework. 
@@ -27,7 +27,7 @@ where the decision variable  $\Phi_{h,i,j}\in\mathbb{R}$ is the amount of power 
 \begin{equation}\label{eq:weight_fct}
   \mbox{W}\left(T_{i+1,j}\right) = \frac{2\left(T_{i+1,j}-T_{min,j} \right)}{T_{max,j} - T_{min,j}}-1 
 \end{equation}
-The aggregator framework, simulating the considered scenario, has been implemented in \textsc{matlab} and is presented in detail in previous work\fcite{thavlov2013aggregation}.
+The aggregator framework, simulating the considered scenario, has been implemented in \textsc{matlab} and is presented in detail in previous work\cite{thavlov2013aggregation}.
 
 \subsection{Reference Scenario}
 The DTU-FlexServices aggregator wants to participate in the ancillary service markets with a FRR up-regulation service with a volume of 250 kW. The service will be provided through the flexibility in the heating of 100 houses with electric heaters which are distributed over a wide geographical area, i.e. they are not on the same feeder. Since it is the first time DTU-FlexServices participates in the market for this service, RisøGrid requires DTU-FlexServices to go through the validation process. Following the steps outlined in Sec.~\ref{sec:alignment}, the validation process consists of the following steps:
