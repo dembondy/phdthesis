@@ -90,33 +90,77 @@ To fulfill these requirements two indices are defined:
 \subsection{Service Performance Assessment index}
 The service performance assessment index consists of the weighted average of the normalized root mean square error (RMSE) of the service delivery\footnote{Originally, this index was defined in \cite{bondy2014performance} as the integral square error (ISE) of the service delivery, which was then normalized to a maximum allowable error. This definition does note cope well when the service provision of several services are evaluated at the same time. Therefore, the index was reformulated as the RMSE.}. For evaluation of \emph{K} amount of ancillary services, over discrete time horizon of service delivery \emph{N}, the index is defined:
 \begin{align}\label{eq:MAINetaAS}
-\eta^{AS} &= \sum^{K}_{i=1} W_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {QoS^{AS}_{i,t}}^{2} \right)}{N_i}}\\
-\sum_{i=1}^K W_i &= 1
+\eta^{AS} &= \sum^{K}_{i=1} W^{AS}_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {QoS^{AS}_{i,t}}^{2} \right)}{N_i}}\\
+\sum_{i=1}^K W^{AS}_i &= 1 \label{eq:was}
 \end{align}
 where $QoS^{AS}_{i,t}$ is the truncated $QoS \in [0,1]$ of the ancillary serviced delivery. This definition means that $\eta^{AS} \in [0,1]$, where values close to 0 mean a good service delivery, and values close to 1 mean a bad service delivery. It is expected that in most cases $K=1$, but this definition allows for more services being evaluated at the same time.
 
 The index can be similarly defined for \emph{M} amount of asset management services:
-\begin{equation}\label{eq:MAINetaAMS}
-\eta^{AMS} = \sum^{M}_{i=1} W_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {QoS^{AMS}_{i,t}}^{2} \right)}{N_i}}.
-\end{equation}
+\begin{align}\label{eq:MAINetaAMS}
+\eta^{AMS} &= \sum^{M}_{i=1} W^{AMS}_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {QoS^{AMS}_{i,t}}^{2} \right)}{N_i}}\\
+\sum_{i=1}^M W^{AMS}_i &= 1 \label{eq:wams}
+\end{align}
 It is likely that $M > 1$, e.g. if the aggregator is an EV fleet operator for a single large customer. Finally, if an aggregator desires to evaluate its own overall performance, e.g. as part of an internal reviewing process, it can combine both kinds of service provision in a weighted average:
 \begin{equation}
 \eta_{tot} = \alpha \eta^{AS} + (1-\alpha) \eta^{AMS}, \quad \alpha \in [0,1]
 \end{equation}
-where $\alpha$ is the weight ratio  between the two kinds of service.
+where $\alpha$ is the weight ratio  between the two kinds of service. 
 
-The definition of $\eta$ takes the time horizon of service provision into account. This is done, so that the performance assessment gives a result that is scaled to the time scale of service delivery. For example, if two aggregators perform with an error of equal magnitude, but one aggregator is contracted to deliver the service on a shorter time horizon, the assessment of this aggregator should be worse than the one which was contracted for a longer period. Conversely, if two aggregators deliver a service on different time horizons, and both have error in service delivery which is \emph{proportionately} the same, the performance assessment will evaluate them to have equal performance. This is illustrated in Figure~\ref{fig:indextest1}, where 5 aggregators deliver a reference tracking service over different time horizons. All aggregators have the same proportionate error\footnote[][-2\baselineskip]{This is ensured by using a sine as the ``actual'' performance of the aggregators, and each case is an extra period of the sine wave.} which leads to the same $\eta$, as can be seen in Table~\ref{tab:qostest1}. There is a slight increase in the values of $\eta$ due to numerical round off.\bondy{should I also show an example of an evaluation where the QoS is different?}
+An example of how the service delivery could look for five different aggregators providing the same ancillary service, in this case a reference tracking service, with varying \emph{QoS} is presented in Figure~\ref{fig:indextest3} and the corresponding performance evaluations are presented in Table~\ref{tab:qostest3}. This scenario shows a wide spread of \emph{QoS}, which is reflected in the $\eta$ values. The first aggregator has a relatively good performance and therefore has small $\eta$, while the worst performing aggregator has an $\eta$ ten times larger, i.e. worse performance.
+\begin{margintable}[-5\baselineskip]%[h!]
+	\centering
+	\begin{tabular}{cc}
+		\toprule
+		Aggregator & $\eta$ \\
+		\midrule
+		1 & 0.0740 \\
+		2 & 0.1481 \\
+		3 & 0.2962 \\
+		4 & 0.4937 \\
+		5 & 0.7308 \\
+		\bottomrule
+	\end{tabular}
+	\caption{The values of $\eta$ for same service delivery horizons and different service performance.}
+	\label{tab:qostest3}
+\end{margintable}
+
 \begin{figure}
 \centering
-\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{indextest.eps}%
-\label{subfig:indextest1}} \\
-\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostest.eps}%
-\label{subfig:qostest1}}
-\caption{Test of the QoS definition, where 5 aggregators deliver the same service with same performance.}
-\label{fig:indextest1}
+\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{indextest_initial.eps}%
+\label{subfig:indextest3}} \\
+\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostest_initial.eps}%
+\label{subfig:qostest3}}
+\caption[][1\baselineskip]{Test of the QoS definition where five aggregators deliver the same service for the same time horizons and with different performance.}
+\label{fig:indextest3}
 \end{figure}
 
-\begin{table}[h!]
+The definition of $\eta$ takes the time horizon of service provision into account. This is done, so that the performance assessment gives a result that is scaled to the time scale of service delivery. For example, if two aggregators perform with an error of equal magnitude, but one aggregator is contracted to deliver the service on a shorter time horizon, the assessment of this aggregator should be worse than the one which was contracted for a longer period. This is shown in Figure~\ref{fig:indextest4} and Table~\ref{tab:qostest4}, where Aggregator 1 delivers the same service and the same error as Aggregator 2 but over half the delivery period.
+\begin{margintable}[-1\baselineskip]%[h!]
+	\centering
+	\begin{tabular}{cc}
+		\toprule
+		Aggregator & $\eta$ \\
+		\midrule
+		1 & 0.3491 \\
+		2 & 0.2469 \\
+		\bottomrule
+	\end{tabular}
+	\caption{The values of $\eta$ for different service delivery horizons and with the same magnitude of error. Since $\eta$ is normalized with time, the shorter service is evaluated worse than the service delivered over the long time horizon.}
+	\label{tab:qostest4}
+\end{margintable}
+
+\begin{figure}
+\centering
+\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{timenormtest.eps}%
+\label{subfig:indextest4}}\\
+\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostimenormtest.eps}%
+\label{subfig:qostest4}}
+\caption{Test of the QoS definition where 2 aggregators deliver the same service for different time horizons and with the same magnitude of error.}
+\label{fig:indextest4}
+\end{figure}
+
+Conversely, if two aggregators deliver a service on different time horizons and both have an error in service delivery which is \emph{proportionately} the same, the performance assessment will evaluate them to have equal performance. This is illustrated in Figure~\ref{fig:indextest1}, where five aggregators deliver a reference tracking service over different time horizons. All aggregators have the same proportionate error\footnote{This is ensured by using a sine as the ``actual'' performance of the aggregators, and each case is an extra period of the sine wave.} which leads to the same $\eta$, as can be seen in Table~\ref{tab:qostest1}. There is a slight increase in the values of $\eta$ due to numerical round off, which means that the precision of $\eta$ depends on the precision of the measurements. The amount of significant digits should be determined by the system operator or whichever entity is in charge of the service performance assessment.
+\begin{margintable}[15\baselineskip]%[h!]
 	\centering
 	\begin{tabular}{cc}
 		\toprule
@@ -129,26 +173,65 @@ The definition of $\eta$ takes the time horizon of service provision into accoun
 		5 & 0.7338 \\
 		\bottomrule
 	\end{tabular}
-	\caption{The values of $\eta$ over different service delivery horizons.}
+	\caption{The values of $\eta$ for different service delivery horizons. A numerical difference appears in the third decimal due to rounding error. The precision of $\eta$ depends on the measurement equipment of the flexibility asset.}
 	\label{tab:qostest1}
-\end{table}
+\end{margintable}
+\begin{figure}
+\centering
+\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{indextest_difftime_sameqos.eps}%
+\label{subfig:indextest1}} \\
+\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostest_difftime_sameqos.eps}%
+\label{subfig:qostest1}}
+\caption{Test of the QoS definition where five aggregators deliver the same service for different time horizons and with the same performance.}
+\label{fig:indextest1}
+\end{figure}
+
+Finally, Figure~\ref{fig:indextest2} and Table~\ref{tab:qostest2} show five aggregator delivering the same service for different time horizons and with different performance. It can be seen that truncating the \emph{QoS} when calculating $\eta$ means that $\eta$ alone can not be used for assessing if a service was delivered. Thus, the service verification index, described in the next section, must be taken into account in order to give a complete idea of service performance and delivery.
+\begin{figure}
+\centering
+\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{indextest_difftime_diffqos.eps}%
+\label{subfig:indextest2}} \\
+\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostest_difftime_diffqos.eps}%
+\label{subfig:qostest2}}
+\caption{Test of the QoS definition where five aggregators deliver the same service over different time horizons and with different performance.
+	\begin{margintable}%[-4\baselineskip]%[h!]
+	\centering
+	\begin{tabular}{cc}
+		\toprule
+		Aggregator & $\eta$ \\
+		\midrule
+		1 & 0.8199 \\
+		2 & 0.7904  \\
+		3 & 0.7333  \\
+		4 & 0.6758  \\
+		5 & 0.5949 \\
+		\bottomrule
+	\end{tabular}
+	\caption{The values of $\eta$ over different service delivery horizons and different service performance.}
+	\label{tab:qostest2}
+\end{margintable}
+}
+\label{fig:indextest2}
+\end{figure}
+\FloatBarrier
 
 \subsection{Service Verification Index}
-Similar to the service performance assessment index, an index is defined for service verification\footnote{This index can also be interpreted as an index measuring non-delivery.} based upon \emph{QoS} whenever $QoS > 1$. A new measure is introduced:
+Similar to the service performance assessment index, an index is defined for service verification\footnote{This index can also be interpreted as an index measuring non-delivery.} based upon \emph{QoS} whenever $QoS > 1$. A new non-delivery measure is introduced:
 \begin{equation}
 	ND(t) = QoS(t) - 1,\quad \forall QoS(t) > 1, \forall t.
 \end{equation}
 Using this new measure, the service verification index for \emph{K} amount of ancillary services, over a discrete time horizon of service delivery \emph{N}, is defined as:
-\begin{equation}\label{eq:epsilonAS}
-\epsilon^{AS} = \sum^{K}_{i=1} W_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {ND^{AS}_{i,t}}^{2} \right)}{N_i}}
+\begin{equation}\label{eq:epsilonASmain}
+	\epsilon^{AS} = \sum^{K}_{i=1} W^{AS}_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {ND^{AS}_{i,t}}^{2} \right)}{N_i}}
 \end{equation}
-where $\epsilon^{AS} \in [0,\infty]$. Similar to $\eta$, $\epsilon$ is also normed to time. The service verification for the index can also be defined for asset management services:
-\begin{equation}\label{eq:epsilonAMS}
-\epsilon^{AMS} = \sum^{M}_{i=1} W_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {ND^{AMS}_{i,t}}^{2} \right)}{N_i}}.
-\end{equation}
+where $\epsilon^{AS} \in [0,\infty]$ and $W^{AS}_i$ is the same as in Equation~\eqref{eq:was}. Similar to $\eta$, $\epsilon$ is also normalized to time.
 
-Following the same example of $\eta$, the verification index scales with time, and the verification index values for the examples shown in previous section can be seen in Table~\ref{tab:epstest1}. Contrary to the service performance assessment index, the verification index does not have a clear limit for what is considered a verified serviced. For some services, e.g. ancillary services, it is critically important that $QoS(t) \lll 1$, which would mean a requirement of $\epsilon \approx 0}$. In other cases, $\epsilon > 0}$ is tolerable to certain extent. The tolerance limit for $\epsilon$ should be defined in the contract agreements between aggregator and the entity acquiring the services.
-\begin{table}[h!]
+The service verification for the index can also be defined for asset management services:
+\begin{equation}\label{eq:epsilonAMSmain}
+	\epsilon^{AMS} = \sum^{M}_{i=1} W^{AMS}_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {ND^{AMS}_{i,t}}^{2} \right)}{N_i}}
+\end{equation}
+where  \emph{M} is the size of the unit portfolio and $W^{AMS}_i$ corresponds to Equation~\eqref{eq:wams}. Following the definition of $\eta$, the verification index scales with time. This can be seen through the verification index values corresponding to Figure~\ref{fig:indextest1} in Table~\ref{tab:epstest1}. Again, due to numerical accuracy, only the second decimal number is significant.
+\begin{margintable}%[h!]
 	\centering
 	\begin{tabular}{cc}
 		\toprule
@@ -161,15 +244,51 @@ Following the same example of $\eta$, the verification index scales with time, a
 		5 & 0.0841 \\
 		\bottomrule
 	\end{tabular}
-	\caption{The values of $\epsilon$ over different service delivery horizons.}
+	\caption{The values of $\epsilon$ over different service delivery horizons with same delivery error, as shown in Figure~\ref{fig:indextest1}.}
 	\label{tab:epstest1}
-\end{table}
+\end{margintable}
+
+The two proposed indices have almost the same definition, the difference being that \emph{ND} is not truncated when estimating $\epsilon$. Table~\ref{tab:epstest2} shows the $\epsilon$ values corresponding to the example in Figure~\ref{fig:indextest2}, and shows clearly the definition of \emph{ND}, i.e. values $QoS \leq 1$ are ignored, while $QoS > 1$ count as part of the non-delivery. Contrary to the service performance assessment index, the verification index does not have a clear limit for what is considered a verified serviced. For some services, e.g. ancillary services, it is critically important that $QoS(t) \ll 1$, which would mean a requirement of $\epsilon \approx 0$. In other cases, $\epsilon > 0$ is tolerable to certain extent. The tolerance limit for $\epsilon$ should be defined in the contract agreements between aggregator and the entity acquiring the services.
+
+\begin{margintable}[-5\baselineskip]%[h!]
+	\centering
+	\begin{tabular}{cc}
+		\toprule
+		Aggregator & $\epsilon$ \\
+		\midrule
+		1 & 0.3612 \\
+		2 & 0.2512  \\
+		3 & 0.0840  \\
+		4 & 0.0  \\
+		5 & 0.0 \\
+		\bottomrule
+	\end{tabular}
+	\caption{The values of $\epsilon$ corresponding to Figure~\ref{fig:indextest2}.}
+	\label{tab:epstest2}
+\end{margintable}
+
+%\begin{table}[h!]
+%	\centering
+%	\begin{tabular}{cc}
+%		\toprule
+%		Aggregator & $\epsilon$ \\
+%		\midrule
+%		1 & 0.3612 \\
+%		2 & 0.2506  \\
+%		3 & 0.0838  \\
+%		4 & 0.0  \\
+%		5 & 0.0 \\
+%		\bottomrule
+%	\end{tabular}
+%	\caption{The corresponding values of $\epsilon$ to Figure~\ref{fig:indextest3}.}
+%	\label{tab:epstest3}
+%\end{table}
 
 \section{Application to Service Verification}
 \newsection{T}{he two indices defined} in the previous section have different applications. As stated in the introduction to the chapter, verification occurs at the prequalification phase, at the operation phase and at the settlement phase. The work during this project has focused on the use of the indices for prequalification and settlement. 
 
 \subsection{Prequalification Verification}
-In the case of prequalification, the indices form part of the assessment module of the validation framework presented in Figure~\ref{fig:MAINframework}. As such, the indices can evaluate the simulated results and return the $\eta$ and $\epsilon$ results. Since the simulations will be repeated enough times to gain a statistical certainty of the aggregator behavior, both indices the verification of the simulated services will be a statistical value, e.g. with a mean and a distribution.
+In the case of prequalification, the indices form part of the assessment module of the validation framework presented in Figure~\ref{fig:MAINframework}. As such, the indices can evaluate the simulated results and return the $\eta$ and $\epsilon$ results. Since the simulations will be repeated enough times to gain a statistical certainty of the aggregator behavior, the verification of the simulated services will be a statistical value, e.g. with a mean and a distribution.
 
 \subsection{Settlement Verification}
 Verification of delivered services occurs as a post-delivery analysis. For an aggregator, the verification of a delivered service will be done by the entity who bought the service, or a third party metering company. It is still an open question how the specific DER consumption/production will be measured, since in most cases the resource will be behind a common metering point, e.g. the smart meter of a household. Also, current measurement requirements would force all resources to have expensive measurement equipment, of which the cost would far outweigh the profit of participating in the ancillary service markets. As part of an iPower demonstration event held at DTU Risø Campus in November 2014, a verification module was implemented, using the index definition of \cite{bondy2014performance}, for the verification of a DSO service. In this case, the consumption of the participating DER came only from flexible heating, and the measured consumption could be used to verify the service. An integration of the verification script to the code running the demonstration also showed that the same code could be used as a simple online performance monitoring tool.

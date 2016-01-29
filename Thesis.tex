@@ -8,6 +8,7 @@
 \listfiles
 \input{prefrontmatter/titlepage}
 \makeindex
+\makeglossaries
 \begin{document}
 
 \prefrontmatter
@@ -20,13 +21,17 @@
 \frontmatter
 \include{frontmatter/Summary}
 \include{frontmatter/Preface}
+\include{frontmatter/ListOfPublications}
 \include{frontmatter/Acknowledgements}
 %\clearforchapter
 \tableofcontents
 %\clearforchapter
-%\mylistoftodos
+\mylistoftodos
+\include{frontmatter/abbreviations}
+
 \listoffigures
 \listoftables
+\printglossary[type=\acronymtype,title={Abbreviations}]
 
 \cleardoublepage
 \thispagestyle{empty}

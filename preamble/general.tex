@@ -19,6 +19,8 @@
 \usepackage[cmex10]{amsmath}
 \usepackage{mathtools}
 
+\usepackage[acronym,nomain]{glossaries}  % For doing the list of acronyms (abbreviations)
+
 \usepackage{listings}                 % Source code printer for LaTeX
 \usepackage{tikz}
 \usepackage{lettrine}                 % For having the big letter at start of Chapter and section
@@ -64,12 +66,12 @@
 \usepackage{eso-pic}                  % Watermark and other bag
 \usepackage{preamble/dtucolors}
 \graphicspath{{graphics/}}
-\usepackage{soul,todonotes}
+\usepackage{soul}
 % Language
 %\usepackage{polyglossia}    % multilingual typesetting and appropriate hyphenation
 %\setdefaultlanguage{english}
 %\setotherlanguage{danish}
-\usepackage[main=english,danish]{babel}
+\usepackage[main=english,danish,safe=none]{babel}
 % Floating objets, captions and references
 \usepackage[noabbrev,nameinlink,capitalise]{cleveref} % Clever references. Options: "fig. !1!" --> "!Figure 1!"
 %\hangcaption
@@ -84,34 +86,34 @@
 \setcounter{secnumdepth}{2}           % Depth of section numbering
 
 %% Todos
-%\usepackage{totcount}                 % For total counting of counters
-%\def\todoshowing{}
-%\ifnum\strcmp{\showtodos}{false}=0
-%    \def\todoshowing{disable}
-%\fi
-%\usepackage[colorinlistoftodos,\todoshowing]{todonotes} % Todonotes package for nice todos
-%\newtotcounter{todocounter}           % Creates counter in todo
-%\let\oldtodo\todo
-%\newcommand*{\newtodo}[2][]{\stepcounter{todocounter}\oldtodo[#1]{\thesection~(\thetodocounter)~#2}}
-%\let\todo\newtodo
-%\let\oldmissingfigure\missingfigure
-%\newcommand*{\newmissingfigure}[2][]{\stepcounter{todocounter}\oldmissingfigure[#1]{\thesection~(\thetodocounter)~#2}}
-%\let\missingfigure\newmissingfigure
-%\makeatletter
-%\newcommand*{\mylistoftodos}{% Only show list if there are todos
-%\if@todonotes@disabled
-%\else
-%    \ifnum\totvalue{todocounter}>0
-%        \markboth{\@todonotes@todolistname}{\@todonotes@todolistname}
-%        \phantomsection\todototoc
-%        \listoftodos
-%    \else
-%    \fi
-%\fi
-%}
-%\makeatother
-%\newcommand{\lesstodo}[2][]{\todo[color=green!40,#1]{#2}}
-%\newcommand{\moretodo}[2][]{\todo[color=red!40,#1]{#2}}
+\usepackage{totcount}                 % For total counting of counters
+\def\todoshowing{}
+\ifnum\strcmp{\showtodos}{false}=0
+    \def\todoshowing{disable}
+\fi
+\usepackage[colorinlistoftodos,\todoshowing]{todonotes} % Todonotes package for nice todos
+\newtotcounter{todocounter}           % Creates counter in todo
+\let\oldtodo\todo
+\newcommand*{\newtodo}[2][]{\stepcounter{todocounter}\oldtodo[#1]{\thesection~(\thetodocounter)~#2}}
+\let\todo\newtodo
+\let\oldmissingfigure\missingfigure
+\newcommand*{\newmissingfigure}[2][]{\stepcounter{todocounter}\oldmissingfigure[#1]{\thesection~(\thetodocounter)~#2}}
+\let\missingfigure\newmissingfigure
+\makeatletter
+\newcommand*{\mylistoftodos}{% Only show list if there are todos
+\if@todonotes@disabled
+\else
+    \ifnum\totvalue{todocounter}>0
+        \markboth{\@todonotes@todolistname}{\@todonotes@todolistname}
+        \phantomsection\todototoc
+        \listoftodos
+    \else
+    \fi
+\fi
+}
+\makeatother
+\newcommand{\lesstodo}[2][]{\todo[color=green!40,#1]{#2}}
+\newcommand{\moretodo}[2][]{\todo[color=red!40,#1]{#2}}
 
 % Making the first letter of chapters and sections 
 \setlength{\DefaultNindent}{0pt} % read the doc about it
@@ -299,7 +301,7 @@
 \fi
 
 %% For notes
-\newcommand{\bondy}[1]{\sethlcolor{s13}\hl{#1\,[BONDY]}} 
+\newcommand{\bondy}[1]{\sethlcolor{cyan}\hl{#1\,[BONDY]}} 
 \newcommand{\bondynote}[1]{\todo[color=s13!50,inline]{BONDY: #1}}
 %% for Subfigures
 \usepackage[caption=false,font=footnotesize]{subfig}
