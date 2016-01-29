@@ -107,7 +107,18 @@ It is likely that $M > 1$, e.g. if the aggregator is an EV fleet operator for a 
 where $\alpha$ is the weight ratio  between the two kinds of service. 
 
 An example of how the service delivery could look for five different aggregators providing the same ancillary service, in this case a reference tracking service, with varying \emph{QoS} is presented in Figure~\ref{fig:indextest3} and the corresponding performance evaluations are presented in Table~\ref{tab:qostest3}. This scenario shows a wide spread of \emph{QoS}, which is reflected in the $\eta$ values. The first aggregator has a relatively good performance and therefore has small $\eta$, while the worst performing aggregator has an $\eta$ ten times larger, i.e. worse performance.
-\begin{margintable}[-5\baselineskip]%[h!]
+
+\begin{figure}[htb!]
+\centering
+\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{indextest_initial.eps}%
+\label{subfig:indextest3}} \\
+\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostest_initial.eps}%
+\label{subfig:qostest3}}
+\caption[][1\baselineskip]{Test of the QoS definition where five aggregators deliver the same service for the same time horizons and with different performance.}
+\label{fig:indextest3}
+\end{figure}
+
+\begin{margintable}%[-5\baselineskip]%[h!]
 	\centering
 	\begin{tabular}{cc}
 		\toprule
@@ -123,19 +134,20 @@ An example of how the service delivery could look for five different aggregators
 	\caption{The values of $\eta$ for same service delivery horizons and different service performance.}
 	\label{tab:qostest3}
 \end{margintable}
+\FloatBarrier
+The definition of $\eta$ takes the time horizon of service provision into account. This is done, so that the performance assessment gives a result that is scaled to the time scale of service delivery. For example, if two aggregators perform with an error of equal magnitude, but one aggregator is contracted to deliver the service on a shorter time horizon, the assessment of this aggregator should be worse than the one which was contracted for a longer period. This is shown in Figure~\ref{fig:indextest4} and Table~\ref{tab:qostest4}, where Aggregator 1 delivers the same service and the same error as Aggregator 2 but over half the delivery period.
 
-\begin{figure}
+\begin{figure}[htb!]
 \centering
-\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{indextest_initial.eps}%
-\label{subfig:indextest3}} \\
-\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostest_initial.eps}%
-\label{subfig:qostest3}}
-\caption[][1\baselineskip]{Test of the QoS definition where five aggregators deliver the same service for the same time horizons and with different performance.}
-\label{fig:indextest3}
+\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{timenormtest.eps}%
+\label{subfig:indextest4}}\\
+\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostimenormtest.eps}%
+\label{subfig:qostest4}}
+\caption{Test of the QoS definition where 2 aggregators deliver the same service for different time horizons and with the same magnitude of error.}
+\label{fig:indextest4}
 \end{figure}
 
-The definition of $\eta$ takes the time horizon of service provision into account. This is done, so that the performance assessment gives a result that is scaled to the time scale of service delivery. For example, if two aggregators perform with an error of equal magnitude, but one aggregator is contracted to deliver the service on a shorter time horizon, the assessment of this aggregator should be worse than the one which was contracted for a longer period. This is shown in Figure~\ref{fig:indextest4} and Table~\ref{tab:qostest4}, where Aggregator 1 delivers the same service and the same error as Aggregator 2 but over half the delivery period.
-\begin{margintable}[-1\baselineskip]%[h!]
+\begin{margintable}%[-1\baselineskip]%[h!]
 	\centering
 	\begin{tabular}{cc}
 		\toprule
@@ -148,19 +160,19 @@ The definition of $\eta$ takes the time horizon of service provision into accoun
 	\caption{The values of $\eta$ for different service delivery horizons and with the same magnitude of error. Since $\eta$ is normalized with time, the shorter service is evaluated worse than the service delivered over the long time horizon.}
 	\label{tab:qostest4}
 \end{margintable}
-
-\begin{figure}
+\FloatBarrier
+Conversely, if two aggregators deliver a service on different time horizons and both have an error in service delivery which is \emph{proportionately} the same, the performance assessment will evaluate them to have equal performance. This is illustrated in Figure~\ref{fig:indextest1}, where five aggregators deliver a reference tracking service over different time horizons. All aggregators have the same proportionate error\footnote{This is ensured by using a sine as the ``actual'' performance of the aggregators, and each case is an extra period of the sine wave.} which leads to the same $\eta$, as can be seen in Table~\ref{tab:qostest1}. There is a slight increase in the values of $\eta$ due to numerical round off, which means that the precision of $\eta$ depends on the precision of the measurements. The amount of significant digits should be determined by the system operator or whichever entity is in charge of the service performance assessment.
+\begin{figure}[htb!]
 \centering
-\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{timenormtest.eps}%
-\label{subfig:indextest4}}\\
-\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostimenormtest.eps}%
-\label{subfig:qostest4}}
-\caption{Test of the QoS definition where 2 aggregators deliver the same service for different time horizons and with the same magnitude of error.}
-\label{fig:indextest4}
+\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{indextest_difftime_sameqos.eps}%
+\label{subfig:indextest1}} \\
+\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostest_difftime_sameqos.eps}%
+\label{subfig:qostest1}}
+\caption{Test of the QoS definition where five aggregators deliver the same service for different time horizons and with the same performance.}
+\label{fig:indextest1}
 \end{figure}
 
-Conversely, if two aggregators deliver a service on different time horizons and both have an error in service delivery which is \emph{proportionately} the same, the performance assessment will evaluate them to have equal performance. This is illustrated in Figure~\ref{fig:indextest1}, where five aggregators deliver a reference tracking service over different time horizons. All aggregators have the same proportionate error\footnote{This is ensured by using a sine as the ``actual'' performance of the aggregators, and each case is an extra period of the sine wave.} which leads to the same $\eta$, as can be seen in Table~\ref{tab:qostest1}. There is a slight increase in the values of $\eta$ due to numerical round off, which means that the precision of $\eta$ depends on the precision of the measurements. The amount of significant digits should be determined by the system operator or whichever entity is in charge of the service performance assessment.
-\begin{margintable}[15\baselineskip]%[h!]
+\begin{margintable}%[15\baselineskip]%[h!]
 	\centering
 	\begin{tabular}{cc}
 		\toprule
@@ -176,25 +188,19 @@ Conversely, if two aggregators deliver a service on different time horizons and 
 	\caption{The values of $\eta$ for different service delivery horizons. A numerical difference appears in the third decimal due to rounding error. The precision of $\eta$ depends on the measurement equipment of the flexibility asset.}
 	\label{tab:qostest1}
 \end{margintable}
-\begin{figure}
-\centering
-\subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{indextest_difftime_sameqos.eps}%
-\label{subfig:indextest1}} \\
-\subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostest_difftime_sameqos.eps}%
-\label{subfig:qostest1}}
-\caption{Test of the QoS definition where five aggregators deliver the same service for different time horizons and with the same performance.}
-\label{fig:indextest1}
-\end{figure}
-
+\FloatBarrier
 Finally, Figure~\ref{fig:indextest2} and Table~\ref{tab:qostest2} show five aggregator delivering the same service for different time horizons and with different performance. It can be seen that truncating the \emph{QoS} when calculating $\eta$ means that $\eta$ alone can not be used for assessing if a service was delivered. Thus, the service verification index, described in the next section, must be taken into account in order to give a complete idea of service performance and delivery.
-\begin{figure}
+\begin{figure}[t!]
 \centering
 \subfloat[Simulated service delivery]{\includegraphics[width=1\columnwidth]{indextest_difftime_diffqos.eps}%
 \label{subfig:indextest2}} \\
 \subfloat[QoS for the services]{\includegraphics[width=1\columnwidth]{qostest_difftime_diffqos.eps}%
 \label{subfig:qostest2}}
 \caption{Test of the QoS definition where five aggregators deliver the same service over different time horizons and with different performance.
-	\begin{margintable}%[-4\baselineskip]%[h!]
+}
+\label{fig:indextest2}
+\end{figure}
+\begin{margintable}%[-8\baselineskip]%[h!]
 	\centering
 	\begin{tabular}{cc}
 		\toprule
@@ -210,9 +216,7 @@ Finally, Figure~\ref{fig:indextest2} and Table~\ref{tab:qostest2} show five aggr
 	\caption{The values of $\eta$ over different service delivery horizons and different service performance.}
 	\label{tab:qostest2}
 \end{margintable}
-}
-\label{fig:indextest2}
-\end{figure}
+
 \FloatBarrier
 
 \subsection{Service Verification Index}
