@@ -4,9 +4,9 @@
 \begin{marginfigure}
 	\includegraphics[width=\textwidth]{framework_services.eps}
 	\caption{This chapter focuses on the \emph{service definition} block of the aggregator validation framework presented in Chapter~\ref{cha:validation}.}
-      \label{fig:frameworkservices}
+      \label{fig:framework_services}
 \end{marginfigure}
-\newchapter{I}{t is clear from} Chapter~\ref{cha:validation} that \emph{service requirements} is an essential block in the aggregator validation framework (see Figure~\ref{fig:frameworkservices}). Initially, an objective of this work was to model service requirements in order to perform the aggregator validation. While this objective was achieved, it is clear that current service requirements in many countries are directly, or indirectly, blocking the integration of aggregators providing DR\fcite{cappers2013assessment,coalition2014mapping}. If aggregators are to be successfully integrated into the power system, the rules and requirements for participation must be changed. This chapter presents two novel contributions to integrating aggregators in the power system: a modeling method for ancillary services, and a proposal for the restructuring of requirements for ancillary services. A method for modeling ancillary services is important because the resulting models form the benchmark for the performance evaluation and verification of the aggregator, as well as being a direct input to the aggregator (as discussed in Chapter~\ref{cha:aggregator}). The redefinition of ancillary service requirements is important since it will allow system operators to utilize the properties of all available resources, both traditional and new, in an optimal way.
+\newchapter{I}{t is clear from} Chapter~\ref{cha:validation} that \emph{service requirements} is an essential block in the aggregator validation framework (see Figure~\ref{fig:framework_services}). Initially, an objective of this work was to model service requirements in order to perform the aggregator validation. While this objective was achieved, it is clear that current service requirements in many countries are directly, or indirectly, blocking the integration of aggregators providing DR\fcite{cappers2013assessment,coalition2014mapping}. If aggregators are to be successfully integrated into the power system, the rules and requirements for participation must be changed. This chapter presents two novel contributions to integrating aggregators in the power system: a modeling method for ancillary services, and a proposal for the restructuring of requirements for ancillary services. A method for modeling ancillary services is important because the resulting models form the benchmark for the performance evaluation and verification of the aggregator (see Chapter~\ref{cha:verification}), as well as being a direct input to the aggregator (see Chapter~\ref{cha:aggregator}). The redefinition of ancillary service requirements is important since it will allow system operators to utilize the properties of all available resources, both traditional and new, in an optimal way.
 
 The service modeling method is part of a submitted journal paper\fcite{bondy2016method} and the requirements restructuring is part of a draft journal paper\fcite{bondy2016redefining}. This draft journal paper is the outcome of my external research stay.
 
@@ -20,10 +20,19 @@ The service modeling method is part of a submitted journal paper\fcite{bondy2016
 
 Aggregators/DR provide flexibility, as it is, they are not being paid for flexibility as defined previously, but only for power. This needs rethinking.
 \section{Background} % (fold)
+\newsection{T}{he following section outlines} concepts related to 
 \label{sec:backgroundservices}
+\subsection{What are Ancillary Services?} % (fold)
+\label{sub:ancillaryservicesdef}
+Defining what \gls{as} are, as well as which services the term includes, is difficult. This is due to both the differences in the way power systems are managed around the world and the differences in the terminology used to refer to such services. There is overlap between the European and US definition\fcite{eurelectric2004,ferc1997} of AS in that both describe them as services used to ensure the reliability of the power system. In both European and US context reliability is addressed by considering \emph{system adequacy} and \emph{security} \footnote{NERC also used the term system security, but in September 2001 security became synonymous with homeland protection in the US. Now it uses the term \emph{operating reliability} \cite{nerc2007definition}}. \emph{System adequacy} is the power system's ability to supply the electricity demand at all times and \emph{security} is the ability to withstand sudden disturbances.
+
+Generally, maintaining an adequate and secure power system means maintaining the power system operating at nominal frequency and voltage. In cases where the power system deviates from nominal operation, either due to natural fluctuations in production/consumption or faults in the system, the system operators will activate ancillary services to restore normal operation. 
+
+There exists a variety of ancillary services\todo{put a reference and examples}, but this work focuses on those that use active power to maintain the nominal frequency of the grid. In Europe these services are Frequency Containment Reserves, Frequency Restoration Reserves (either automatic or manual), and Replacement Reserves\fcite{entsoe2013network}.
+% subsection What are Ancillary Services? (end)
 \subsection{Service Requirements for Ancillary Services} % (fold)
 \label{sub:servreqAS}
-
+Because AS are essential for the secure operation of the system, the system operators also have requirements and restrictions on the units providing AS. A super-set of requirements across different systems is defined in \fcite{Rebours}. These requirements can roughly be classified into three categories: \emph{temporal requirements}, which relate to how fast and for how long a service must be delivered; \emph{resource tuning requirements}, which relate to specific values that tuning parameters in the resource must have; and \emph{market requirements}, which relate to bid sizes and similar parameters in systems where services are acquired through market mechanisms. Of these three categories, only the temporal requirements relate to service performance. Furthermore, in most systems are the requirements implicitly defined for traditional generation units. This means that most service requirements are oriented towards the least common denominator of service providers, e.g. a unit providing primary frequency control should provide half of the service within 15 seconds and full response within 30 seconds\fcite{EnerginetAncillary}. A variety of generation and consumption units would be able to provide this service faster, but this quality is not rewarded. Another example is the requirement of having a PI-controller on units providing secondary frequency control, in order to track the AGC signal. Such a controller is infeasible on distributed systems, but other modern controllers can provide offset-free control with similar properties.
 % subsection Service Requirements for Ancillary Services (end)
 \subsection{Demand as Ancillary Services} % (fold)
 \label{sub:demandAS}
@@ -31,7 +40,10 @@ The concept of using demand side management to help the secure operation of the 
 
 The 
 % subsection Demand as Ancillary Services (end)
+\subsection{New System Support Services} % (fold)
+\label{sub:newservices}
 
+% subsection New System Support Services (end)
 % section Background on Aggregator Services (end)
 \section{Modeling of Ancillary Services} % (fold)
 \label{sec:Modeling of Ancillary Services}
