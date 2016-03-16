@@ -1,6 +1,11 @@
 %!TEX root = ../Thesis.tex
 \chapter{Performance Assessment \& Verification of Aggregator Services} % (fold)
 \label{cha:verification}
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{framework_verification.eps}
+	\caption{This chapter focuses on the \emph{service verification and evaluation} block of the aggregator validation framework presented in Chapter~\ref{cha:validation}.}
+      \label{fig:frameworkservices}
+\end{marginfigure}
 \newchapter{P}{erformance assessment is the} process\marginnote{The IEEE defines verification as:``confirmation, through the provision of objective evidence, that specified requirements have been fulfilled.''} of quantifying and verifying the provision of a service according to the contractual specifications of the service. Performance assessment usually occurs at three stages\fcite{coalition2014mapping}
 \begin{itemize}
 	\item To qualify potential resources against service specifications as part of the validation/prequalification procedure.
@@ -13,7 +18,11 @@
 %\end{itemize}
 %All resources should be held to the performance specifications established by the product. However – demand side and generation side communication requirements will usually need to be designed separately and made appropriate to each. Technical rules often proscribe the use of metered values to base performance and settlements.[from the SEDC report used in the DRAS paper]
 
-This chapter presents a novel set of performance indices developed for aggregator performance assessment, and how these can be used as part of aggregator validation and service verification. The initial work on aggregator performance assessment was presented in a conference paper\fcite{bondy2014performance} and further refined in a submitted journal paper\fcite{bondy2016method}. These paper can be found in Appendix~\ref{app:isgt2014} and Appendix~\ref{app:segan}. 
+This chapter presents a novel set of performance indices developed for aggregator performance assessment which can be applied at the three stages outlined above. The main focus of the results presented is on aggregator validation and service verification. \todo{finish thought here\ldots something about the importance or the relevance}
+
+The initial work on aggregator performance assessment was presented in a conference paper\fcite{bondy2014performance} and further refined in a submitted journal paper\fcite{bondy2016method}. These paper can be found in Appendix~\ref{app:isgt2014} and Appendix~\ref{app:segan}. 
+
+
 \section{Background}
 \newsection{L}{ittle attention has been} given to the problem of performance assessment of aggregator controllers seen from a service-delivery perspective. As stated in Section~\ref{subsec:aggtest}, performance assessment of aggregators has been mostly ad-hoc analysis specific to a problem the designers are trying to solve, but none have taken a systematic approach to the evaluation of aggregators in terms of established service requirements. In this section we present the concept of control performance assessment and performance indices in power systems, which are topics that serve as background for the rest of the chapter.
 
@@ -30,12 +39,18 @@ Usually these indices are normed so that for an index $\eta$:
 \end{equation}
 
 \subsection{Performance Indices in the Power System}
-Currently, the concepts of performance indices and evaluation criteria are used in the power system for the general assessment of how well the System Operator is managing the system. But these evaluation concepts are usually tailored to specific services, e.g. CPS1 and CPS2\footnote{An alternative to these two Control Performance Standards is formulated in \cite{gross2001analysis}.} used by NERC\fcite{nerc2011balancing} for evaluating regulation, or the \emph{nadir-based frequency response} metric\fcite{eto2010use} used for evaluating the quality of primary frequency control in an area. Other evaluation criteria have the power interruption to the end customer in focus, e.g. System Average Interruption Duration Index (SAIDI) and System Average Interruption Frequency Index (SAIFI)\fcite{LaCommare20061845}. 
+Currently, the concepts of performance indices and evaluation criteria are used in the power system for the general assessment of how well the System Operator is managing the system. But these evaluation concepts are usually tailored to specific services, \eg CPS1 and CPS2\footnote{An alternative to these two Control Performance Standards is formulated in \cite{gross2001analysis}.} used by NERC\fcite{nerc2011balancing} for evaluating regulation, or the \emph{nadir-based frequency response} metric\fcite{eto2010use} used for evaluating the quality of primary frequency control in an area. Other evaluation criteria have the power interruption to the end customer in focus, \eg System Average Interruption Duration Index (SAIDI) and System Average Interruption Frequency Index (SAIFI)\fcite{LaCommare20061845}. 
+
+As part of the FERC order 755\footnote{The order stipulates that all units providing regulation should get remunerated based upon their performance.}, PJM has introduced a performance score for the remuneration of services in the form of:
+\begin{equation}
+	\text{Performance Score} = A S_A + B S_D +C S_P
+\end{equation}
+where $S_A$ is an accuracy score, $S_D$ is a delay score, $S_P$ is a precision score, and $A+B+C =1$ are scalar weights. While this is a detailed performance metric, it is tied to the way LFC is done in PJM. \todo{refine thought, and see where LFC is defined for the first time, probably should be in the services section}
 
 A measure for the performance of aggregators, that is not directed at a single service and that has service delivery in focus, is the topic of this chapter.
 
 \section{Quality of Service}\label{sec:MAINQoS}
-\newsection{T}{he concept of Quality}\marginnote{This section relies heavily on the service modeling concepts presented in Chapter~\ref{cha:services}, and it is recommended that the reader familiarizes with that section before reading this section.} of Service (QoS) is closely related to the service models presented in Section\bondy{put in correct section reference}. One of the elements of a service model is the definition of the service error. QoS is an instantaneous measure of how well the aggregator is delivering a service at any given time instant, and can be defined as the scaling of the error to the limits defined in the service model, i.e.:
+\newsection{T}{he concept of Quality}\marginnote{This section relies heavily on the service modeling concepts presented in Chapter~\ref{cha:services}, and it is recommended that the reader familiarizes with that section before reading this section.} of Service (QoS) is closely related to the service models presented in Section\bondy{put in correct section reference}. One of the elements of a service model is the definition of the service error. QoS is an instantaneous measure of how well the aggregator is delivering a service at any given time instant, and can be defined as the scaling of the error to the limits defined in the service model, \ie:
 \begin{equation}
 	QoS(t) = e(t)C_s(t),
 \end{equation}
@@ -100,13 +115,13 @@ The index can be similarly defined for \emph{M} amount of asset management servi
 \eta^{AMS} &= \sum^{M}_{i=1} W^{AMS}_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {QoS^{AMS}_{i,t}}^{2} \right)}{N_i}}\\
 \sum_{i=1}^M W^{AMS}_i &= 1 \label{eq:wams}
 \end{align}
-It is likely that $M > 1$, e.g. if the aggregator is an EV fleet operator for a single large customer. Finally, if an aggregator desires to evaluate its own overall performance, e.g. as part of an internal reviewing process, it can combine both kinds of service provision in a weighted average:
+It is likely that $M > 1$, \eg if the aggregator is an EV fleet operator for a single large customer. Finally, if an aggregator desires to evaluate its own overall performance, \eg as part of an internal reviewing process, it can combine both kinds of service provision in a weighted average:
 \begin{equation}
 \eta_{tot} = \alpha \eta^{AS} + (1-\alpha) \eta^{AMS}, \quad \alpha \in [0,1]
 \end{equation}
 where $\alpha$ is the weight ratio  between the two kinds of service. 
 
-An example of how the service delivery could look for five different aggregators providing the same ancillary service, in this case a reference tracking service, with varying \emph{QoS} is presented in Figure~\ref{fig:indextest3} and the corresponding performance evaluations are presented in Table~\ref{tab:qostest3}. This scenario shows a wide spread of \emph{QoS}, which is reflected in the $\eta$ values. The first aggregator has a relatively good performance and therefore has small $\eta$, while the worst performing aggregator has an $\eta$ ten times larger, i.e. worse performance.
+An example of how the service delivery could look for five different aggregators providing the same ancillary service, in this case a reference tracking service, with varying \emph{QoS} is presented in Figure~\ref{fig:indextest3} and the corresponding performance evaluations are presented in Table~\ref{tab:qostest3}. This scenario shows a wide spread of \emph{QoS}, which is reflected in the $\eta$ values. The first aggregator has a relatively good performance and therefore has small $\eta$, while the worst performing aggregator has an $\eta$ ten times larger, \ie worse performance.
 
 \begin{figure}[htb!]
 \centering
@@ -252,7 +267,7 @@ where  \emph{M} is the size of the unit portfolio and $W^{AMS}_i$ corresponds to
 	\label{tab:epstest1}
 \end{margintable}
 
-The two proposed indices have almost the same definition, the difference being that \emph{ND} is not truncated when estimating $\epsilon$. Table~\ref{tab:epstest2} shows the $\epsilon$ values corresponding to the example in Figure~\ref{fig:indextest2}, and shows clearly the definition of \emph{ND}, i.e. values $QoS \leq 1$ are ignored, while $QoS > 1$ count as part of the non-delivery. Contrary to the service performance assessment index, the verification index does not have a clear limit for what is considered a verified serviced. For some services, e.g. ancillary services, it is critically important that $QoS(t) \ll 1$, which would mean a requirement of $\epsilon \approx 0$. In other cases, $\epsilon > 0$ is tolerable to certain extent. The tolerance limit for $\epsilon$ should be defined in the contract agreements between aggregator and the entity acquiring the services.
+The two proposed indices have almost the same definition, the difference being that \emph{ND} is not truncated when estimating $\epsilon$. Table~\ref{tab:epstest2} shows the $\epsilon$ values corresponding to the example in Figure~\ref{fig:indextest2}, and shows clearly the definition of \emph{ND}, \ie values $QoS \leq 1$ are ignored, while $QoS > 1$ count as part of the non-delivery. Contrary to the service performance assessment index, the verification index does not have a clear limit for what is considered a verified serviced. For some services, \eg ancillary services, it is critically important that $QoS(t) \ll 1$, which would mean a requirement of $\epsilon \approx 0$. In other cases, $\epsilon > 0$ is tolerable to certain extent. The tolerance limit for $\epsilon$ should be defined in the contract agreements between aggregator and the entity acquiring the services.
 
 \begin{margintable}[-5\baselineskip]%[h!]
 	\centering
@@ -292,10 +307,10 @@ The two proposed indices have almost the same definition, the difference being t
 \newsection{T}{he two indices defined} in the previous section have different applications. As stated in the introduction to the chapter, verification occurs at the prequalification phase, at the operation phase and at the settlement phase. The work during this project has focused on the use of the indices for prequalification and settlement. 
 
 \subsection{Prequalification Verification}
-In the case of prequalification, the indices form part of the assessment module of the validation framework presented in Figure~\ref{fig:MAINframework}. As such, the indices can evaluate the simulated results and return the $\eta$ and $\epsilon$ results. Since the simulations will be repeated enough times to gain a statistical certainty of the aggregator behavior, the verification of the simulated services will be a statistical value, e.g. with a mean and a distribution.
+In the case of prequalification, the indices form part of the assessment module of the validation framework presented in Figure~\ref{fig:MAINframework}. As such, the indices can evaluate the simulated results and return the $\eta$ and $\epsilon$ results. Since the simulations will be repeated enough times to gain a statistical certainty of the aggregator behavior, the verification of the simulated services will be a statistical value, \eg with a mean and a distribution.
 
 \subsection{Settlement Verification}
-Verification of delivered services occurs as a post-delivery analysis. For an aggregator, the verification of a delivered service will be done by the entity who bought the service, or a third party metering company. It is still an open question how the specific DER consumption/production will be measured, since in most cases the resource will be behind a common metering point, e.g. the smart meter of a household. Also, current measurement requirements would force all resources to have expensive measurement equipment, of which the cost would far outweigh the profit of participating in the ancillary service markets. As part of an iPower demonstration event held at DTU Risø Campus in November 2014, a verification module was implemented, using the index definition of \cite{bondy2014performance}, for the verification of a DSO service. In this case, the consumption of the participating DER came only from flexible heating, and the measured consumption could be used to verify the service. An integration of the verification script to the code running the demonstration also showed that the same code could be used as a simple online performance monitoring tool.
+Verification of delivered services occurs as a post-delivery analysis. For an aggregator, the verification of a delivered service will be done by the entity who bought the service, or a third party metering company. It is still an open question how the specific DER consumption/production will be measured, since in most cases the resource will be behind a common metering point, \eg the smart meter of a household. Also, current measurement requirements would force all resources to have expensive measurement equipment, of which the cost would far outweigh the profit of participating in the ancillary service markets. As part of an iPower demonstration event held at DTU Risø Campus in November 2014, a verification module was implemented, using the index definition of \cite{bondy2014performance}, for the verification of a DSO service. In this case, the consumption of the participating DER came only from flexible heating, and the measured consumption could be used to verify the service. An integration of the verification script to the code running the demonstration also showed that the same code could be used as a simple online performance monitoring tool.
 
 \section{Conclusions on Performance Assessment}
 The topic of performance assessment is important for the prequalification of aggregators, the monitoring of aggregator service delivery and the settlement of services. The presented indices are a tool that is useful for performance assessment. Although the concept of performance indices are not new in the power system, the established indices evaluate the overall system performance and reliability. While these indices provide a useful tool for system operators to evaluate their performance in maintaining a secure grid, they are not suited for the evaluation of aggregators. Therefore, the definition of these indices present a novel approach to the problem of evaluating the performance of aggregators.
