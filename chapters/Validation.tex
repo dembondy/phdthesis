@@ -6,7 +6,7 @@
 \section{Background}
 \newsection{S}{ince ancillary services are} essential for the reliability of the power system, units that provide said services must have a high degree of reliability. The TSO requires units that provide ancillary services to pass a prequalification process. This prequalification process consists of validating the unit for service delivery. In this section conventional resource validation is briefly discussed and it is explained why the same method can not be applied to aggregators. Also a short section on the current work on aggregator testing is presented.
 \subsection{Conventional Resource Validation vs. Aggregator Validation}\label{subsec:backgroundvalidation}
-In Denmark, the prequalification\marginnote{The topic of conventional resource validation is thoroughly explained in Section~\ref{sec:PSSCCconventionalvalidation}.} process is divided into two steps:
+In Denmark, the prequalification\marginnote{The topic of conventional resource validation is discussed in more detail in Section~\ref{sec:PSSCCconventionalvalidation}.} process is divided into two steps:
 \begin{enumerate}
 	\item documentation for the unit is submitted to the TSO, and
 	\item a test procedure where the unit response to a signal from the TSO is evaluated.
@@ -26,7 +26,7 @@ This process works on traditional generators because the dynamics of traditional
 It is both impractical and meaningless to validate every unit in an aggregator portfolio. The aggregator architecture must be tested as a whole, based upon statistical methods.
 
 \subsection{Aggregator Testing in Literature}\label{subsec:aggtest}
-There is currently no standardized procedure for prequalification of aggregators as there is with traditional generation units. Until now, the performance evaluation and testing of aggregators in academia has been ad-hoc to specific aggregator implementation\fcite{vrettos2015frequency}, or the evaluation focus has been on computational or financial performance\fcite{su2012performance,rahnama2014evaluation}. Similarly, a platform for simulation of aggregation strategy has been proposed\fcite{dittawit2014demand}, but the focus is on the simulation tool itself, which in turn focuses only on the demand side, and not on the process of validation. None have taken a systematic approach to generally evaluating the performance of the aggregators in terms of the contractual requirements of service delivery.
+There is currently no standardized procedure for prequalification of aggregators as there is with traditional generation units. Until now, the performance evaluation and testing of aggregators in academia has been ad-hoc to specific aggregator implementation\fcite{vrettos2015integrating}, or the evaluation focus has been on computational or financial performance\fcite{su2012performance,rahnama2014evaluation}. Similarly, a platform for simulation of aggregation strategy has been proposed\fcite{dittawit2014demand}, but the focus is on the simulation tool itself, which in turn focuses only on the demand side, and not on the process of validation. None have taken a systematic approach to generally evaluating the performance of the aggregators in terms of the contractual requirements of service delivery.
 
 %\begin{itemize}
 %	\item What is the control services validation problem, and why is it important?
@@ -43,7 +43,7 @@ There is currently no standardized procedure for prequalification of aggregators
 	\item Allowing commercial entities interested in entering the aggregator market to test the design of their aggregator infrastructure and control algorithm before deployment.
 \end{itemize}
 
-The reliability of the aggregator depends on stochastic processes, \eg consumer patterns and weather behavior. Therefore, it is natural that the validation procedure gives a statistical measure for the reliability. This means that the aggregator must undergo a series of validation test cases, as depicted in Figure~\ref{fig:MAINframework}. Formulating a set of test scenarios constrains the testing of the aggregator to a set of circumstances the aggregator is expected to be able to handle, see Figure~\ref{fig:aggstatespace}. These kinds of tests must to be reproducible and be carried out enough times so that conclusion have a statistical certainty, which is infeasible to be carried out on the physical system. Therefore, this test process has to be carried out through detailed simulations of the aggregator interaction with the electric power system and DERs, in combination with general models for communication.
+The reliability of the aggregator depends on stochastic processes, \eg consumer patterns and weather behavior. Therefore, it is natural that the validation procedure gives a statistical measure for the reliability. This means that the aggregator must undergo a series of validation test cases, as depicted in Figure~\ref{fig:MAINframework}. Formulating a set of test scenarios constrains the testing of the aggregator to a set of circumstances that the aggregator is expected to be able to handle, see Figure~\ref{fig:aggstatespace}. These kinds of tests must to be reproducible and with sufficient sampling so that the validation can be backed up with statistical certainty. It is infeasible to carry out this procedure the physical system. Therefore, this test process has to be carried out with aid of detailed simulations of the aggregator interaction with the electric power system and DERs, in combination with general models for communication.
 \begin{figure}[htbp!]
 \centering
 \includegraphics[width=0.7\textwidth]{validationMAIN.eps}
@@ -58,7 +58,7 @@ The reliability of the aggregator depends on stochastic processes, \eg consumer 
 \label{fig:aggstatespace}
 \end{figure}
 
-The proposed simulation tests should be carried out within a validation framework, as depicted in Figure~\ref{fig:frameworkbig}. The service requirements describe the goal the aggregator needs to achieve and the test scenarios define the normal operation disturbances that an aggregator should handle. The aggregator will not be held responsible for service non-delivery when it is affected by major problems outside it responsibility domain, \eg in case of severe grid faults. The service requirements are discussed in depth in Chapter~\ref{cha:services} and the service verification and evaluation is discussed in depth in Chapter~\ref{cha:verification}.
+The proposed simulation tests should be carried out within a validation framework, as depicted in Figure~\ref{fig:frameworkbig}. The service requirements describe the goal the aggregator needs to achieve and the test scenarios define the normal operation disturbances that an aggregator should handle. The aggregator will not be held responsible for service non-delivery when it is affected by major problems outside its responsibility domain, \eg in case of severe grid faults. The service requirements are discussed in depth in Chapter~\ref{cha:services} and the service verification and evaluation is discussed in depth in Chapter~\ref{cha:verification}.
 
 \begin{figure}[ht]
 	\centering
@@ -66,7 +66,7 @@ The proposed simulation tests should be carried out within a validation framewor
 	\includegraphics[width=\textwidth]{framework/framework.eps}\label{fig:frameworkbig}
 \end{figure}
 
-\section{Service Requirements and Test Alignment} 
+\section{Procedure for Validation of Aggregators} 
 \newsection{F}{rom the previous} section it is clear that the service requirements form an essential part of the aggregator validation process. Service requirements are discussed in the depth in Chapter~\ref{cha:services}, but a set of test service requirement metrics have been formulated as part of the test method and are presented here.
 
 \todo{include the Design of Experiments stuff from the pscc paper}

@@ -67,14 +67,14 @@ While the index~\eqref{eq:astrom} benchmarks the actual performance criterion ag
 	For demonstration purposes, in this section $J_{max}(N)$ for the PowerMax service is calculated. 
 	Typically, the service will be contracted several months ahead of the actual delivery. The activation schedule (On and Off triggers), the maximum power cap ($P_M$), the maximum duration of the service per activation ($T_M$), and the quality of service (\emph{QoS}) are defined when contracting the service. The contract is valid for a period of several months, where the Aggregator is obliged to follow the established schedule.
 
-	The limits specified for the QoS\cite{FLECH} of the PowerMax service are presented here: 
+	The limits specified for the QoS\cite{ipower2013development} of the PowerMax service are presented here: 
 	\begin{itemize}
 		\item Deviation from On trigger: $\pm$ 15 min. per day
 		\item Deviation in size of service (dependent on $P_M$): Max. $\pm 5\% P_M$  
 		\item Acceptable no. of unsatisfactory activations(non-delivery): $\text{NDC} = 4$
 	\end{itemize}
 
-A graphical representation of these service requirements is depicted in Fig.~\ref{fig:servicereq}. It is clear that the maximum acceptable error in service delivery is the shaded area. Note that the limit for non-delivery of service during the first 15 minutes of activation is dotted due to the fact that non-delivery is not counted during this period. The specifications for counting unsatisfactory activations are not clarified in \cite{FLECH}, so it is assumed that breaking the QoS limits on one sampling period counts as one non-delivery. In the case where the service is not respected in three consecutive (or non-consecutive) sampling periods, $\text{NDC}=3$.
+A graphical representation of these service requirements is depicted in Fig.~\ref{fig:servicereq}. It is clear that the maximum acceptable error in service delivery is the shaded area. Note that the limit for non-delivery of service during the first 15 minutes of activation is dotted due to the fact that non-delivery is not counted during this period. The specifications for counting unsatisfactory activations are not clarified in \cite{ipower2013development}, so it is assumed that breaking the QoS limits on one sampling period counts as one non-delivery. In the case where the service is not respected in three consecutive (or non-consecutive) sampling periods, $\text{NDC}=3$.
 
 For example, in the case where  $P_M = 5\,kW$, $T_M=4\, h$ and the power is measured once an hour, $J_{max}(N) = 2$, as it represents the square root of the square of the maximum (when $J_{act}(N)=1$) permissible error over 4 hours.
 \begin{figure}[t]  % Find out how to send it to next column.
