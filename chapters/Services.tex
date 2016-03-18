@@ -8,7 +8,7 @@
 \end{marginfigure}
 \newchapter{I}{t is clear from} Chapter~\ref{cha:validation} that \emph{service requirements} is an essential block in the aggregator validation framework (see Figure~\ref{fig:framework_services}). Initially, an objective of this work was to model service requirements in order to perform the aggregator validation. While this objective was achieved, it is clear that current service requirements in many countries are directly, or indirectly, blocking the integration of aggregators providing DR\fcite{cappers2013assessment,coalition2014mapping}. If aggregators are to be successfully integrated into the power system, the rules and requirements for participation must be changed. This chapter presents two novel contributions to integrating aggregators in the power system: a modeling method for services, and a proposal for the restructuring of requirements for ancillary services. A method for modeling services is important because the resulting models form the benchmark for the performance evaluation and verification of the aggregator (see Chapter~\ref{cha:verification}), as well as being a direct input to the aggregator (see Chapter~\ref{cha:aggregator}). The redefinition of ancillary service requirements is important since it will allow system operators to utilize the properties of all available resources, both traditional and new, in an optimal way.
 
-The concepts presented in this section are part of two draft journal papers\fcite{bondy2016method,bondy2016redefining} which can be found in Appendix~\ref{app:segan} and Appendix~\todo{Berkeley Ref}, as well as work done as a collaborating author for a conference paper\fcite{heussen2013a} and a technical report written for the iPower consortium\fcite{bondy2014flech}.
+The concepts presented in this section are part of two draft journal papers\fcite{bondy2016method,bondy2016redefining} which can be found in Appendix~\ref{app:segan} and Appendix~\todo{Berkeley Ref}, as well as work done as a collaborating author for a conference paper\fcite{heussen2013a} and a technical report written for the iPower consortium\fcite{bondy2014flech}. Section~\label{sec:backgroundservices} discusses different kinds of services that aggregators can provide and Section~\ref{sec:modelingAS} presents how these can be modeled. In Section~\ref{sec:Redefining} a proposal for how ancillary service requirements can be reformulated in order to be technology agnostic. 
 
 %Content of this chapter is the work done at LBNL and through the iPower demo.
 %\begin{itemize}
@@ -27,7 +27,7 @@ Defining what \gls{as} are, as well as which services the term includes, is diff
 
 Generally, maintaining an adequate and secure power system means maintaining the power system operating at nominal frequency and voltage. In cases where the power system deviates from nominal operation, either due to natural fluctuations in production/consumption or faults in the system, the system operators will activate ancillary services to restore normal operation. 
 
-There exists a variety of ancillary services\todo{put a reference and examples}, but this work focuses on those that use active power to maintain the nominal frequency of the grid. In Europe\footnote{ENTSO-E recently changed its nomenclature of AS, and the three presented here correspond roughly to the classical primary, secondary and tertiary reserves as presented in \cite{Rebours}.} these services are \glspl{fcr}, \glspl{frr} (either automatic or manual), and \glspl{rr}\fcite{entsoe2013network}.
+There exists a variety of ancillary services\todo{put a reference and examples}, but this work focuses on those that use active power to maintain the nominal frequency of the grid. In Europe\footnote{ENTSO-E recently changed its nomenclature of AS, and the three presented here correspond roughly to the classical primary, secondary and tertiary reserves as presented in \cite{Rebours}.} these services are \glspl{fcr}, \glspl{frr} (either automatic\footnote{In the United States, regulation is used for system balancing. This service corresponds to automatic FRR.} or manual), and \glspl{rr}\fcite{entsoe2013network}.
 % subsection What are Ancillary Services? (end)
 \subsection{Service Requirements for Ancillary Services} % (fold)
 \label{sub:servreqAS}
@@ -48,6 +48,7 @@ As the amount of DERs installed at distribution level increases, the DSOs face n
 
 One of the main outcomes of the iPower project was the definition of a set of flexibility services that demand aggregators can provide DSOs\fcite{ipower2013development} for congestion management or voltage issues. The requirements for three of the congestion management services have been further detailed individually\footnote{The services requirements were detailed in the following technical reports\cite{hansen2013flech,biegel2014flech,bondy2014flech}.}, and aggregator architectures have been designed to provide both congestion management\fcite{hu2014coordinated} and voltage support\fcite{han2014assessment}. At the same time, the concept of the \gls{flech} has been designed as a platform to enable the transparent contracting of flexibility\fcite{heussen2013a}.
 
+An example of a flexibility service is the \emph{PowerMax}\fcite{bondy2014flech} service, where the aggregator maintains the total consumption of its portfolio under a limit, within a specified period of time. This means that the aggregator is free to manipulate its portfolio as long as its peak load is below the limit specified by the DSO.
 % subsection DSO Services (end)
 \subsection{Asset Management Services} % (fold)
 \label{sub:assetmanagementservices}
@@ -57,9 +58,10 @@ The main idea behind AMS is that the flexibility assets have a primary purpose, 
 % subsection Asset Management Servc (end)
 % section Background on Aggregator Services (end)
 \section{Modeling of Service Requirements} % (fold)
-\label{sec:Modeling of Ancillary Services}
-\newsection{T}{he validation framework} presented in Chapter~\ref{cha:validation} uses the \emph{service requirements} as a benchmark towards which the aggregator is evaluated. Currently, requirements for services are encoded within the contractual agreements between system operator and service provider. A method for translating the contracts into a model that the validation framework can use was developed.
-The method consists of the following six steps:
+\label{sec:modelingAS}
+\newsection{T}{he validation framework} presented in Chapter~\ref{cha:validation} uses the \emph{service requirements} as a benchmark towards which the aggregator is evaluated. This is because the requirements form the control objective of the aggregator. Currently, requirements for services are encoded within the contractual agreements between system operator and service provider. A standard method is needed for extracting this information and building a model that can be used for benchmarking.
+
+By analysing the services presented in Section~\ref{sec:backgroundservices}, a method for translating the contracts into a time series model has been developed. The method consists of the following six steps:
 %form have been identified as a generic method for modeling ancillary services. The steps are exemplified by DSO services defined in  and TSO services defined in :
 \begin{enumerate}
   \item Identify physical parameters defining the service.
@@ -87,13 +89,68 @@ The method consists of the following six steps:
 \end{enumerate}
 
   %§$\mathbf{x}_{ideal}(t)$ and $\mathbf{x}_{acc}(t)$ can be a pair of values, e.g. minimum and maximum tolerance limits, for some services and may be only a single value, e.g. minimum or maximum tolerance, for others. 
-From the frequency related AS and distribution level flexibility services described in Section~\ref{sec:backgroundservices} three kinds of services are identified:
+Furthermore, the analysed services can be divided into three kinds of services:
 \begin{description}
 	\item[Reference Tracking:] Services where a reference signal must be followed, \eg regulation in the United States.
-	\item[Band Service:] Services where 
-	\item[Cap Service:]
+	\item[Band Service:] Services where the output is able vary between an upper and lower limit, \eg smart charging of a fleet of EVs.
+	\item[Cap Service:] Services where the output must respect either a upper or lower bound, \eg the \emph{PowerMax} service.
 \end{description}
+
+Based upon the three kinds of service, the service error can be measured the following ways:
+\subsection*{Reference tracking}
+
+Reference tracking error can be calculated as:
+\begin{equation}\label{MAINeq:ref_error}
+e(t) = x_{meas}(t) - x_{ideal}(t),
+\end{equation}
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{tracking_error2.eps}
+	\caption{Error in reference tracking.}
+      \label{fig:reftrackerrorMAIN}
+\end{marginfigure}
+where $x_{meas}(t)$ is the measured output, \eg the total load of the aggregator portfolio, and $x_{ideal}(t)$ is the ideal response defined in the service model. This definition will lead $e<0$ for measured values below the ideal and $e>0$ for values above the ideal. In this case $\mathbf{x}_{acc}(t)$ will be a band around $x_{ideal}(t)$, and the values of $\mathbf{x}_{acc}(t)$ do not need to be symmetric.
+
+\subsection*{Band service}
+The ideal response in a band service is defined as $ \mathbf{x}_{ideal}(t)= [x_{min}(t),x_{max}(t)]$. The error in the band service can therefore be estimated by:
+\begin{equation}\label{MAINeq:band_error}
+e(t)=
+\begin{cases}
+x_{meas}(t) - x_{min}(t) , & x_{meas}(t) < x_{min}(t)  \\
+0, & x_{min}(t) \leq x_{meas}(t) \leq x_{max}(t) \\
+x_{meas}(t) - x_{max}(t), & x_{meas}(t)  > x_{max}(t).  
+\end{cases}
+\end{equation}
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{band_error2.eps}
+	\caption{Error in band service.}
+      \label{fig:banderrorMAIN}
+\end{marginfigure}
+
+In this case, the $\mathbf{x}_{acc}(t)$ is a set of values that surrounds the band defined by $ \mathbf{x}_{ideal}(t)$, as seen in Fig.~\ref{fig:RefErr}. The values of $\mathbf{x}_{acc}(t)$ do not need to be symmetric around the band.
+
+\subsection*{Cap service}
+%Maximum/minimum cap error only counts the error when performance is above/below some ideal value. 
+In cap services, error is only tracked when $x_{meas}(t)$ is either above or below a given a limit value.
+Maximum cap error is calculated as shown in \eqref{MAINeq:maxmin_cap} and minimum cap can be similarly calculated. In \eqref{MAINeq:maxmin_cap}, $x_{max}(t)$ is the ideal maximum limit according to the service contract:
+
+\begin{equation}\label{MAINeq:maxmin_cap}
+e(t)=
+\begin{cases}
+x_{meas}(t)-x_{max}(t), & x_{meas}(t) > x_{max}(t) \\
+0, & x_{meas}(t) \leq x_{max}(t).
+\end{cases}
+\end{equation}
+\begin{marginfigure}
+	\includegraphics[width=\textwidth]{cap_error2.eps}
+	\caption{Error in cap service.}
+      \label{fig:caperrorMAIN}
+\end{marginfigure}
+
+In the cap service, $x_{acc}(t)$ is a limit that either lies below $x_{min}(t)$ or above $x_{max}(t)$.
+
+
 % section Modeling of Ancillary Services (end)
+
 %
 \section{Redefining Ancillary Service Requirements} % (fold)
 \label{sec:Redefining Ancillary Service Requirements}
@@ -101,3 +158,7 @@ From the frequency related AS and distribution level flexibility services descri
 % section Redefining Ancillary Service Requirements (end)
 % chapter Service Requirements (end)
 
+\section{Conclusions on Service Requirements} % (fold)
+\label{sec:ConclusionsServiceRequirements}
+
+% section Conclusions on Service Requirements (end)
