@@ -6,9 +6,10 @@
 	\caption{This chapter focuses on the \emph{service definition} block of the aggregator validation framework presented in Chapter~\ref{cha:validation}.}
       \label{fig:framework_services}
 \end{marginfigure}
-\newchapter{I}{t is clear from} Chapter~\ref{cha:validation} that \emph{service requirements} is an essential block in the aggregator validation framework (see Figure~\ref{fig:framework_services}). Initially, an objective of this work was to model service requirements in order to perform the aggregator validation. While this objective was achieved, it is clear that current service requirements in many countries are directly, or indirectly, blocking the integration of aggregators providing DR\fcite{cappers2013assessment,coalition2014mapping}. If aggregators are to be successfully integrated into the power system, the rules and requirements for participation must be changed. This chapter presents two novel contributions to integrating aggregators in the power system: a modeling method for services, and a proposal for the restructuring of requirements for ancillary services. A method for modeling services is important because the resulting models form the benchmark for the performance evaluation and verification of the aggregator (see Chapter~\ref{cha:verification}), as well as being a direct input to the aggregator (see Chapter~\ref{cha:aggregator}). The redefinition of ancillary service requirements is important since it will allow system operators to utilize the properties of all available resources, both traditional and new, in an optimal way. 
 
-The concepts presented in this section are part of two draft journal papers\fcite{bondy2016method,bondy2016redefining} which can be found in Appendix~\ref{app:segan} and Appendix~\todo{Berkeley Ref}, as well as work done as a collaborating author for a conference paper\fcite{heussen2013a} and a technical report written for the iPower consortium\fcite{bondy2014flech}. Section~\label{sec:backgroundservices} discusses different kinds of services that aggregators can provide and Section~\ref{sec:modelingAS} presents how these can be modeled. In Section~\ref{sec:Redefining} a proposal for how ancillary service requirements can be reformulated in order to be technology agnostic. 
+\newchapter{T}{he requirements for ancillary} services in many countries are defined, due to historical reasons, on the assumption that only generators provide ancillary services. It is clear that current service requirements in many countries are directly, or indirectly, blocking the integration of aggregators providing DR\fcite{cappers2013assessment,coalition2014mapping}. If aggregators are to be successfully integrated into the power system, the rules and requirements for participation must be changed. This chapter presents two novel contributions to integrating aggregators in the power system: a modeling method for services, and a proposal for the restructuring of requirements for ancillary services. A method for modeling services is important because the resulting models form the benchmark for the performance evaluation and verification of the aggregator (see Chapter~\ref{cha:verification}), as well as being a direct input to the aggregator (see Chapter~\ref{cha:aggregator}). The redefinition of ancillary service requirements is important since it will allow system operators to utilize the properties of all available resources, both traditional and new, in an optimal way. 
+
+The concepts presented in this section are part of two draft journal papers\fcite{bondy2016method,bondy2016redefining} which can be found in Appendix~\ref{app:segan} and Appendix~\todo{Berkeley Ref}, as well as work done as a collaborating author for a conference paper\fcite{heussen2013a} and a technical report written for the iPower consortium\fcite{bondy2014flech}. Section~\label{sec:backgroundservices} discusses different kinds of services that aggregators can provide and Section~\ref{sec:modelingAS} presents how these can be modeled. These models are directly related to the \emph{service requirements} block in the aggregator validation framework (see Figure~\ref{fig:framework_services}). In Section~\ref{sec:Redefining} a proposal for how ancillary service requirements can be reformulated in order to be technology agnostic. 
 
 %Content of this chapter is the work done at LBNL and through the iPower demo.
 %\begin{itemize}
@@ -18,7 +19,6 @@ The concepts presented in this section are part of two draft journal papers\fcit
 %	\item Redefining Ancillary Services Requirements for Technology Agnostic Resources
 %\end{itemize}
 
-Aggregators/DR provide flexibility, as it is, they are not being paid for flexibility as defined previously, but only for power. This needs rethinking.\todo{fit this line somewhere, it is important!}
 \section{Background}\label{sec:backgroundservices} % (fold)
 \newsection{T}{he following section outlines} concepts related to the definition and requirements of services at TSO and DSO level. While services for the TSO (ancillary services) are well established, DSO services are a relatively new concept which has been explored in iPower project\fcite{ipower2013development}.
 \subsection{What are Ancillary Services?} % (fold)
@@ -29,7 +29,7 @@ Generally, maintaining an adequate and secure power system means maintaining the
 
 Some countries, \eg Denmark, consider voltage control, black start capabilities, short circuit control and reactive reserves as AS. This work focuses on those services that use active power to maintain the nominal frequency of the grid. In Europe\footnote{ENTSO-E changed in 2013 its nomenclature of AS, and the three presented here correspond roughly to the classical primary, secondary and tertiary reserves as presented in \cite{Rebours}.} these services are \glspl{fcr}, \glspl{frr} (either automatic\footnote{In the United States, regulation is used for system balancing. This service corresponds to automatic FRR.} or manual), and \glspl{rr}\fcite{entsoe2013network}.
 
-These reserves are activated as shown in Figure~\ref{fig:MAINfreqcont}. The FCR is the fastest reserve and reacts automatically upon the grid measurements. Its role is to stop frequency excursions and its effectiveness can be measured by the \emph{frequency nadir} \cite{eto2010use}. The FRR is activated by tracking the \gls{agc} signal, or through manual activation by the system operator, relieves the FCR (allowing the FCR to be available again) and restores the frequency to the nominal value. The RR relieve the FRR, usually through rescheduling of units or by bringing inactive units online.
+These reserves are activated as illustrated in Figure~\ref{fig:MAINfreqcont}. The FCR is the fastest reserve and reacts automatically upon the grid measurements. Its role is to stop frequency excursions and its effectiveness can be measured by the \emph{frequency nadir} \cite{eto2010use}. The FRR is activated by tracking the \gls{agc} signal, or through manual activation by the system operator, relieves the FCR (allowing the FCR to be available again) and restores the frequency to the nominal value. The RR relieve the FRR, usually through rescheduling of units or by bringing inactive units online.
 
 \begin{figure}[htbp!]
 \centering
@@ -39,7 +39,7 @@ These reserves are activated as shown in Figure~\ref{fig:MAINfreqcont}. The FCR 
 \end{figure}
 
 % subsection What are Ancillary Services? (end)
-\subsection{Service Requirements for Ancillary Services} % (fold)
+\subsection{Requirements for Ancillary Services} % (fold)
 \label{sub:servreqAS}
 Because AS are essential for the secure operation of the system, the system operators have requirements and restrictions on the units providing AS. A super-set of requirements across different systems was presented by \emph{Rebours}\fcite{Rebours}, and following his overview we classify requirements into three categories:
 \begin{description}
@@ -165,26 +165,105 @@ In the cap service, $x_{acc}(t)$ is a limit that either lies below $x_{min}(t)$ 
 \section{Restructuring Ancillary Service Requirements} % (fold)
 \label{sec:Redefining Ancillary Service Requirements}
 Until now, system operators have been able to arrest frequency excursions fast enough because of the inherent system inertia. With the increasing penetration of wind power in the system, the electricity prices are lowered and operating fossil-fueled generator becomes economically unfeasible. This has the effect of reducing the system inertia, and reducing the availability of AS resources. Therefore new AS sources with faster response times are required. \emph{Vrettos et al.}\cite{vrettos2015integrating} show that if FCR is provided by DR (with a very fast response), the frequency nadir occurs at higher frequencies.
-Also, \emph{Makarov et al.}\cite{makarov2008assessing} argue that the value of regulation resources can be defined based upon the ramp capabilities of the service providing units. Faster reacting units are more valuable to system operators, since they help arrest the frequency excursion faster and at a higher nadir. It does require changes to the AGC in order to utilize the fast response, but this would also lead to the need for fewer reserves.
+Also, \emph{Makarov et al.}\cite{makarov2008assessing} argue that the value of regulation resources can be defined based upon the ramp capabilities of the service providing units. Faster reacting units are more valuable to system operators, since they help arrest the frequency excursion faster and at a higher nadir.% It does require changes to the AGC in order to utilize the fast response, but this would also lead to the need for fewer reserves.
 
- In this section a new form of defining AS requirements is presented, which has as an objective to utilize the capabilities of all available resources. 
+AS requirements are specified by a system operator based on the desired control response for a particular power system, under the implicit assumption that the ideal unit response corresponds to a scalar fraction of the required system response. Today, these requirements --- as reflected in the service definition --- are not differentiated according to the capabilities of the unit providing the service. Therefore, service definitions are designed to accommodate the least capable unit in the portfolio. As a consequence, more capable units are not being fully utilized, leading to excess contracting of service providers.
 
+ In this section a new form of defining AS requirements is presented, which has as an objective to allow all units to participate in the AS markets on equal footing. The main assumption is that all units can be valuable for AS provision, even when they do not fully comply with current requirements, and that the system operators will be able to manage the system better if the capabilities of all available resources are utilized. Also, units should be remunerated based upon the value they represent to the operation of the system, and their performance compared to these expected values.
+
+Regulative authorities have concluded that fast reacting units are valuable for the system operation, and started programs to benefit of these resources. An example of this is FERC order 755 (Pay for Performance) which has led to PJM splitting their regulation market product into RegA, for slow reacting units, and RegD for fast reacting units. The product differentiation approach has been a success for PJM, but  splitting the market may still lead to suboptimal utilization of units and does not address the issue of new technologies being effectively excluded from certain markets.  We propose instead to restructure the ancillary service definitions such that all types of service providers participate with the same market product defined by a set of optimal performance parameters, and not by minimum requirements. This means that the all entities providing a given ancillary service are optimally cleared under a single market.
+
+\subsection{The Overall Approach} % (fold)
+\label{sub:TheOverallApproach}
+The restructuring of AS requirements is formed by the following key concepts:
+\begin{enumerate}
+	\item The system operator is able to formulate an overall \emph{ideal AS response} that can be achieved through an optimal mix of resources. Any resource can make a bid for providing part of this ideal response.
+	\item The \emph{parametrization of AS bid}, where the parameter values of each unit/bid reflect the service provider's capabilities to partially fulfill the ideal response. This avoids excluding units that may have useful capabilities in one parameter, e.g. very fast ramp rate, but low capabilities in another parameters, e.g. only holding the response for a short time. Such a service definition allows compliance to be measured on a linear rather than a binary scale: In addition to compliance and noncompliance, different levels of partial compliance are possible.
+	\item Clearing all units under a \emph{generalized single clearing-price auction} allows constructing an optimal portfolio, and enables competition between all resources, leading to lower prices.
+    \item \emph{Performance-based remuneration} gives incentive to better AS provision and enables transparent performance-based clearing of the market.
+\end{enumerate}
+
+These key concepts are discussed individually in the following subsections.
+% subsection The Overall Approach (end)
+\subsection{Ideal Service Tender} % (fold)
+\label{sub:IdealServiceTender}
+The ideal source for AS is one with ``unlimited capabilities in terms of response time, energy output, ability to frequently reverse their output, ability to respond and follow the AGC setpoint changes, and size .''\cite{makarov2008assessing}\footnote{For this kind of response to be optimal, changes must be made to the AGC algorithm \cite{peydayesh2012effects}.} It is impossible for any one unit to possess these characteristics, but system operators aim at achieving this kind of system response by contracting several units.
+
+For example, a system operator could determine that the ideal system response to a frequency excursion is the one that has a resulting frequency nadir at the settling frequency (thus minimizing the risk of tripping the under-frequency relays). Based upon the inertia in its system, the system operator determines the volume ($V_{tot}$) needed as well as the response characteristics needed to achieve this, see Figure~\ref{fig:idealresponse}.
+
+\begin{figure}[htbp!]
+\centering
+\includegraphics[width=0.9\columnwidth]{primary_frequency_control_ideal.eps}
+\caption{In this case, the ramp of the ideal response is mainly determined by the system inertia and is to be sustained until FRR can be activated.}
+\label{fig:idealresponse}
+\end{figure}
+% subsection Ideal Service Tender (end)
 \subsection{Service Parametrization} % (fold)
 \label{sub:ServiceParametrization}
+The overall ideal service requirements can be expressed as:
+\begin{equation}
+	S^* = f_m(\textbf{x}^*) \label{eq:optimaltender}
+\end{equation}
+where $\textbf{x}^*$ is a vector of ideal parameter values and $f_m(\cdot)$ a function that translates the parameters $\textbf{x}$ into a model, e.g. into a time series as shown in Section~\ref{sec:modelingAS}. Furthermore, the system operator must inform how the parameters are valued with respect to the $S^*$, which is done through a capability value:
+\begin{align}
+    \kappa &= g(\mathbf{x}) \\
+    \kappa &\in [0,1].
+\end{align}
 
+For example, a system operator decides that FCR in their market is defined by $\textbf{x} = [\tau_r,\tau_d,V]$, where $\tau_r$ is the rise time of the service, $\tau_d$ is the duration of the service, and $V$ is the volume of the service. Due to the properties in its system, it decides that $\textbf{x}^* = [30 s, 20 min, 90 MW]$. The capability value of each bidder is calculated by:
+\begin{equation}
+	\kappa_i = \alpha_1 \frac{\tau_{r,0}}{\max({\tau_{r,0},\tau_{r,i})}} + \alpha_2  \frac{\min(\tau_{d,0},\tau_{d,i})}{\tau_{d,0}} + \alpha_3 \frac{V_i}{V_{tot}}, \quad \forall \, i \in \Omega \label{eq:kappa_primfreq}
+\end{equation}
+where $\tau_{r,0}$ and $\tau_{d,0}$ are a nominal value the system operator sets, $\tau_{r,i}$ and $\tau_{d,i}$ are the actual parameter values for each bidder, $\frac{V_i}{V_{tot}}$ is the bid contribution to the total required volume, and $\Omega$ is the pool of bids. Finally, $\sum_{i} \alpha_i = 1$, and in this case could be $\alpha_1,\alpha_2 = \frac{2}{5}, \alpha_3 = \frac{1}{5}$.
 % subsection Service Parametrization (end)
 
+\subsection{Market Mechanism} % (fold)
+\label{sub:MarketMechanism}
+It is impossible to restructure the AS definition without addressing the market mechanism for determining the optimal set of resources. The market should be designed as a single clearing price auction, in which each resource bid is adjusted by \emph{two} factors for bid quality: 1) the capability value $\kappa_i$ and 2) a historical performance\footnote{The historical performance parameter can also be interpreted as an availability parameter, or certainty parameter.} parameter $\eta^{hist}_i$. In this section a proposal for how this market mechanism could be formulated is presented.
 
+The proposed clearing mechanism identifies a common clearing price based on the most expensive accepted bid\footnote{This is similar to the merit order lists used in \eg the Nordic system for Manual Regulating Power\cite{bondy2013}.}:
+%Clearing principles
+\begin{equation}
+    P^\mathtt{clear} = \max P^\mathtt{bid}_i, \quad i \in \Omega^\mathtt{acc}
+\end{equation}
+where $\Omega^{acc}\subseteq \Omega$ is the subset of accepted bids of the set of received bids $\Omega$. 
+The clearing mechanism selects the subset of bids which offer the cheapest overall clearing cost and meet the tender requirements with a given certainty of availability: 
+\begin{align}
+      \Omega^\mathtt{acc} &= &\mathtt{argmin}_{\Omega^\mathtt{hyp} \in \mathcal P(\Omega)} \sum_{i\in \Omega^\mathtt{hyp}}{\kappa_i P^\mathtt{clear}_i } & \\
+	  &\mathtt{s.t.}& \sum_{i\in \Omega^\mathtt{hyp}} f_m(\mathbf{x}) \geq S^* &  \\
+      &~ & \eta^{hist}_i \geq \eta^{hist}_{min} &\quad \forall \, i \in \Omega^\mathtt{hyp} 
+\end{align}
+Where $\mathcal P(\Omega)$ denotes the Power Set of $\Omega$ and $\Omega^{hyp}$ is a subset of the Power Set. $S^*$ is the ideal tender from Eq.~\eqref{eq:optimaltender} and $\eta^{hist}_{min}$ is the minimum historical performance requirement to participate in the market\footnote{This value represents how averse the system operator is to risk, and could also be considered part of the service parameters $\textbf{x}$.}.
 
-%The system operator must have enough FCR to arrest the frequency excursion as fast as possible, before the system enters a state where a blackout is inevitable. A metric for how effective the procurement of reserve is the \emph{frequency nadir} \cite{eto2010use}, and it is desirable that the value is as close as possible to the nominal frequency of the system, see Figure~\ref{fig:MAINfreqcont}.
+% subsection Market Mechanism (end)
 
-%Similarly, the system operator should ensure that the FRRs act as fast as possible to relieve the FCRs and bring the frequency from the settling frequency back to the nominal frequency.
+\subsection{Performance Based Remuneration} % (fold)
+\label{sub:PerformanceBasedRemuneration}
 
+The estimation of the service provision performance can be done in different ways, depending on which parameters the system operator deems to be the most critical. The concept of performance assessment is discussed in Chapter~\ref{cha:verification}, and performance index is introduced there. Here it suffices to say that the performance measurement is a function of the error in service delivery:
+\begin{align}
+	\eta &= c(e(t)), \label{eq:perfindexsimple}\\
+	\eta &\in [0,1]
+\end{align}
+
+We propose that remuneration is based on the performance evaluation of the service provision:
+\begin{equation}
+	P^\mathtt{rem}_i = \eta_i\kappa_i  P^\mathtt{clear} \qquad \forall \, i \in \Omega^\mathtt{acc}.
+\end{equation}
+Thus, remuneration is based upon the value the resource has to the grid operator, how well it performs, and the most expensive activated resource.
+% subsection Performance Based Remuneration (end)
 
 % section Redefining Ancillary Service Requirements (end)
-% chapter Service Requirements (end)
 
 \section{Conclusions on Service Requirements} % (fold)
 \label{sec:ConclusionsServiceRequirements}
+\newsection{A}{ggregators have become} possible sources for ancillary services and distribution system services. While system operators are aware of the potential in using flexibility for system balancing, the ancillary service requirements have not been changed in order to accommodate this new technology. This chapter presented a novel proposal for solving this issue, by restructuring the ancillary service requirements based upon a set of optimal parameters instead of the limiting minimum requirements found in many systems today.
+
+Also, a method for modeling services was shown. The resulting models are relevant for the validation framework in that they provide the benchmark towards which aggregators must perform. In Chapter~\ref{cha:verification} it is shown how the service models can be used for performance assessment and verification of services.
+
+The work presented in this chapter differs from the rest of the thesis, in that the concepts presented here are not focused on the aggregator itself. The service modeling method can be applied to any kind of service, not necessarily those provided by aggregators, and the objective of the ancillary service restructuring is to include any new technology, not only aggregators providing DR.
+
+A final observation with respect to services is that operators like Energinet.dk are interested in acquiring flexibility from aggregators. The traditional approach to buying ancillary services is that the operator pays for an increase or decrease in power production, but flexibility has an extra dimension: time\footnote{See Chapter~\ref{cha:aggregator}.}. That is, flexibility is not only about increasing and decreasing production, but also about moving it in time. System operators expect flexibility services to fit in within the existing framework, but the two kinds of services can arguably be said to be essentially different. 
 
 % section Conclusions on Service Requirements (end)
+% chapter Service Requirements (end)
