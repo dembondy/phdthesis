@@ -9,7 +9,7 @@
 
 \newchapter{T}{he requirements for ancillary} services in many countries are defined, due to historical reasons, on the assumption that only generators provide ancillary services. It is clear that current service requirements in many countries are directly, or indirectly, blocking the integration of aggregators providing DR\fcite{cappers2013assessment,coalition2014mapping}. If aggregators are to be successfully integrated into the power system, the rules and requirements for participation must be changed. This chapter presents two novel contributions to integrating aggregators in the power system: a modeling method for services, and a proposal for the restructuring of requirements for ancillary services. A method for modeling services is important because the resulting models form the benchmark for the performance evaluation and verification of the aggregator (see Chapter~\ref{cha:verification}), as well as being a direct input to the aggregator (see Chapter~\ref{cha:aggregator}). The redefinition of ancillary service requirements is important since it will allow system operators to utilize the properties of all available resources, both traditional and new, in an optimal way. 
 
-The concepts presented in this section are part of two draft journal papers\fcite{bondy2016method,bondy2016redefining} which can be found in Appendix~\ref{app:segan} and Appendix~\todo{Berkeley Ref}, as well as work done as a collaborating author for a conference paper\fcite{heussen2013a} and a technical report written for the iPower consortium\fcite{bondy2014flech}. Section~\label{sec:backgroundservices} discusses different kinds of services that aggregators can provide and Section~\ref{sec:modelingAS} presents how these can be modeled. These models are directly related to the \emph{service requirements} block in the aggregator validation framework (see Figure~\ref{fig:framework_services}). In Section~\ref{sec:Redefining} a proposal for how ancillary service requirements can be reformulated in order to be technology agnostic. 
+The concepts presented in this section are part of two draft journal papers\fcite{bondy2016method,bondy2016redefining} which can be found in Appendix~\ref{app:segan} and Appendix~\todo{Berkeley Ref}, as well as work done as a collaborating author for a conference paper\fcite{heussen2013a} and a technical report written for the iPower consortium\fcite{bondy2014flech}. Section~\ref{sec:backgroundservicesandreq} discusses different kinds of services that aggregators can provide and Section~\ref{sec:modelingAS} presents how these can be modeled. These models are directly related to the \emph{service requirements} block in the aggregator validation framework (see Figure~\ref{fig:framework_services}). In Section~\ref{sec:RedefiningAncillaryServiceRequirements} a proposal for how ancillary service requirements can be reformulated in order to be technology agnostic. 
 
 %Content of this chapter is the work done at LBNL and through the iPower demo.
 %\begin{itemize}
@@ -19,7 +19,7 @@ The concepts presented in this section are part of two draft journal papers\fcit
 %	\item Redefining Ancillary Services Requirements for Technology Agnostic Resources
 %\end{itemize}
 
-\section{Background}\label{sec:backgroundservices} % (fold)
+\section{Background}\label{sec:backgroundservicesandreq} % (fold)
 \newsection{T}{he following section outlines} concepts related to the definition and requirements of services at TSO and DSO level. While services for the TSO (ancillary services) are well established, DSO services are a relatively new concept which has been explored in iPower project\fcite{ipower2013development}.
 \subsection{What are Ancillary Services?} % (fold)
 \label{sub:ancillaryservicesdef}
@@ -71,7 +71,7 @@ The main idea behind AMS is that the flexibility assets have a primary purpose, 
 \label{sec:modelingAS}
 \newsection{T}{he validation framework} presented in Chapter~\ref{cha:validation} uses the \emph{service requirements} as a benchmark towards which the aggregator is evaluated. This is because the requirements form the control objective of the aggregator. Currently, requirements for services are encoded within the contractual agreements between system operator and service provider. A standard method is needed for extracting this information and building a model that can be used for benchmarking.
 
-By analysing the services presented in Section~\ref{sec:backgroundservices}, a method for translating the contracts into a time series model has been developed. The method consists of the following six steps:
+By analysing the services presented in Section~\ref{sec:backgroundservicesandreq}, a method for translating the contracts into a time series model has been developed. The method consists of the following six steps:
 %form have been identified as a generic method for modeling ancillary services. The steps are exemplified by DSO services defined in  and TSO services defined in :
 \begin{enumerate}
   \item Identify physical parameters defining the service.
@@ -163,7 +163,7 @@ In the cap service, $x_{acc}(t)$ is a limit that either lies below $x_{min}(t)$ 
 
 %
 \section{Restructuring Ancillary Service Requirements} % (fold)
-\label{sec:Redefining Ancillary Service Requirements}
+\label{sec:RedefiningAncillaryServiceRequirements}
 Until now, system operators have been able to arrest frequency excursions fast enough because of the inherent system inertia. With the increasing penetration of wind power in the system, the electricity prices are lowered and operating fossil-fueled generator becomes economically unfeasible. This has the effect of reducing the system inertia, and reducing the availability of AS resources. Therefore new AS sources with faster response times are required. \emph{Vrettos et al.}\cite{vrettos2015integrating} show that if FCR is provided by DR (with a very fast response), the frequency nadir occurs at higher frequencies.
 Also, \emph{Makarov et al.}\cite{makarov2008assessing} argue that the value of regulation resources can be defined based upon the ramp capabilities of the service providing units. Faster reacting units are more valuable to system operators, since they help arrest the frequency excursion faster and at a higher nadir.% It does require changes to the AGC in order to utilize the fast response, but this would also lead to the need for fewer reserves.
 
