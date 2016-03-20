@@ -60,6 +60,11 @@ One of the main outcomes of the iPower project was the definition of a set of fl
 
 An example of a flexibility service is the \emph{PowerMax}\fcite{bondy2014flech} service, where the aggregator maintains the total consumption of its portfolio under a limit, within a specified period of time. This means that the aggregator is free to manipulate its portfolio as long as its peak load is below the limit specified by the DSO.
 % subsection DSO Services (end)
+\subsection{BRP Portfolio Balance Service} % (fold)
+\label{sub:BRPPortfolioBalance}
+The idea of using aggregators for internal balancing of BRPs was also explored in the iPower project\fcite{tougaard2015flech}. The main objective of such a service is for the aggregator to provide services to BRPs so that they can avoid imbalance costs. This service is similar to FRR, except the contract is with a BRP, which means that contracted volumes will usually be smaller, and the acquisition horizon shorter. BRP portfolio balance services must be acquired 1 hour to 5 minutes before the activation period, and must be cheaper than the imbalance cost.
+
+% subsection BRP Portfolio Balance (end)
 \subsection{Asset Management Services} % (fold)
 \label{sub:assetmanagementservices}
 In Chapter~\ref{cha:aggregator} the concept of \gls{ams} is introduced as the services that an aggregator provides to the owner of the DERs, or flexibility assets. An example of this is the case where the aggregator is an EV fleet operator that has the contractual responsibility of maintaining all EVs in the fleet within a certain \gls{soc}. The purpose of validating aggregators for these services is that flexibility asset owners can use the validation as a trust measure.

@@ -149,14 +149,25 @@ The functions defined here abstract from any kind of aggregator architecture imp
 \label{fig:MAINrefarch}
 \end{figure}
 
-\subsection{Application Example:}
+\subsection{Application Example: Open Energi}
+As an example, the aggregator architecture for the British company Open Energi is described using the reference architecture. The information on how their aggregator functions was acquired through a publication\fcite{cheng2014availability} and unofficial email-interview with one of their developers.
 
+Part of Open Energi's business model is to provide frequency response to National Grid, the TSO of the United Kingdom, by controlling the heating of bitumen tanks. This is achieved by installing a unit on each bitumen tank that can react upon changes in the grid frequency. How the control algorithm coordinates all units for an appropriate response is a company secret, but we were given enough information\footnote{Note that Open Energi has not had the opportunity to review this example, and can therefore not be taken as an accurate example.} to describe Open Energi with the reference architecture as presented in Figure~\ref{fig:openenergirefarch}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=1.0\textwidth]{stackdrawing_openenergi.eps}
+\caption{Mapping the Open Energi aggregator to the functional reference architecture. In this case it is only blocks related to communication that appear both at the aggregator and asset side.}
+\label{fig:openenergirefarch}
+\end{figure}
+
+In this case autonomous, fully-distributed architecture is represented by having  most of the \emph{decision making} and \emph{information interpreter} functions on the asset side, and only having the operator interface, portfolio performance assessment and service interface on the aggregator side. Based upon this, a system operator can determine that since Open Energi has the basic expected functionalities, it is allowed to go through the validation procedure\footnote{See Chapter~\ref{cha:validation}.}. 
 
 \section{Conclusions Regarding Aggregators}
 \newsection{T}{he concept of aggregators} is widespread in the smart grid literature, but the interpretations of what an aggregator is varies widely. One of the contributions presented in this chapter is to provide a common lexicon and reference architecture for aggregators so that discussion on the topic can be harmonized. This will hopefully lead to faster advances in the field. Also, the functional reference architecture is to be used in aggregator validation and certification\footnote{The concept of aggregator validation and certification is discussed in depth in Section~\ref{sec:aggpreq}, where it is also discussed how this functional reference architecture can be useful.}. A secondary use for the reference architecture is to serve as a guide for future designs of aggregators.
 
 When aggregators are discussed in the academic literature, the focus is usually on the control function. The functional reference architecture makes it clear that aggregators are more complex than single control block. There are several implicit functionalities, \eg the \emph{enabler functions} that are glossed over in academic studies, but are important for understanding the full capabilities the aggregator.
 
-A current shortcoming of this work is that the presented functional reference architecture for aggregators is part of a work-in-progress paper and as such, needs to be refined and extended. Future work will include the design of key performance indices (KPIs) assigned to each function, such that the scores can be used for benchmarking. 
+A current shortcoming of this work is that the presented functional reference architecture for aggregators is part of a work-in-progress paper and as such, needs to be refined and extended. Future work will include the design of key performance indices assigned to each function, such that the scores can be used to gain a better understanding of the capabilities of the aggregator. 
 
 % chapter The Aggregator (end)
