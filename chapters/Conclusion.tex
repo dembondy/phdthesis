@@ -1,26 +1,42 @@
 %!TEX root = ../Thesis.tex
 \chapter{Conclusion and Future Work}
 \label{cha:conclusion}
-\newchapter{M}{orbi pharetra ligula} integer mollis mi nec neque ultrices vitae volutpat leo ullamcorper. In at tellus magna. Curabitur quis posuere purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse tristique placerat feugiat. Aliquam vitae est at enim auctor ultrices eleifend a urna. Donec non tincidunt felis. Maecenas at suscipit orci.
-\section{Discussion of key results} % (fold)
-\label{sec:Discussionofkeyresults}
+\newchapter{T}{his PhD project focused} on the question of how to validate consumption aggregators. Methods, concepts and procedures were developed around the creation of an aggregator validation framework. The classical procedure for generator validation consists of documentation of the generator capabilities and a limited set of validation tests. This procedure has been adapted to aggregators the following way:
+\begin{description}
+	\item[Documentation of aggregator capabilities:] A functional reference architecture for aggregators was formulated\fcite{bondy2015a}, which gives system operators an overview of the capabilities of the aggregator. The reference framework consists of 11 essential functions, which abstract from the specific implementation of the aggregator. The end objective is for each of these functions to have an associated key performance index, which helps the system operator asses the capabilities of the aggregator.
+	\item[Validation tests:] A validation framework was defined in order to carry out the validation tests. Specifically, this thesis focused on three aspects of this framework:
+		\begin{itemize}
+			\item The definition and modeling of services\fcite{bondy2016method}. These service models form the control objective of the aggregator and serve as benchmarks for the service performance evaluation and verification. This method is based upon identifying the relevant contractual parameters and defining a set of time series for ideal service delivery and acceptable service delivery. Furthermore, the concept of \emph{Quality of Service} (QoS) was introduced as a measure of how well the aggregator provides a service. The QoS is defined as the error between the actual service delivery and the benchmark service model, scaled to the contractual limits. Thus, $QoS \in [0,1]$.
+			\item The definition of a Service Performance Index\fcite{bondy2014performance} ($\eta$) and a Service Verification Index\fcite{bondy2016method} ($\epsilon$). These indices are metrics used for evaluating the aggregator, and are novel in that they are not made specifically for any single service, but can be used with service models in order to evaluate aggregators providing any service. The Service Performance Index is the root mean square of the QoS delivered by the aggregator. The Service Verification Index is also based upon the root mean square of the QoS, but it only measures how much the service delivery breaks the contractual limits, i.e. when $QoS > 1$.
+			\item The procedure for carrying out the validation test was defined\fcite{bondy2016validation}, based upon statistical concepts and expanding the service metrics from deterministic measures to statistical measures. Specifically, fractional factorial tests should be run with enough sampling and over adequate disturbance distributions in order to fully understand the capabilities of the aggregator that is being validated.
+		\end{itemize}
+\end{description}
+
+In an effort to ease the integration of aggregators into the ancillary service markets, a proposal for restructuring of ancillary service requirements was presented\fcite{bondy2016redefining}. The new definitions consists of defining an ideal service tender, and parametrizing the bids so that each bid can fractionally fulfill the ideal service tender across one or more of the parameters. This means that units that have good capabilities in one parameter, but not in another, are still valuable for the system operator and can still participate in the market. The value of the resources is expressed by the capability value $\kappa$. An example of how this parametrization can be used in a market was presented, and it was shown how $\kappa$ and $eta$ can be used for performance based remuneration.
+
+The changes in the power system are leading to the decommissioning of traditional power plants, thus reducing the pool of available sources of ancillary services. At the same time, the increasing penetration of renewable intermittent generation will require units capable of providing faster balancing services. Aggregators seem to be able to solve part of this issue. Therefore, the validation of aggregators is important if they are to be used as sources for ancillary services. The research question of this thesis is in short: \emph{how can aggregators be validated?}. I believe the work presented here takes significant steps towards answering this question.
 
 
-Aggregator validation consists of three things:
-\begin{itemize}
-	\item Documentation through the reference architecture
-	\item Simulation aided validation tests
-	\item Communication test
-\end{itemize}
-
-% section Discussion of key results (end)
 
 \section{Future Work} % (fold)
 \label{sec:FutureWork}
+There are mainly two subjects which have not been discussed here:
+\begin{itemize}
+	\item The elaboration of operation scenario descriptions\footnote{See Figure~\ref{fig:MAINframework}.} that determine the situations that aggregators are expected to handle;
+	\item Metering and measurement resolution of the DERs providing the services. 
+\end{itemize}
+These are important issues that must be addressed before aggregators can be fully integrated into the system. 
 
+The functional reference architecture was submitted as work-in-progress paper, and is missing one main feature. The key performance index for each function have not been assigned. This reference architecture must be completed in order for it to be useful for the system operators. As it is, it is useful as a guide for entrepreneurs seeking to open an aggregator business.
+
+Similarly, the work on restructuring the ancillary service requirements is at a draft stage, and requires further work with respect to the study case. A project has already been set up for one of the collaborators from overseas to come to DTU and work on an experimental implementation of concept. 
+
+This project was mostly developed within the iPower project framework, which focused on flexibility services for DSOs and the Flexibility Clearing House. This has lead to an understanding of what DSOs expect from aggregators, which in turn lead to the use of DSO services as example cases in most of the papers I published. This project could have benefited of a closer collaboration with a TSO, so that the applicability of the method could be discussed with the people who might end up using it.
+
+Finally, the concepts described here should be implemented in a software framework and an aggregator should be validated on it.
 % section Future Work (end)
-
-\section{Application} % (fold)
-\label{sec:Application}
-
-% section Application (end)
+%
+%\section{Application} % (fold)
+%\label{sec:Application}
+%
+%% section Application (end)
