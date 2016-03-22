@@ -224,7 +224,7 @@ where $\tau_{r,0}$ and $\tau_{d,0}$ are a nominal value the system operator sets
 
 \subsection{Market Mechanism} % (fold)
 \label{sub:MarketMechanism}
-It is impossible to restructure the AS definition without addressing the market mechanism for determining the optimal set of resources. The market should be designed as a single clearing price auction, in which each resource bid is adjusted by \emph{two} factors for bid quality: 1) the capability value $\kappa_i$ and 2) a historical performance\footnote{The historical performance parameter can also be interpreted as an availability parameter, or certainty parameter.} parameter $\eta^{hist}_i$. In this section a proposal for how this market mechanism could be formulated is presented.
+It is impossible to restructure the AS definition without addressing the market mechanism for determining the optimal set of resources. The market should be designed as a single clearing price auction, in which each resource bid is adjusted by \emph{two} factors for bid quality: 1) the capability value $\kappa_i$ and 2) a historical performance\footnote{The historical performance parameter can also be interpreted as an availability parameter, or certainty parameter.} parameter $\eta^{hist}$. In this section a proposal for how this market mechanism could be formulated is presented.
 
 The proposed clearing mechanism identifies a common clearing price based on the most expensive accepted bid\footnote{This is similar to the merit order lists used in \eg the Nordic system for Manual Regulating Power\cite{bondy2013}.}:
 %Clearing principles
@@ -251,7 +251,7 @@ The estimation of the service provision performance can be done in different way
 	\eta &\in [0,1]
 \end{align}
 
-We propose that remuneration is based on the performance evaluation of the service provision:
+We propose that remuneration must be based on the performance evaluation of the service provision:
 \begin{equation}
 	P^\mathtt{rem}_i = \eta_i\kappa_i  P^\mathtt{clear} \qquad \forall \, i \in \Omega^\mathtt{acc}.
 \end{equation}

@@ -67,12 +67,12 @@ This thesis addresses one of the solutions proposed to deal with the vulnerabili
 \newsection{A}{ggregators are expected to} be new providers of ancillary services, and other energy related services, to the players in the power markets. This means that they must go through the same prequalification/certification process that current providers of ancillary services must go through. Therefore, the control algorithms and architecture that form an aggregator must be validated\marginnote{The Institute for Electrical and Electronics Engineers (IEEE) defines validation as: ``The assurance that a product, service, or system meets the needs of the customer and other identified stakeholders.''}. Several factors, such as the distributed nature and the modular composition of aggregators, make this problem non-trivial. The overarching question this thesis seeks to answer is: \emph{How can aggregators be validated, such that they can be trusted by the power market participants, and hereby actively help with the secure operation of the power system?}.
 
 Considering that \emph{validation} is the key word in this question, the overarching question can be split into the following subproblems:
-\begin{ennumerate}
+\begin{enumerate}
 	\item what are the needs the TSO wants fulfilled when acquiring services?
 	%\item can an aggregator fulfill those needs?
 	\item how can we measure how close the aggregator is to fulfilling those needs?
 	\item how can we systematically ensure that the aggregator matches the required needs?
-\end{ennumerate}
+\end{enumerate}
 %control-services? This is a broad definition, and here I will  narrow down my research to use control services to provide ancillary services, primarily through demand response, but the techniques should be able to be generalized.
 
 \subsection*{Scoping and Methodology}
@@ -85,7 +85,8 @@ The scope of ancillary services is wide, and the operation of the power system v
 
 The methodology that has been followed has been practical in nature. That is, in answering each of the questions above, it has been analysed how the TSOs currently deal with these problems, \ie 1) the formulation of services requirements, 2) the verification of service delivery, and 3) the validation of service providers. Solutions have been formulated from the current practices by adapting or changing these to methods that can be applied to aggregators.
 
-In order to have an understanding about current service definitions and requirements, the regulations of Energinet.dk (the Danish TSO), the \gls{entsoe} and PJM (an American \gls{rto}) were analysed. In order to understand how to measure aggregator performance, work on aggregator design was done\fcite{costanzo2013coordination}. In order to understand how to validate aggregators, it had to be understood how system operators validate traditional generators.
+In order to have an understanding about current service definitions and requirements, the regulations of Energinet.dk (the Danish TSO), the \gls{entsoe} and PJM (an American \gls{rto}) were analysed. In order to understand how to measure aggregator performance, work on aggregator design was done\fcite{costanzo2013coordination}. In order to understand how to validate aggregators, it had to be understood how system operators validate traditional generators. The current validation practice was identified in part through documentation, and in part through direct contact to Energinet.dk. For each of these, requirements have been formulated and salutions have been proposed.
+
 \subsection*{Contributions}
 %Focus has been given to the development of concepts rather than software implementation. Still, a module for service verification was developed for the laboratory.
 The original contributions to the field are:

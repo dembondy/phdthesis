@@ -91,9 +91,10 @@ Since the case study looks at simplified setup, and the example does not take th
   \eta_{RMS} = \sqrt{\frac{1}{M}\sum_{i=1}^M\left(\sum_{j=1}^N\left(\Phi_{h,i,j}\right) - S_i\right)^2}
 \end{equation}
 where $\left[1,M\right]$ are the iterations where the aggregator has been activated. The results of the test are presented in Table~\ref{tab:results}, where it can be seen that $E[\eta_{RMS}]<60 \, kW$. Therefore the DTU-FlexServices is certified to provide FRR up-regulation service to RisøGrid.
-
+\begingroup
+\setlength{\tabcolsep}{4pt}%
 \begin{table}[!t]%% increase table row spacing, adjust to taste
-\renewcommand{\arraystretch}{1.1}
+\renewcommand{\arraystretch}{0.9}
 % if using array.sty, it might be a good idea to tweak the value of
 % \extrarowheight as needed to properly center the text within the cells
 \caption{Performance of DTU-FlexServices}
@@ -103,7 +104,7 @@ where $\left[1,M\right]$ are the iterations where the aggregator has been activa
 % than the plain LaTeX2e tabular which is used here.
 \begin{tabular}{clcccccccc}
 \toprule
-        & & \multicolumn{7}{c}{Process noise, $\sigma$}                   & Average \\
+        & & \multicolumn{7}{c}{Process noise, $\sigma$}                   & Avg. \\
         & & 0.00   & 0.05   & 0.10   & 0.15   & 0.20   & 0.25    & 0.30   &         \\ 
 \midrule
 \multirow{7}{*}{\rotatebox[origin=c]{90}{Availability}} 
@@ -115,10 +116,11 @@ where $\left[1,M\right]$ are the iterations where the aggregator has been activa
 & 75\%    & 54.28  & 40.74  & 39.91  & 75.22  & 86.14  & 114.13  & 135.76 & 78.03   \\
 & 70\%    & 45.63  & 90.90  & 85.41  & 99.02  & 93.68  & 123.82  & 142.64 & 97.30   \\
 \midrule
-Average & & 16.62  & 28.02  & 22.60  & 49.24  & 66.16  & 86.38   & 118.28 & 55.33   \\
+Avg. & & 16.62  & 28.02  & 22.60  & 49.24  & 66.16  & 86.38   & 118.28 & 55.33   \\
 \bottomrule
 \end{tabular}
 \end{table}
+\endgroup
 %\begin{figure}[!t]
 %\centering
 %\includegraphics[width=\columnwidth]{figures/heatmap.eps}
