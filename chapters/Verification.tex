@@ -20,7 +20,7 @@
 
 This chapter presents a novel set of performance indices developed for aggregator performance assessment which can be applied at the three stages outlined above. The main focus of the results presented is on aggregator validation and service verification.  \todo{finish thought here\ldots something about the importance or the relevance}
 
-The initial work on aggregator performance assessment was presented in a conference paper\fcite{bondy2014performance} and further refined in a submitted journal paper\fcite{bondy2016method}. These paper can be found in Appendix~\ref{app:isgt2014} and Appendix~\ref{app:segan}. 
+The initial work on aggregator performance assessment was presented in a conference paper\fcite{bondy2014performance} and further refined in a submitted journal paper\fcite{bondy2016method}. These paper can be found in Appendix~\ref{app:isgt2014} and Appendix~\ref{app:tsg}. 
 
 
 \section{Background}
@@ -73,15 +73,15 @@ where $x_{acc,max/min}$ and $x_{max/min}$ are part of the service model defined 
 
 \begin{figure}[htpb!]
 \centering
-\subfloat[Tracking service error]{\includegraphics[width=0.5\columnwidth]{SEGAN/tracking_error2.eps}%
-\label{subfig:errortracking}} \subfloat[Tracking service Quality of Service]{\includegraphics[width=0.5\columnwidth]{SEGAN/tracking_error3.eps}%
+\subfloat[Tracking service error]{\includegraphics[width=0.5\columnwidth]{tsg/tracking_error2.eps}%
+\label{subfig:errortracking}} \subfloat[Tracking service Quality of Service]{\includegraphics[width=0.5\columnwidth]{tsg/tracking_error3.eps}%
 \label{subfig:qostracking}}\\
-\subfloat[Band service error]{\includegraphics[width=0.5\columnwidth]{SEGAN/band_error2.eps}%
-\label{subfig:errorband}}\subfloat[Band service Quality of Service]{\includegraphics[width=0.5\columnwidth]{SEGAN/band_error3.eps}%
+\subfloat[Band service error]{\includegraphics[width=0.5\columnwidth]{tsg/band_error2.eps}%
+\label{subfig:errorband}}\subfloat[Band service Quality of Service]{\includegraphics[width=0.5\columnwidth]{tsg/band_error3.eps}%
 \label{subfig:qosband}}\\
-\subfloat[Cap service error]{\includegraphics[width=0.5\columnwidth]{SEGAN/cap_error2.eps}%
+\subfloat[Cap service error]{\includegraphics[width=0.5\columnwidth]{tsg/cap_error2.eps}%
 \label{subfig:errorcap}}
-\subfloat[Cap service Quality of Service]{\includegraphics[width=0.5\columnwidth]{SEGAN/cap_error3.eps}%
+\subfloat[Cap service Quality of Service]{\includegraphics[width=0.5\columnwidth]{tsg/cap_error3.eps}%
 \label{subfig:qoscap}}
 \caption{Error and QoS for the three kinds of services, note that the acceptable band do not need to be symmetric.}
 \label{fig:MAINerrorQoS}
@@ -90,10 +90,9 @@ where $x_{acc,max/min}$ and $x_{max/min}$ are part of the service model defined 
 \section{The Aggregator Performance Indices}
 \newsection{P}{erformance criteria used for} evaluating controllers usually fall within three categories\fcite{Green}: quality, reliability and energy efficiency. When assessing aggregators, service quality and service reliability define the performance of the aggregator. Four requirements are defined for the performance criteria of aggregators:
 \begin{itemize}
-	\item[R1] Provide a \emph{quality} measure normalized to the contractual requirements (bounds) of a service. 
-	\item[R2] The measure should be normalized with respect to time.
-	\item[R3] Provide a \emph{reliability} measure in relation to service non-delivery.
-	\item[R4] Each service that the aggregator provides must have a separate, individually verifiable, measure. For example, to evaluate service delivery with respect to ancillary-service delivery, the asset-management quality is irrelevant.
+	\item[P-R1] provide a \emph{quality} measure normalized with respect to the contractual requirements (bounds) of a service and with respect to time,
+	\item[P-R2] provide a \emph{reliability} measure in relation to service non-delivery, which is normalized with respect to time,
+	\item[P-R3] service quality and reliability evaluation must be applicable to entities providing multiple services.
 \end{itemize}
 
 To fulfill these requirements two indices are defined:

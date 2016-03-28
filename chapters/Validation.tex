@@ -1,15 +1,17 @@
 %!EX root = ../Thesis.tex
 \chapter{Validation of Aggregators}
 \label{cha:validation}
-\newchapter{I}{t is expected that} aggregators of large quantities of flexible consumption or production units will be able to provide ancillary services to TSOs and DSOs, as well as other flexibility services, \eg portfolio balancing for BRPs. Since the provision of ancillary services is essential for the security of the power system, units providing these services must go through a prequalification process by the appropriate entity. This could be the TSO\footnote{In Denmark, Energinet.dk is the TSO and is in charge of the prequalification/approval process (described in \cite{EnerginetAncillary}).}, a DSO or even an independent third party\footnote{For the rest of this chapter the responsible for carrying out the aggregator validation will be called the \emph{testing entity}.}. Traditionally, the prequalification process in Denmark has consisted of an initial submission of documentation describing the capabilities of the unit, and subsequently a test that validates the unit capabilities and communication. While this validation test is well established for large central generation units, how the test is to be applied to aggregators is still an open question. The solution to this question is of utmost importance if aggregators are to deliver ancillary services. In Chapter~\ref{cha:aggregator} the essential differences between aggregators and traditional generators are mentioned. In this chapter, these differences are expanded upon, and a framework for aggregator validation is presented. Furthermore, one of the main contributions of this work is the definition of a test procedure to validate aggregators. This procedure is originally presented in the conference paper\fcite{bondy2016validation} which can be found in Appendix~\ref{app:pscc2016}. The presented validation framework is original to this work. The validation process described here focuses on aggregator providing ancillary services, but can also be applied as a certification method for aggregators, such that they can participate with other products in the electricity market.
+%\newchapter{I}{t is expected that} aggregators of large quantities of flexible consumption or production units will be able to provide ancillary services to TSOs and DSOs, as well as other flexibility services, \eg portfolio balancing for BRPs. Since the
+\newchapter{P}{rovision of ancillary services} is essential for the security of the power system, and if aggregators are to provide these services, along with other flexibility services, they must go through a prequalification process by the appropriate entity. This could be the TSO\footnote{In Denmark, Energinet.dk is the TSO and is in charge of the prequalification/approval process (described in \cite{EnerginetAncillary}).}, a DSO or even an independent third party\footnote{For the rest of this chapter the responsible for carrying out the aggregator validation will be called the \emph{testing entity}.}. Traditionally, the prequalification process in Denmark has consisted of an initial submission of documentation describing the capabilities of the unit, and subsequently a test that validates the unit capabilities and communication. While this validation test is well established for large central generation units, how the test is to be applied to aggregators is still an open question. The solution to this question is of utmost importance if aggregators are to trusted for service delivery. In Chapter~\ref{cha:aggregator} the essential differences between aggregators and traditional generators are mentioned. In this chapter, these differences are expanded upon, and a framework for aggregator validation is presented. Furthermore, one of the main contributions of presented in this chapter is the expansion of the validation procedure to include statistical test methods and statistical measures for service requirements and performance. This procedure is originally presented in the conference paper\fcite{bondy2016validation} which can be found in Appendix~\ref{app:pscc2016}. The presented validation framework is original to this work. The validation process described here focuses on aggregator providing ancillary services, but can also be applied as a certification method for aggregators, such that they can participate with other products in the electricity market.
 
 \section{Background}
-\newsection{S}{ince ancillary services are} essential for the reliability of the power system, units that provide said services must have a high degree of reliability. The TSO requires units that provide ancillary services to pass a prequalification process. This prequalification process consists of validating the unit for service delivery. In this section conventional resource validation is briefly discussed and it is explained why the same method can not be applied to aggregators. Also a short section on the current work on aggregator testing is presented.
+%\newsection{S}{ince ancillary services are} essential for the reliability of the power system, units that provide said services must have a high degree of reliability. The TSO requires units that provide ancillary services to pass a prequalification process. This prequalification process consists of validating the unit for service delivery.
+\newsection{I}{n this section, conventional} resource validation is briefly discussed and it is explained why the same method can not be applied to aggregators. Also a short section on the current work on aggregator testing is presented.
 \subsection{Conventional Resource Validation vs. Aggregator Validation}\label{subsec:backgroundvalidation}
 In Denmark, the prequalification\marginnote{The topic of conventional resource validation is discussed in more detail in Section~\ref{sec:PSSCCconventionalvalidation}.} process is divided into two steps:
 \begin{enumerate}
 	\item documentation for the unit is submitted to the TSO, and
-	\item a test procedure where the unit response to a signal from the TSO is evaluated.
+	\item a validation test where the unit's response to a signal from the TSO is evaluated.
 \end{enumerate}
 
 The unit response tests serves two purposes: it validates that the response corresponds to the presented documentation, and it tests the communication system between the TSO control room and unit. If the units succeeds in the prequalification process, it is certified for participation in the ancillary service markets.
@@ -17,22 +19,29 @@ The unit response tests serves two purposes: it validates that the response corr
 This process works on traditional generators because the dynamics of traditional generators are well understood. That is, generators can be described to a large degree of certainty through physical equations, and the unit response test serves to confirm the documented values of the equation variables\footnote{The response test can also be seen as a system identification test.}. This is not possible for aggregators because they behave fundamentally different from large generation units:
 \begin{enumerate}
 	\item The aggregator portfolio can either be of a heterogeneous or homogeneous nature. \marginnote{A homogeneous aggregator is one which has a portfolio of same units, \eg a fleet of EVs. A heterogeneous aggregator has a mix of units in its portfolio, \eg EVs and thermostatically controlled loads.}In both instances, the variance of the response of the portfolio units, along with the tynamic nature of the portfolio, means that the aggregator can not be described through physical equations and a single response test will give no insight to the overall response capabilities of the aggregator. This is aggravated by the fact that each DER will have its own set of requirements to satisfy its owner's needs.
-	\item Since the aggregator consists of geographically dispersed units, there is no single point of measurement. This means that the aggregated power profile does not represent a measurement at any single point in the power grid. This also means that traditional measurement systems can not be used on aggregators.
-	\item The reliability concepts for distributed systems are different than those of single large units. Specifically, the failure modes are very different. The failure in a single unit in the aggregator has a much smaller impact on the overall aggregator performance compared to the failure of a subsystem in a generator fails.
+	\item Since the aggregator consists of geographically dispersed units, there is no single point of measurement. This means that the aggregated power profile does not represent a measurement at any single point in the power grid. This also means that traditional expensive measurement systems can not be used on aggregators.
+	\item The reliability concepts for distributed systems are different than those of single large units. Specifically, the failure modes are very different. The failure in a single unit in the aggregator has a much smaller impact on the overall aggregator performance compared to the failure of a subsystem in a generator fails. Also, communication reliability between the aggregator and the DER must be taken into account.
 	\item Aggregator architectures will vary widely, and may be respond differently depending on the grid state, weather conditions and user behavior. An aggregator must be tested for a variety of operating conditions which are irrelevant for traditional generators.
-	\item Aggregator do not necessarily have a production or consumption baseline base upon operational schedules. This creates the challenge of determining if a service provided by an aggregator will effectively help the system, or is the aggregator being paid for a schedule it would have executed regardless. Also, this issue with the baseline means that without proper policy, the aggregators could introduce problems to the system and then be paid to solve them.\todo{Check if the points more or less match the corresponding from the previous chapter}
+	\item Aggregator do not necessarily have a production or consumption baseline base upon operational schedules. This creates the challenge of determining if a service provided by an aggregator will effectively help the system, or is the aggregator being paid for a schedule it would have executed regardless. Also, this issue with the baseline means that without proper policy, the aggregators could introduce problems to the system and then be paid to solve them.%\todo{Check if the points more or less match the corresponding from the previous chapter}
+	\item Availability of the flexibility will vary over time, as the flexibility assets have to satisfy their primary purpose, this varying variability must be taken into account. Furthermore, the flexibility assets might be part of an installation which might restrict flexibility further.
 \end{enumerate}
 
-It is both impractical and meaningless to validate every unit in an aggregator portfolio. The aggregator architecture must be tested as a whole, based upon statistical methods.
+It is both impractical and meaningless to validate every unit in an aggregator portfolio, since it is the statistical properties of the aggregated pool, not the individual unit, which makes the aggregator suitable for service delivery. The aggregator architecture must be tested as a whole, based upon statistical methods.
 
 \subsection{Aggregator Testing in Literature}\label{subsec:aggtest}
-There is currently no standardized procedure for prequalification of aggregators as there is with traditional generation units. Until now, the performance evaluation and testing of aggregators in academia has been ad-hoc to specific aggregator implementation\fcite{vrettos2015integrating}, or the evaluation focus has been on computational or financial performance\fcite{su2012performance,rahnama2014evaluation}. Similarly, a platform for simulation of aggregation strategy has been proposed\fcite{dittawit2014demand}, but the focus is on the simulation tool itself, which in turn focuses only on the demand side, and not on the process of validation. None have taken a systematic approach to generally evaluating the performance of the aggregators in terms of the contractual requirements of service delivery.
+There is currently no standardized procedure for prequalification of aggregators as there is with traditional generation units. Until now, the performance evaluation and testing of aggregators in academia has been ad-hoc to specific aggregator implementation\footnote{See \eg \cite{vrettos2015integrating,hu2014coordinated,leemput2012a}.}, or the evaluation focus has been on computational or financial performance\fcite{su2012performance,rahnama2014evaluation}. Similarly, a platform for simulation of aggregation strategy has been proposed\fcite{dittawit2014demand}, but the focus is on the simulation tool itself, which in turn focuses only on the demand side, and not on the process of validation. None have taken a systematic approach to generally evaluating the performance of the aggregators in terms of the contractual requirements of service delivery.
 
-%\begin{itemize}
-%	\item What is the control services validation problem, and why is it important?
-%	\item What is the general framework I propose?
-%	\item Which are the components in this framework that I have worked on?
-%\end{itemize}
+\subsection{Design of Experiments} % (fold)
+\label{sub:DesignofExperiments}
+The validation tests must be methodical and excite the aggregator such that the variance in its capabilities is well understood. Concepts from \emph{Design of Experiments} are used for designing such tests, mainly\fcite{nistrepl}:
+\begin{description}
+	\item[Treatment:] A treatment is a specific combination of factor levels whose effect is to be compared with other treatments.
+	\item[Statistical Replication:] Replication can be defined as performing the same treatment combination more than once in an experiment. This is done in order to estimate the random error. 
+	\item[Fractional Factorial Experiments:] Factors are the elements of a treatment, \eg the baking treatment for a cake involves a given time at a given temperature\fcite{oehlert2010first}. In this case, time and temperature are factors that can be varied and will change the outcome of the treatment. Fractional factorial refers to taking a subset of the combinations of the factors.
+\end{description}
+
+The fractional factorial test presented in Appendix~\ref{app:pscc2016} follows the \emph{off-line quality control} methods that were popularized by \emph{G. Taguchi}\fcite{taguchi1979introduction}. Some aspects of these methods have been heavily criticized\fcite{box1988explanation,pignatiello1991top}, but the methods presented in modern textbooks\fcite{oehlert2010first,cavazzuti2012optimization} have been adapted and changed according to these critiques. Thus, these methods seem appropriate to use for aggregator validation.
+% subsection Design of Experiments (end)
 
 \section{The Validation Framework}
 
@@ -46,14 +55,14 @@ There is currently no standardized procedure for prequalification of aggregators
 The reliability of the aggregator depends on stochastic processes, \eg consumer patterns and weather behavior. Therefore, it is natural that the validation procedure gives a statistical measure for the reliability. This means that the aggregator must undergo a series of validation test cases, as depicted in Figure~\ref{fig:MAINframework}. Formulating a set of test scenarios constrains the testing of the aggregator to a set of circumstances that the aggregator is expected to be able to handle, see Figure~\ref{fig:aggstatespace}. These kinds of tests must to be reproducible and with sufficient sampling so that the validation can be backed up with statistical certainty. It is infeasible to carry out this procedure the physical system. Therefore, this test process has to be carried out with aid of detailed simulations of the aggregator interaction with the electric power system and DERs, in combination with general models for communication.
 \begin{figure}[htbp!]
 \centering
-\includegraphics[width=0.5\textwidth]{validationMAIN.eps}
+\includegraphics[width=0.6\textwidth]{validationMAIN.eps}
 \caption{Schematic procedure for aggregator validation. The aggregator test must be done with aid of a simulation framework so that the variation in aggregator capabilities can be appropriately identified.}
 \label{fig:MAINframework}
 \end{figure}
 
 \begin{figure}[hpb!]
 \centering
-\includegraphics[width=0.5\textwidth]{aggstatespace.eps}
+\includegraphics[width=0.6\textwidth]{aggstatespace.eps}
 \caption{From all the possible state space the aggregator can operate in, it is only a subset that is considered nominal operation. Within this nominal operation, a test operation space is defined, where the stochastic variables that affect the aggregator performance are manipulated to test the aggregator reliability. These stochastic variables include, but are not limited to, weather conditions, communication failure and user behavior.}
 \label{fig:aggstatespace}
 \end{figure}
@@ -80,7 +89,7 @@ Finally, the \emph{service verification and evaluation} block\footnote{The topic
 \section{Procedure for Validation of Aggregators} 
 \newsection{F}{rom the previous} section it is clear that the service requirements form an essential part of the aggregator validation process. Service requirements are discussed in the depth in Chapter~\ref{cha:services}, but a set of test service requirement metrics have been formulated as part of the test method and are presented here.
 
-In order to measure how disturbances\footnote{See Figure~\ref{sec:servreqmet} for a visual representation of how disturbances affect the aggregator} affect service delivery, a set of performance metrics must defined. Based upon the current ancillary service definition, the chosen metrics are:
+A set of performance metrics must defined to measure how disturbances\footnote{See Figure~\ref{sec:servreqmet} for a visual representation of how disturbances affect the aggregator} affect service delivery. Based upon the current ancillary service definition, the chosen metrics are:
 \begin{description}
 	\item[Time responsiveness:] how fast can the service be delivered from the moment the reference or measurement signal changes.
 	\item[Grid responsiveness:] how well can the aggregator follow changes in the grid state.
@@ -89,25 +98,33 @@ In order to measure how disturbances\footnote{See Figure~\ref{sec:servreqmet} fo
 
 It is the TSO that defines the value of these metrics that signify a passed validation test. Since the tests are stochastic, the metric value should also have a stochastic component, this could for example be \emph{time responsiveness} of service provision of 5 seconds with variance of $\pm$ 1 second. The metrics must be measured by an index and while literature has a wide array of indices for measuring performance, a specific index for aggregators is presented in Chapter~\ref{cha:verification}.
 
-In order to align the service requirements and the test design, the following steps are proposed:
+The following steps are proposed for designing the test procedure:
 \begin{enumerate}
 	\item The aggregator informs of the general composition of its portfolio, as well as the service it wants to be validated for.
 	\item The tester identifies the appropriate service requirements for the service to be tested for.
 	\item The tester identifies the expected normal operation of the aggregator.
 	\item The tester defines the test operation scenarios that the aggregator is expected to perform under. The scenarios must define the statistical properties, \eg mean and variance, for the stochastic disturbances affecting the aggregator performance.
-	\item The tests are carried out on the aggregator.
+	\item The tests are carried out on the aggregator:
+		\begin{itemize}
+			\item simulation tests must be carried out, going through the appropriate factorial levels defined in the normal operation of the aggregator;
+			\item the simulation tests must be replicated with sufficient samples to capture how the error of the inputs propagates through the aggregator;
+		\end{itemize}
 	\item The aggregator performance is evaluated.	
 \end{enumerate}
 
 %Note that the entity performing the validation tests can be an independent party, \eg a third party certifier for aggregators, or it can be the TSO.
 Depending on the excitation signals the aggregator is subject to, the tests are divided into two categories:
 \begin{itemize}
-	\item step response, and
+	\item step/ramp response, and
 	\item continuous reference tracking.
 \end{itemize}
 The kind of test used for the validation will depend on the test scenario description.
 
-In order to correctly determine the variation in the aggregator capabilities, the test must follow a \emph{fractional factorial method}\fcite{oehlert2010first} where the aggregator is tested through a range of the relevant disturbances. An example of this can be found in Appendix~\ref{app:pscc2016}, Section~\ref{sec:casestudy}.
+In order to ensure that the simulations are correct, a limited selection of cases must be validated with field tests. This also ensures that the communication system between the aggregator and the system operator functions correctly.
+
+To summarize, the validation procedure consists of a series of simulated tests, where the same excitation signal (be it a step/ramp response or a continuous signal) is replicated with enough samples, over a combination of factor levels, to identify the capabilities of the aggregator. A subsample of these tests must be validated through a field test.
+
+An example of how the procedure is applied to an aggregator (without the final field test validation) can be found in Appendix~\ref{app:pscc2016}, Section~\ref{sec:casestudy}.
 
 \section{On Prequalification and Certification of Aggregators}\label{sec:aggpreq}
 \newsection{I}{t was previously mentioned} that traditional generator prequalification consists of two steps, the documentation of the generator and the response test. The prequalification process must be adapted to aggregators. Parting from the concepts presented in this chapter, such a prequalification process could be the following:
@@ -117,11 +134,11 @@ In order to correctly determine the variation in the aggregator capabilities, th
 	\item \emph{Monitoring:} Furthermore, aggregator performance should be continually evaluated, and new validation tests should be carried out routinely. This is due to the dynamic nature of the aggregator portfolio, which may regularly change in size and composition, and due to the changes and updates that may come to the control algorithm.
 \end{enumerate}
 
-The same process can be applied to a certification process, \ie a process where a third part certifies the aggregator for participation in the different markets. In this case, the aggregator must be validated against other services, \eg BRP portfolio balancing or distribution system services.
+The same process can be applied to a certification process, \ie a process where a third part certifies the aggregator for participation in the different markets. In this case, the aggregator must be validated against other flexibility services, \ie BRP portfolio balancing or distribution system services.
 
 \section{Conclusions Regarding the Validation Framework}
-\newsection{T}{he concept of validation} of aggregators is important for the participation of aggregators in both ancillary services markets and energy markets. The original contribution of this work is the design of the aggregator validation framework and the procedure for validating aggregators. The described approach to test the system through statistical methods and define the validation requirements with statistical values is novel.
+\newsection{T}{he concept of validation} of aggregators is important for the participation of aggregators in both ancillary services markets and other service markets. The original contribution of this work is the application of statistical method for validation test of aggregators. Also, the validation framework was presented, in which it is clear what are the elements that form part of aggregator validation.
 
-In comparison with the traditional test method, this validation procedure must capture the capabilities of a much more complex system, and therefore relies in part on simulations. A weakness in the proposed method is that the validation tests are highly dependable on the accuracy of the used models in the simulation. A way to mitigate this is to make the framework modular so that the tests can be run with hardware-in-the-loop (for model validation of individual units) or so that the framework can be connected to validated models, \eg a Real-Time Digital Simulator (RTDS). The error between the used models and reality must be quantified\fcite{steinbrink2015challenges} and taken into account for the final aggregator certification. Each block in the simulation must use validated models or software. This applies to the communication systems, the grid models and the DER models. The test architecture which validates the aggregators must also be validated.
+In comparison with the traditional test method, the proposed validation procedure must capture the capabilities of a much more complex system, and therefore relies in part on simulations. A weakness in the proposed method is that the validation tests are highly dependable on the accuracy of the used models in the simulation. A way to mitigate this is to make the framework modular so that the tests can be run with hardware-in-the-loop (for model validation of individual units) or so that the framework can be connected to validated models, \eg a Real-Time Digital Simulator (RTDS). The error between the used models and reality must be quantified\fcite{steinbrink2015challenges} and taken into account for the final aggregator certification. Each block in the simulation must use validated models or software. This applies to the communication systems, the grid models and the DER models. The test architecture which validates the aggregators must also be validated.
 
-Future work will consist of further refining the validation architecture, specifically defining the interfaces between modules, and implementing the software platform. Also, further exploration of the field of \emph{Design of Experiments} may yield better methods than the fractional factorial method for quantifying the capabilities of the aggregator.
+Future work will consist of further refining the validation architecture, specifically defining the interfaces between modules, and implementing the software platform. Further exploration of the field of \emph{Design of Experiments} may yield better methods than the fractional factorial method for quantifying the capabilities of the aggregator. Also, a set of realistic operation scenarios must be defined.

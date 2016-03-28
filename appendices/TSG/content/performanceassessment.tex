@@ -1,0 +1,177 @@
+%\kh{this paragrpah has an apologetic tone ... }
+In Sec.~\ref{subsec:needforreq} three requirements for performance metrics are presented. These can be expressed formally as:
+\begin{align}
+    \text{[P-R1]:} \quad & \eta = f_P(x_{meas},\mathbf{x}_{acc},t), \quad \eta \in [0,1],\\
+    \text{[P-R2]:} \quad & \epsilon = f_R(x_{meas},\mathbf{x}_{acc},t),\\
+    \text{[P-R3a]:} \quad & \eta_K = \sum_{i \in M} f_M(\eta_i), \quad \eta_i \in [0,1],\\
+    \text{[P-R3b]:} \quad & \epsilon_M = \sum_{i \in M} f_M(\epsilon_i),\\
+\end{align}
+where $\eta$ is a quality performance measure, $\epsilon$ is a reliability measure, $\eta_M$ and $\epsilon_M$ are the same measures applied to multiple services \emph{M}. The measured output (or sum of outputs in the case of aggregation) is defined by $x_{meas}$, and the service bounds are defined by $\mathbf{x}_{acc}$, as defined in Sec.~\ref{susec:reqmodform}. $f_P(\cdot)$ is a function that evaluates service performance normalized to $\mathbf{x}_{acc}$ and time \emph{t}. Similarly, $f_R(\cdot)$ is a function that evaluates service reliability based upon $\mathbf{x}_{acc}$ and normalized to time and $f_M(\cdot)$ is a function that gives an overall measure for multiple services.
+
+These concepts were originally presented in \cite{bondy2014performance}, but are revised and expanded upon following concepts from \cite{thavlov2015thesis}. In order to asses service performance three concepts are introduced in this section:
+\begin{itemize}
+\item Quality of Service, which is an instantaneous measure of how well the aggregator is delivering one service within the contract constraints;
+\item service performance assessment index, which describes the overall performance of the aggregator over the delivery period for the services, or subset of services, it is providing; and a
+\item service verification index, which describes how much an aggregator is breaking the contractual agreements (non-delivering) of the services, or a subset of services, it provides.
+\end{itemize}
+
+Differently from the previous work, the service delivery index is split into measures of the ancillary services (AS) delivered to system operators and the AMS delivered to unit owners (see Sec.~\ref{subsec:ASDER}). In this way, a system operator (or a third party certification company) can use the index for certification of aggregators, for which the AMS evaluation is irrelevant. Furthermore, the service verification index is introduced, and a new way of defining the quality of service is presented.
+%\athanote{We should be a bit more explicit about services delivered upwards in the system (AS) and down-wards (AMS) to the asset owner}
+
+\subsection{Quality of Service}
+Quality of service (QoS) is a measure defined in \cite{bondy2014performance}, where it is used to assess the quality of a power system service at any given time. QoS at any given time is given by:
+\begin{equation}\label{eq:QoS}
+QoS(t)=e(t)C_{n}(t)
+\end{equation}
+where \emph{e(t)} is the error in service delivery introduced in Sec.~\ref{sec:TSGmethodology}, and $C_n(t)$ is a normalization factor that can be time varying. Following [P-R1], we define:
+\begin{itemize}
+\item $QoS \geq 0$;
+\item for $QoS \leq 1$ the service is considered delivered within the contractual constraints;
+\item and $QoS = 0$ is a perfect service delivery.
+\end{itemize}
+In order to achieve these definitions, the normalization factor $C_{n}(t)$ must be calculated from $\mathbf{x}_{acc}(t)$ thus:
+\begin{equation}
+C_{n}(t) = 
+\begin{cases}
+\frac{1}{x_{acc,max}(t) - x_{max}(t)}, & e(t) \geq 0 \\
+\frac{1}{x_{acc,min}(t) - x_{min}(t)}, & e(t) < 0.
+\end{cases}\label{eq:cst}
+\end{equation}
+where $x_{acc,max/min}$ and $x_{max/min}$ are part of the service model defined in Sec.~\ref{sec:TSGmethodology}. By defining $C_{n}(t)$ in this way, we take into account the possibility of asymmetry in the values of $x_{acc}$, and ensure that QoS is a positive value. A visual representation of this scaling can be seen in Fig.~\ref{fig:TSGtracking_error}--Fig.~\ref{fig:TSGcap_error}, where the QoS for the three kinds of services are presented.
+In general, the rate with which $QoS(t)$ increases depends on the difference between $x_{acc}(t)$ and $x_{ideal}(t)$.
+\begin{figure}
+\centering
+\subfloat[Error]{\includegraphics[width=0.5\columnwidth]{graphics/tsg/tracking_error2.eps}%
+\label{fig:errortracking}} \subfloat[Quality of Service]{\includegraphics[width=0.5\columnwidth]{graphics/tsg/tracking_error3.eps}%
+\label{fig:qostracking}}
+\caption{Error and QoS for tracking services, note that the acceptable band do not need to be symmetric.}
+\label{fig:TSGtracking_error}
+\end{figure}
+\begin{figure}
+\centering
+\subfloat[Error]{\includegraphics[width=0.5\columnwidth]{graphics/tsg/band_error2.eps}%
+\label{fig:errorband}}\subfloat[Quality of Service]{\includegraphics[width=0.5\columnwidth]{graphics/tsg/band_error3.eps}%
+\label{fig:qosband}}
+\caption{Error and QoS for band services.}
+\label{fig:TSGband_error}
+\end{figure}
+\begin{figure}
+\centering
+\subfloat[Error]{\includegraphics[width=0.5\columnwidth]{graphics/tsg/cap_error2.eps}%
+\label{fig:errorcap}}
+\subfloat[Quality of Service]{\includegraphics[width=0.5\columnwidth]{graphics/tsg/cap_error3.eps}%
+\label{fig:qoscap}}
+\caption{QoS for a maximum cap service, a minimum cap service is defined similarly but with $x_{min}$ and $x_{acc,min}$ values.}
+\label{fig:TSGcap_error}
+\end{figure}
+%\begin{figure*}[!t]
+%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
+%\label{fig_second_case}}}
+%\caption{Simulation results}
+%\label{fig_sim}
+%\end{figure*}
+
+Note that in \eqref{eq:cst}, $C_{n}(t)$ is not defined for $x_{acc}(t) = x_{ideal}(t)$. This is a corner case, in which:
+%\bondynote{This QoS is only used then to calculate the Non-Delivery K, so, since we subtract 1 later on anyway, we might as well say the cornercase automatically starts counting on the Non-Delivery, and QoS = 1 for $e \neq 0$}
+\begin{equation}
+QoS(t) = e(t), \quad x_{acc}(t) = x_{ideal}(t)
+\end{equation}
+
+
+\subsection{Assessing service delivery}
+Based on the above instantaneous measure for the quality of individual services, we can evaluate the aggregator as a whole based upon the quality of all the services it delivers. 
+
+%\khnote{formalized requirements here}
+
+The overall service delivery index of AS is defined by $\eta^{AS}$ in Eq.~\eqref{eq:TSGetaAS}, but before calculating the index, the non-delivery incidents (which are measured apart) must be sorted out. This is done by restricting $QoS_{K,meas}^{AS}(t)$ (the measured quality of service for the \emph{K} ancillary services the aggregator is providing) such that it does not account for $QoS > 1$: 
+%\begin{algorithmic}[H]
+%\FOR{ t = 0:$t_N$ }
+%\FOR{ i = 1:K}
+%    \IF{$QoS_{i,meas}^{AS}(t)>1$} 
+%        \STATE $QoS_{i}^{AS}(t) = 1$ 
+%    \ELSE 
+%        \STATE $QoS_{i}^{AS}(t) = QoS_{i,meas}^{AS}(t)$
+%    \ENDIF
+%\ENDFOR
+%\ENDFOR
+%\end{algorithmic}
+\begin{align}
+	QoS^{AS}(t) = \begin{cases} QoS^{AS}_{meas}(t) ,\quad &\forall QoS^{AS}_{meas}(t) \leq 1, \forall t\\
+	1, \quad &\forall QoS^{AS}_{meas}(t) > 1, \forall t.
+	\end{cases}
+\end{align}
+
+where \emph{K} is the total number of AS the aggregator provide.
+This restriction is not done in \cite{bondy2014performance} since that work did not use a separate reliability index. This means that $\eta_{AS}$ is only a measure of the service provision performance within the contractual limits.
+
+While the previous definitions have been established in continuous time, the actual measurement and calculations are done in discrete time. This leads to $\eta_{AS}$ being estimated for \emph{K} amount of AS over each corresponding discrete time horizon $N_K$:
+\begin{align}\label{eq:TSGetaAS}
+\eta^{AS} &= \sum^{K}_{i=1} W_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {QoS^{AS}_{i,t}}^{2} \right)}{N_i}}\\
+\sum_{i=1}^K W^{AS}_i &= 1
+\end{align}
+where $W^{AS}_K$ is the assigned weight to each AS, leading to $\eta^{AS} \in [0,1]$, and $\eta$ close to zero representing good performance while $\eta$ close to 1 representing a barely acceptable performance. This means that the service performance assessment index for all the AS the aggregator provides is a weighted average of the root mean square (RMS) of the error in all service deliveries, thus satisfying [P-R3a]. With this index it is possible to evaluate aggregators that deliver more than one AS at a time, e.g. a frequency containment reserve and a replacement reserve, and assign a hierarchy of importance with respect to the services. However, how to do distinguish measurements to verify the services, and how to evaluate which service is more important, is out of scope of this work, but the definition of Eq.~\eqref{eq:TSGetaAS} takes the possibilities into account. In the case where only a single service delivery is considered, Eq.~\eqref{eq:TSGetaAS} is simply the RMS of the error in service delivery:
+\begin{equation}\label{eq:etaASsimp}
+\eta^{AS} = \sqrt{\frac{\sum^{N}_{t=0} \left( {QoS^{AS}_{t}}^{2} \right)}{N}},
+\end{equation}
+which satisfies [P-R1]. 
+
+Eq.~\eqref{eq:TSGetaAS} gives an idea of the performance of the aggregator where the duration of time delivery is taken into account. This means that two service provisions are evaluated equally when their error in service delivery compared to the duration of the service delivery are the same. %With these definitions, requirements \emph{R1}, \emph{R2} and \emph{R4} are fulfilled.
+
+%Similarly, the ability of the aggregator to deliver AMS as a whole can be measured with an index $\eta^{AMS}$ (Eq.~\eqref{eq:etaAMS}). In this instance, QoS is also clamped to $QoS^{AMS}_{M}(t) \in [0,1]$, and the amount of \emph{M} services are evaluated for their corresponding time horizon $N_M$:
+%\begin{equation}\label{eq:etaAMS}
+%\eta^{AMS} = \sum^{M}_{i=1} W^{AMS}_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {QoS^{AMS}_{i,t}}^{2} \right)}{N_i}}
+%\end{equation}
+%with $\eta^{AMS} \in [0,1]$ and $\sum_{i=1}^M W^{AMS}_i = 1$. Each of 
+
+%Finally, if the aggregator desires to have an internal overall evaluation of all the services it is providing, it can do so through a weighted mean of the service performance indices:
+%\begin{equation}
+%\eta_{tot} = \alpha \eta^{AS} + (1-\alpha) \eta^{AMS}, \quad \alpha \in [0,1]
+%\end{equation}
+%where $\alpha$ is the weight ratio the aggregator assigns to the performance of the services.
+
+\subsection{Verifying service delivery}
+Requirement \emph{P-R2} defines a reliability measure. To address this requirement, an index $\epsilon^{AS}$, similar to the service performance assessment index, is defined for verifying the delivery of AS\footnote{This can also be interpreted as evaluating non-delivery of service.}. Also, a non-delivery measure for the AS provision, $ND^{AS}$, is defined according to the expression:
+\begin{align}
+	ND^{AS}(t) = \begin{cases} QoS^{AS}_{meas}(t) - 1,\quad &\forall QoS^{AS}_{meas}(t) > 1, \forall t\\
+	0, \quad &\forall QoS^{AS}(t) \leq 1, \forall t.
+	\end{cases}\label{eq:ndasclamp}
+\end{align}
+%\begin{algorithmic}[H]
+%\FOR{ t = 0:$t_N $}
+%\FOR{ i = 0:K}
+%    \IF{$QoS^{AS}_{i,meas}(t)<1$} 
+%        \STATE $ND^{AS}(t) = 0$ 
+%    \ELSE 
+%        \STATE $ND^{AS}(t) = QoS^{AS}_{i,meas}(t)-1$
+%    \ENDIF
+%\ENDFOR
+%\ENDFOR
+%\end{algorithmic}
+Eq.~\eqref{eq:ndasclamp} shows that whenever the QoS of a service exceeds 1, i.e. the limit of what is an acceptable service provision, the amount with which it breaks the acceptable constraint is measured by \emph{ND}.
+$\epsilon^{AS}$ is calculated in the same way as $\eta^{AS}$ using $ND^{AS}_K(t)$ instead of $QoS^{AS}_{K}(t)$:
+
+\begin{equation}\label{eq:TSGepsilonAS}
+\epsilon^{AS} = \sum^{K}_{i=1} W_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {ND^{AS}_{i,t}}^{2} \right)}{N_i}}
+\end{equation}
+where $\epsilon^{AS} \in [0,\infty]$. This expression satisfies [P-R3b], and in the case where \emph{K=1} it also satisfies [P-R2].
+
+%Similarly, the non-delivery measure of the AMS $\epsilon^{AMS}$ is defined as:
+%\begin{equation}\label{eq:epsilonAMS}
+%\epsilon^{AMS} = \sum^{M}_{i=1} W_i \sqrt{\frac{\sum^{N_i}_{t=0} \left( {ND^{AMS}_{i,t}}^{2} \right)}{N_i}}.
+%\end{equation}
+
+Thus, $\epsilon$ is used to asses the severity of non-delivery events. For some systems it is critically important that $QoS(t)\leq1$ at any time, in which case $\epsilon$ should be close to zero for the contract to be considered respected. Other systems can tolerate $QoS(t)>1$ for some period, which leads to a higher acceptable $\epsilon$. A service delivery is verified if $\epsilon \leq \epsilon_{max}$, and this contractual limit, i.e. the value of $\epsilon_{max}$, must be assessed individually depending on the nature of the system. %It is likely that in most cases $\epsilon^{AS}_{max}<\epsilon^{AMS}_{max}$, since the security of the power system is more important than, e.g., the temperature comfort of a home owner.
+
+In \cite{bondy2014performance}, non-delivery is assesed using a non-delivery counter (NDC). $\epsilon$ differs from the NDC in that it both captures the time span of non-delivery and the magnitude of the violation, whereas NDC only captures the amount of time samples where non-delivery is detected. $\epsilon$ might prove advantageous over the NDC as a service verification index for some systems. A disadvantage of $\epsilon$ is that it might be a less intuitive measure to communicate to the service providers compared to the NDC.
+
+Fig. \ref{fig:RefErr} shows an example of reference tracking error service performance assessment. Deviations between $x_{meas}$ and $x_{ideal}$ inside the band defined by $x_{acc}$ will lead to $QoS<1$, while deviations outside the $x_{acc}$ band will lead to $QoS>1$. For this particular example $\eta^{AS}=0.7501$ and the service verification index is $\epsilon^{AS}=0.2324$, which indicates that generally the service provision is bad at following the reference, and also has a moderate amount of non-delivery. The service acquirer will have to decide whether this verification index value is acceptable or if it should lead to economical penalization or contract termination.
+
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{graphics/tsg/reftrack2.eps}
+\caption{Example of reference tracking error with performance $x_{meas}$, ideal performance $x_{ideal}$ and tolerance limits $x_{acc}$.}
+\label{fig:RefErr}
+\end{figure}
