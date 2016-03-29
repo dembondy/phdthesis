@@ -1,0 +1,30 @@
+- The utility value of a unit's capabilities is encoded in Kappa.
+- The consequences of a skewed distribution between the different characteristics under one kappa value depend on kappa.
+- kappa is an indirect expression of the risk associated with a particular resource, i.e. how much spare capacity may have to be allocated to mitigate that risk. (nonlinear, or?)
+- the market price for kappa is per unit (kW, MW...)
+
+14/10/15
+
+Kappa is a number that encapsulates the value of the response of a service provider
+
+Skype meeting:
+Distribution over the kappas, do we assume it?
+
+how are we convinced that the choice of using kappa to identify performance is better.
+
+20/01/2016
+
+Finish argumentation for not looking at tertiary
+
+Merge Oliver's comment on Sec. Freq. Cont.
+
+Esteban needs help to slash down on section 2.1.3, the main point to keep is "Until now, system operators
+have been able to arrest frequency excursions fast enough because of the inherent system inertia, but as the inertia decreases, faster response times are required of the primary frequency control." (could be merged with introduction to section 2.1)
+
+Section 2.2.1: simplify?
+
+Esteban commands Jason to address the comments.
+
+Clarify difference between the perfect resource and the optimal resource (related to the system need)
+
+Esteban: Spell out the performance in section 3.

@@ -158,7 +158,8 @@
       {2pt}% horizontal separation between label and title body
       {}
 \makeatother
-\titlespacing*{\section}{0pt}{4.5ex plus .5ex minus .2ex}{1.3ex plus .2ex minus .2ex}
+%\titlespacing*{\section}{0pt}{4.5ex plus .5ex minus .2ex}{1.3ex plus .2ex minus .2ex}
+\titlespacing*{\section}{0pt}{2\baselineskip}{1\baselineskip}
 % subsection format
 \titleformat{\subsection}%
   {\normalfont\sffamily}% format applied to label+text
@@ -166,6 +167,7 @@
   {1pt}
   {}
   []
+\titlespacing*{\subsection}{0pt}{2\baselineskip}{1\baselineskip}
 
 %% 
 % Formatting of the Table of Contents

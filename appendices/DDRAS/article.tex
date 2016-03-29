@@ -1,0 +1,99 @@
+%        File: article.tex
+%     Created: Fri Feb 27 03:00 PM 2015 P
+% Last Change: Work in progress
+% Created by Daniel Esteban Morales Bondy
+%
+\documentclass[a4paper,twocolumn,10pt]{article}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage[cmex10]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{soul}
+\usepackage{color}
+\usepackage[hyphens]{url}
+\usepackage[a4paper, margin=0.7in]{geometry}
+\graphicspath{{figs/}}
+\usepackage[normalem]{ulem}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+
+\definecolor{bblue}{rgb}{0.67, 0.9, 0.93}
+
+\newcommand\WhiteCell[1]{%
+  \multicolumn{1}{l}{\cellcolor{white}\textcolor{black}{#1}}
+}
+\newcommand{\bondy}[1]{\sethlcolor{red}\hl{#1\,[Esteban]}} 
+\newcommand{\olge}[1]{\sethlcolor{yellow}\hl{#1\,[Oliver]}} 
+\newcommand{\kh}[1]{\sethlcolor{green}\hl{#1\,[Kai]}} 
+\newcommand{\macd}[1]{\sethlcolor{bblue}\hl{#1\,[Jason]}} 
+\newcommand{\kara}[1]{\sethlcolor{orange}\hl{#1\,[Emre]}} 
+\newcommand{\sila}[1]{\sethlcolor{purple}\hl{#1\,[Sila]}} 
+% Front matter info
+\title{Redefining requirements of Ancillary Services for Technology Agnostic Sources}
+\author{Bondy, MacDonald, Kara, Gehrke, Heussen, Kiliccote, Bindner}
+\date{\vspace{-5ex}}
+\begin{document}
+\maketitle
+Main points of the paper:
+\begin{itemize}
+\item DR and other technologies have unused potential that TSOs are not utilizing
+\item This sub-optimality is due to current requirements oriented towards the lowest common denominator
+\item Two options for optimal utilization of new resources: split market or unify under new conditions
+\item We choose to unify by parametrizing the service definitions/requirements
+\end{itemize}}
+
+\section{Introduction}
+\input{content/introduction.tex}
+
+\section{Ancillary Services: Current Definitions and Requirements}
+\label{sec:currentas}
+\input{content/current.tex}
+
+\section{Unconventional Resources}
+\label{sec:ancsrvDR}
+\input{content/ancsrvDR_new.tex}
+
+\section{Restructuring the Ancillary Service Requirements}
+\label{sec:newas}
+\input{content/proposition_new.tex}
+
+%\section{Case study}
+%\label{sec:newas}
+%\input{content/casestudy.tex}
+
+%\section{Previous section 4}
+%\label{sec:newas}
+%\input{content/proposition.tex}
+
+\section{Case Study}
+\label{sec:casestudy}
+\input{content/casestudy.tex}
+
+\section{Discussion}
+\label{sec:discussion}
+\input{content/discussion.tex}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{content/conclusion.tex}
+\section*{Acknowledgments}
+We're going to ask for feedback from:
+\begin{itemize}
+	\item John Goodin (CAISO)
+	\item Paul Wattles (ERCOT)
+	\item Donna Pratt (NYISO)
+	\item Scott Baker (PJM)
+	\item Joe Eto (LBNL)($\surd$)
+	\item EirGrid (through Mark O'Malley)
+	\item Energinet.dk (Preben Nyeng? Peter Bruhn)
+\end{itemize}
+\bibliography{references/library.bib}{}
+\bibliographystyle{ieeetr}
+\end{document}
+
+
