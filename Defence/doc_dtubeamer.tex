@@ -41,10 +41,17 @@
 
 \usetheme[department=elektro,showsection=true]{DTU}
 
+\setbeamertemplate{section page}
+{
+\color{white} {\large \insertsection}
+%\par
+}
+
 \AtBeginSection[]{
-\begin{frame}[plain,noframenumbering]
-\insertsectionhead\par%
-\end{frame}
+\begingroup
+\setbeamercolor{background canvas}{bg=dtured}
+\frame[dtuwhitelogo,noframenumbering]{\sectionpage}
+\endgroup
 }
 
 \title[PhD defence]{Demand Response for a Secure Power System Operation}
@@ -127,10 +134,14 @@
 \frametitle{How do we ensure aggregator reliability?}
 \begin{itemize}
 \item[1.-] How do we validate aggregators?
-\item[2.-] Which are the service needs?
-\item[3.-] How do we quantify performance?
+\item[2.-] Which are the service needs aggregators satisfy?
+\item[3.-] How do we quantify performance in service delivery?
 \end{itemize}
 }
+
+
+
+
 \section{The Aggregator}
 \frame{
 \frametitle{A reference architecture is needed in order to\\ have a common understanding of what an aggregator is}
@@ -167,17 +178,99 @@
 
 \frame{
 \frametitle{Relevance of the reference architecture}
-
+Contributions/conclusions are listed here
 }
 
 \section{How do we validate aggregators?}
+
 \frame{
-\frametitle{Current procedures are insufficient due to the \\ differences between aggregators and generators}
+\frametitle{Aggregators are essentialy different from generators}
+\begin{columns}[c,onlytextwidth]
+	\begin{column}{.5\textwidth}
+	\setlength{\partopsep}{0pt}
+		\begin{itemize}
+			\item[] Heterogeneous in composition: can not be described by a single equation
+			\item[] Geograghically distributed: no single point of measurement
+			\item[] Different failure modes: reliability must be evaluated differently
+			\item[] Architectures vary: new operating conditions are relevant
+		\end{itemize}
+	\end{column}
+	
+	\begin{column}{.5\textwidth}
+		\begin{center}
+			\begin{figure}
+			\includegraphics[width=0.8\textwidth]{figures/primfreqresp2.eps}
+			\caption{Example of an aggregator response to step input.}
+			\end{figure}
+		\end{center}
+	\end{column}
+\end{columns}
 }
 
-\section{Service Modeling and Requirements}
+\frame{
+\frametitle{Current procedures are insufficient due to the \\ differences between aggregators and generators}
+%\setbeamercovered{transparent}
+\begin{columns}[c,onlytextwidth]
+	\begin{column}{.5\textwidth}
+	\setlength{\partopsep}{0pt}
+		\only<1>{Current procedure:}
+		\only<2->{New procedure:}
+		\only<1>{
+		\begin{itemize}
+			\item[] Documentation
+			\item[] Prequalification test
+		\end{itemize}
+		}
+		\only<2->{
+		\begin{itemize}
+			\item[] Documentation
+			\item[] Simulation test
+			\item[] Prequalification test \& Monitoring
+		\end{itemize}
+		}
+	\end{column}
+	
+	\begin{column}{.5\textwidth}
+		\begin{center}
+			\begin{figure}
+			\includegraphics[width=\textwidth]{figures/swissresponse.eps}
+			\caption{Prequalification signal in SwissGrid}
+			\end{figure}
+		\end{center}
+	\end{column}
+\end{columns}
+}
 
-\section{Performance Assessment and Verification of Services}
+\frame{
+\frametitle{Validation of aggregators must rely on \\ statistical Design of Experiments}
+\begin{columns}[c,onlytextwidth]
+	\begin{column}{.5\textwidth}
+	\setlength{\partopsep}{0pt}
+		New procedure:
+		\begin{itemize}
+			\item[] Documentation
+			\item[] Prequalification test
+		\end{itemize}
+		
+	\end{column}
+	
+	\begin{column}{.5\textwidth}
+		\begin{center}
+			\begin{figure}
+			\includegraphics[width=0.7\textwidth]{figures/framework.eps}
+			\caption{Conceptual validation framework}
+			\end{figure}
+		\end{center}
+	\end{column}
+\end{columns}
+}
+
+
+{\setbeamercolor{background canvas}{bg=black}
+\frame[dtuwhitelogo]{some text}}
+\section{Which are the service needs aggregators satisfy?}
+
+\section{How do we quantify performance in service delivery?}
 
 
 %{
