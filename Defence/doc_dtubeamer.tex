@@ -7,6 +7,8 @@
 \pgfplotsset{compat=newest}
 \usepackage{booktabs}
 \usepackage{siunitx}
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \usepackage{tikz}
 
@@ -31,7 +33,7 @@
 \usepackage{mathtools}
 
 \usepackage{unicode-math}
-\setmathfont{TeX Gyre Pagella Math}
+%\setmathfont{Latin Modern}
 
 % Latin Modern
 %\usepackage{lmodern}
@@ -66,8 +68,25 @@
 \newcommand{\tabitem}{{\color{dtured}$\bullet$} }
 
 \begin{document}
-\frame{
+\frame[noframenumbering]{
 	\maketitle
+}
+
+\frame{
+\frametitle{With support from:}
+\begin{figure}
+	\begin{minipage}[b]{0.7\linewidth}
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/iPower_Logo.eps}
+	%\caption{The traditional power system, where energy flows from producer to consumer.}
+	\end{minipage}
+	\hspace{3cm}
+	\begin{minipage}[b]{0.3\linewidth}
+	\centering
+	\includegraphics[width=\textwidth]{figures/PowerLab_logo.pdf}
+	%\caption{The future power system includes renewable generation and advanced ICT.}
+	\end{minipage}
+\end{figure}
 }
 
 \frame{
@@ -131,6 +150,21 @@
 }
 
 \frame{
+\frametitle{New sources for ancillary services are needed}
+\ocs
+\oc
+
+\ec
+\oc
+\begin{itemize}
+\item[] Ancillary services are critical
+\item[] We need to rethink the operation of the system
+\item[] Demand response of DERs can provide services
+\end{itemize}
+\ec
+\ecs
+}
+\frame{
 \frametitle{The Demand Response Aggregator \\ is a new service provider}
 \begin{figure}
 \centering
@@ -144,6 +178,11 @@
 \frametitle{How do we ensure aggregator reliability?}
 \ocs
 \oc
+\begin{figure}
+\centering
+\includegraphics[width = 0.7\textwidth]{figures/framework3.eps}
+\caption{Guiding concept behind the research.}
+\end{figure}
 \ec
 \oc
 \begin{itemize}
@@ -180,7 +219,7 @@
 \ecs
 }
 \frame{
-\frametitle{AggrefArch}
+\frametitle{A reference architecture for describing the aggregator}
 		\begin{center}
 		\begin{figure}
 		\includegraphics[width=.6\textwidth]{figures/diag_simple3.eps}
@@ -190,34 +229,35 @@
 }
 
 \frame{
-\frametitle{Relevance of the reference architecture}
-Contributions/conclusions are listed here
+\frametitle{Example: OpenEnergi}
+\begin{center}
+		\begin{figure}
+		\includegraphics[width=.6\textwidth]{figures/stackdrawing_openenergi.eps}
+		\caption{OpenEnergi is a fully distributed aggregator.}
+		\end{figure}
+		\end{center}
+
+}
+
+\frame{
+\frametitle{Contributions}
+\ocs
+\oc
+\ec
+\oc
+A candidate reference architecture with the purpose of:
+\begin{itemize}
+\item[] Defining a standard lexicon
+\item[] Identifying the required functionality for an effective aggregator
+\end{itemize}
+\ec
+\ecs
+
 }
 
 \section{How do we validate aggregators?}
 
-\frame{
-\frametitle{Aggregators are essentialy different from generators}
-\ocs
-	\oc
-		\begin{center}
-			\begin{figure}
-			\includegraphics[width=0.8\textwidth]{figures/primfreqresp2.eps}
-			\caption{Example of an aggregator response to step input.}
-			\end{figure}
-		\end{center}
-	\ec
-	\oc
-	\setlength{\partopsep}{0pt}
-		\begin{itemize}
-			\item[] Heterogeneous in composition: can not be described by a single equation
-			\item[] Geograghically distributed: no single point of measurement
-			\item[] Different failure modes: reliability must be evaluated differently
-			\item[] Architectures vary: new operating conditions are relevant
-		\end{itemize}
-	\ec
-\ecs
-}
+
 
 \frame{
 \frametitle{Current procedures are insufficient due to the \\ differences between aggregators and generators}
@@ -227,7 +267,7 @@ Contributions/conclusions are listed here
 		\begin{center}
 			\begin{figure}
 			\includegraphics[width=\textwidth]{figures/swissresponse.eps}
-			\caption{Prequalification signal in SwissGrid}
+			\caption{Prequalification test in SwissGrid}
 			\end{figure}
 		\end{center}
 	\ec
@@ -248,6 +288,29 @@ Contributions/conclusions are listed here
 			\item[] Prequalification test \& Monitoring
 		\end{itemize}
 		}
+	\ec
+\ecs
+}
+
+\frame{
+\frametitle{Aggregators are essentialy different from generators}
+\ocs
+	\oc
+		\begin{center}
+			\begin{figure}
+			\includegraphics[width=0.8\textwidth]{figures/primfreqresp2.eps}
+			\caption{Example of an aggregator response to step input.}
+			\end{figure}
+		\end{center}
+	\ec
+	\oc
+	\setlength{\partopsep}{0pt}
+		\begin{itemize}
+			\item[] Heterogeneous in composition: not necessarily described through analytical methods
+			\item[] Geograghically distributed: no single point of measurement
+			\item[] Different failure modes: reliability must be evaluated differently
+			\item[] Architectures vary: new operating conditions are relevant
+		\end{itemize}
 	\ec
 \ecs
 }
@@ -300,8 +363,17 @@ Contributions/conclusions are listed here
 }
 
 \frame{
-\frametitle{Perspective on contributions}
-contributions go here...
+\frametitle{Contributions}
+\ocs
+\oc
+\ec
+\oc
+Expansion of traditional methods for prequalification:
+\begin{itemize}
+\item[] Application of Design of Experiments concepts to the statistical validation of aggregators
+\end{itemize}
+\ec
+\ecs
 }
 
 
@@ -346,10 +418,10 @@ contributions go here...
 \begin{enumerate}
   \item Identify the parameters required for assessing the service delivery ($n_{del}$)
   \item Identify the relation between system parameters ($n_{k}$) and required service
-  \item Quantify the physical volume of the service;
+  \item Quantify the physical volume of the service
   \item Characterize the boundaries of service delivery
   \item Develop mappings for ideal and acceptable service provision, $h_{id}:\mathbb{R}^{n_{k}}\rightarrow \mathbb{R}^{n_{id}}$, and  $h_{ac}:\mathbb{R}^{n_{k}}\times\mathbb{R}^{n_{id}}\rightarrow \mathbb{R}^{n_{ac}}$ 
-  \item Establish a measure for acceptable aggregation for the measurement of service delivery $h_{m}:\mathbb{R}^{n_{m}}\rightarrow \mathbb{R}^{n_{del}}$, and the service error $h_{e}:\mathbb{R}^{n_{id}}\times\mathbb{R}^{n_{del}}\rightarrow \mathbb{R}$.
+  \item Establish a measure for acceptable aggregation for the measurement of service delivery $h_{m}:\mathbb{R}^{n_{m}}\rightarrow \mathbb{R}^{n_{del}}$, and the service error $h_{e}:\mathbb{R}^{n_{id}}\times\mathbb{R}^{n_{del}}\rightarrow \mathbb{R}$
 \end{enumerate}
 }
 \frame{
@@ -379,10 +451,10 @@ contributions go here...
 \ec
 \oc
 \begin{equation*}
-h_{e}:~~e(t) = x_{del}(t) - x_{ideal}(t),
+e(t) = x_{del}(t) - x_{ideal}(t),
 \end{equation*}
 \begin{align*}
-h_{ac}:~~&x_{acc,max}(t) = x_{ideal}(t) + c_{max}(t), \\
+&x_{acc,max}(t) = x_{ideal}(t) + c_{max}(t), \\
 &x_{acc,min}(t) = x_{ideal}(t) - c_{min}(t),
 \end{align*}
 \ec
@@ -402,7 +474,7 @@ h_{ac}:~~&x_{acc,max}(t) = x_{ideal}(t) + c_{max}(t), \\
 \ec
 \oc
 \begin{equation*}
-h_{e}:~~e(t)=
+e(t)=
 \begin{cases}
 x_{del}(t) - x_{min}(t) , \quad x_{del}(t) < x_{min}(t)  \\
 0, \qquad x_{min}(t) \leq x_{del}(t) \leq x_{max}(t) \\
@@ -410,7 +482,7 @@ x_{del}(t) - x_{max}(t), \quad  x_{del}(t)  > x_{max}(t)
 \end{cases}
 \end{equation*}
 \begin{align*}
-h_{ac}:~~&x_{acc,max}(t) = x_{max}(t) + c_{max}(t), \\
+&x_{acc,max}(t) = x_{max}(t) + c_{max}(t), \\
 &x_{acc,min}(t) = x_{min}(t) - c_{min}(t)
 \end{align*}
 \ec
@@ -429,14 +501,14 @@ h_{ac}:~~&x_{acc,max}(t) = x_{max}(t) + c_{max}(t), \\
 \ec
 \oc
 \begin{equation*}
-h_{e}:~~e(t)=
+e(t)=
 \begin{cases}
 x_{del}(t)-x_{max}(t), & x_{del}(t) > x_{max}(t) \\
 0, & x_{del}(t) \leq x_{max}(t)
 \end{cases}
 \end{equation*}
 \begin{equation*}
-h_{ac}:~~x_{acc,max} = x_{max}(t) + c_{max}(t)
+x_{acc,max} = x_{max}(t) + c_{max}(t)
 \end{equation*}
 \ec
 \ecs
@@ -446,14 +518,241 @@ h_{ac}:~~x_{acc,max} = x_{max}(t) + c_{max}(t)
 \frametitle{Ancillary service reserves are contracted based \\ on the least common denominator for performance}
 \begin{center}
 \begin{figure}
-\includegraphics[width=0.7\textwidth]{figures/traditional_reserve_dim.pdf}
-\caption{Traditional reserve dimensioning is based upon offline static analysis.}
+\includegraphics[width=0.95\textwidth]{figures/traditional_reserve_dim.pdf}
+\caption{Traditional reserve procurement is based upon offline static analysis.}
 \end{figure}
 \end{center}
 }
+
+\frame{
+\frametitle{New resources have different properties \\ that are beneficial to the system}
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.95\textwidth]{figures/new_reserve_dim.pdf}
+\caption{Modern reserve procurement should take the different resource capabilities into account.}
+\end{figure}
+\end{center}
+}
+
+\frame{
+\frametitle{Ancillary service requirements need to be \\ redefined for technology agnostic resources}
+\ocs
+\oc
+\ec
+\oc
+The overall approach to restructuring ancillary services:
+\begin{enumerate}
+\item Formulate an ideal response
+\item Parametrize the ancillary service bid
+\item Calculate the capability value of a unit according to its parameters
+\item Clear all units under a generalized single clearing-price auction
+\item Performance-based remuneration
+\end{enumerate}
+\ec
+\ecs
+}
+
+\frame{
+\frametitle{Example: Frequency Containment Reserve \\ SYSLAB experiment}
+\ocs
+\oc
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{figures/primary_frequency_control_ideal.eps}
+\caption{The desired ideal response depends on the inertia of the system.}
+\end{figure}
+\end{center}
+\ec
+\oc
+Required ideal response:
+\begin{equation*}
+V_{TSO}=f\left(\tau^r_{TSO},\tau^d_{TSO},C_{TSO}\right)
+\end{equation*}
+
+Bids from service providers:
+\begin{equation*}
+\text{Bid} = \left(  \tau^r_i,\tau^d_i,C_i, P^\mathtt{bid}_i\right)
+\end{equation*}
+\ec
+\ecs
+}
+
+\frame{
+\frametitle{Example: Frequency Containment Reserve \\ SYSLAB experiment (continued)}
+Capability value: $$	\kappa_i = \alpha_1 \frac{\tau_{r,0}}{\max({\tau_{r,0},\tau_{r,i})}} + \alpha_2  \frac{\min(\tau_{d,0},\tau_{d,i})}{\tau_{d,0}} + \alpha_3 \frac{V_i}{V_{tot}}, \quad \forall \, i \in \Omega,\sum_{i} \alpha_i = 1 $$ 
+Market clearing:
+\begin{align*}
+      \Omega^\mathtt{acc} = \argmin_{\Omega \in \mathcal P(\Omega^{rec})}  \sum_{i\in \Omega}& { \kappa_i P^\mathtt{clear} }   \\
+      \mathtt{s.t.}  \sum_{i\in \Omega} \left(1-\eta_i \right) V_{i} & \geq V_{TSO}\\
+       P^\mathtt{clear} &= \max P^\mathtt{bid}_i\\
+       \epsilon_{i} & \leq \epsilon_{max}
+\end{align*}
+Performance based remuneration:
+$$ P^\mathtt{rem}_i = \left( 1 - \eta_i\right) \kappa_i  P^\mathtt{clear} V_i \qquad \forall i \in \Omega^\mathtt{acc} $$
+}
+
+\frame{
+\frametitle{Example: Frequency Containment Reserve\\ SYSLAB experiment results}
+\begin{figure}
+	\begin{minipage}[b]{0.45\linewidth}
+	\centering
+	\includegraphics[width=\columnwidth]{figures/MeritOrder}
+	\caption{Clearing according to merit order.}
+	\end{minipage}
+	\hspace{1cm}
+	\begin{minipage}[b]{0.45\linewidth}
+	\centering
+	\includegraphics[width=\columnwidth]{figures/newClearing}%
+	\caption{Clearing according to capability value.}
+	\end{minipage}
+\end{figure} 
+}
+
+\frame{
+\frametitle{Contributions}
+\ocs
+\oc
+\ec
+\oc
+Enabled the delivery of services from aggregators by:
+\begin{itemize}
+\item[] General method for modeling services
+\item[] Redefinition of ancillary service requirements 
+\end{itemize}
+\ec
+\ecs
+}
 \section{How do we quantify performance in service delivery?}
+\frame{
+\frametitle{Service Performance Assessment is useful \\ at various stages of service delivery}
+\ocs
+\oc
+\ec
+\oc
+\begin{itemize}
+\item[] Prequalification process
+\item[] Monitoring during delivery
+\item[] Verification post-delivery
+\item[] Financial settlement
+\end{itemize}
+\ec
+\ecs
+}
 
+\frame{
+\frametitle{Performance indices inspired from process control:\\ Control Performance Assessment}
+\ocs
+\oc
+\ec
+\oc
+Desired indices:
+\begin{align*}
+    \text{[SPI]:} \quad & \eta = f_P(x_{del},\mathbf{x}_{acc},t), \quad \eta \in [0,1]\\
+    \text{[SVI]:} \quad & \epsilon = f_R(x_{del},\mathbf{x}_{acc},t)
+\end{align*}
+\ec
+\ecs
+}
+\frame{
+\frametitle{Quality of Service is defined  \\ by the service error models}
+\ocs
+\oc
+\ec
+\oc
+Quality of service defined by:
+$$ QoS(t) = e(t) C_n (t)$$
 
+Scaling factor defined by:
+\begin{equation*}
+C_{n}(t) = 
+\begin{cases}
+\frac{1}{x_{acc,max}(t) - x_{max}(t)}, & e(t) \geq 0 \\
+\frac{1}{x_{acc,min}(t) - x_{min}(t)}, & e(t) < 0
+\end{cases}
+\end{equation*}
+\ec
+\ecs
+}
+\frame{
+\frametitle{Visual representation of QoS}
+\begin{figure}
+	\begin{minipage}[b]{0.3\linewidth}
+	\centering
+	\includegraphics[width=\columnwidth]{figures/tracking_error2}\\
+	\includegraphics[width=\columnwidth]{figures/tracking_error3}
+	\caption{QoS of reference tracking services.}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.3\linewidth}
+	\centering
+	\includegraphics[width=\columnwidth]{figures/band_error2}\\
+	\includegraphics[width=\columnwidth]{figures/band_error3}
+	\caption{QoS of band services.}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.3\linewidth}
+	\centering
+	\includegraphics[width=\columnwidth]{figures/cap_error2}\\
+	\includegraphics[width=\columnwidth]{figures/cap_error3}
+	\caption{QoS of cap services.}
+	\end{minipage}
+\end{figure} 
+}
+\frame{
+\frametitle{The Service Performance Index evaluates \\ performance within the acceptable bounds}
+\ocs
+\begin{column}{.4\textwidth}
+\ec
+\begin{column}{.6\textwidth}
+We truncate the measured error:
+\begin{align*}
+	QoS^{AS}(t) = \begin{cases} QoS^{AS}_{meas}(t) ,\quad &\forall QoS^{AS}_{meas}(t) \leq 1, \forall t\\
+	1, \quad &\forall QoS^{AS}_{meas}(t) > 1, \forall t
+	\end{cases}
+\end{align*}
+
+We define the SPI as:
+\begin{equation*}
+\eta^{AS} = \sqrt{\frac{\sum^{N}_{t=0} \left( {QoS^{AS}_{t}}^{2} \right)}{t_N}} 
+\end{equation*}
+\ec
+\ecs
+}
+\frame{
+\frametitle{The Service Verification Index evaluates \\ the non-delivery of service}
+\ocs
+\begin{column}{.4\textwidth}
+\ec
+\begin{column}{.6\textwidth}
+We only measure error outside the acceptable bounds:
+\begin{align*}
+	ND^{AS}(t) = \begin{cases} QoS^{AS}_{meas}(t) - 1,\quad &\forall QoS^{AS}_{meas}(t) > 1, \forall t\\
+	0, \quad &\forall QoS^{AS}(t) \leq 1, \forall t
+	\end{cases}
+\end{align*}
+
+We define the SVI as:
+\begin{equation}
+\epsilon^{AS} = \sqrt{\frac{\sum^{N}_{t=0} \left( {ND^{AS}_{t}}^{2} \right)}{t_N}}
+\end{equation}
+\ec
+\ecs
+}
+
+\frame{
+\frametitle{Contributions}
+\ocs
+\oc
+\ec
+\oc
+We enable evaluation of aggregators by applying concepts from process control:
+\begin{itemize}
+\item[] Service Performance Index
+\item[] Service Verification Index
+\end{itemize}
+\ec
+\ecs
+}
 %{
 %\setbeamercolor{background canvas}{bg=black} % Background color
 %	\frame[dtuwhitelogo]{
@@ -463,12 +762,53 @@ h_{ac}:~~x_{acc,max} = x_{max}(t) + c_{max}(t)
 %}
 
 \section{Conclusion}
+\frame{
+\frametitle{New operation methods must be developed \\ in order to cope with fluctuating renewable resources}
+\ocs
+\oc
+	\begin{center}
+	\begin{figure}
+	\includegraphics[width=0.7\textwidth]{figures/framework2.eps}
+	\caption{Conceptual framework for aggregator validation}
+	\end{figure}
+	\end{center}
+\ec
+\oc
+\begin{itemize}
+\item[] Service Specification:
+\begin{itemize}
+\item Procedure for generic service modeling
+\item Redefinition of ancillary service requirements
+\end{itemize}
+\item[] Aggregator prequalification:
+\begin{itemize}
+\item Documentation through functional reference architecture
+\item Application of DoE to aggregator validation
+\end{itemize}
+\item[] Service Verification:
+\begin{itemize}
+\item Application of CPA concepts to the verification of service delivery
+\item Service Performance Index
+\item Service Verification Index
+\end{itemize}
+\end{itemize}
+\ec
+\ecs
+}
 
 \frame{
 \frametitle{Further work}
-operation scenarios\\
-matching simulation to tests\\
-$h_n$\\
+\ocs
+\oc
+\ec
+\oc
+\begin{itemize}
+\item[] Operation scenario descriptions
+\item[] How do you validate simulations with physical tests
+\item[] How do you map measurement aggregation to service delivery: $h_n$
+\end{itemize}
+\ec
+\ecs
 }
 
 
@@ -479,7 +819,7 @@ $h_n$\\
   \begin{tabular}{lr}
     \multicolumn{2}{l}{Daniel Esteban Morales Bondy} \\ 
     \multicolumn{2}{l}{CEE, Technical University of Denmark (DTU)} \\ \midrule
-    Building 776, Room 119    & bondy@elektro.dtu.dk. \\
+    Building 776, Room 05    & bondy@elektro.dtu.dk. \\
     4000 Roskilde, Denmark & +45 30139930
   \end{tabular}
 }%
