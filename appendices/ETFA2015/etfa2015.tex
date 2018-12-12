@@ -74,7 +74,7 @@ We have now established a set of functions to serve as building blocks for a ref
 The functions in section \ref{sec:funcdec} generally belong to one of the following categories:
 \begin{itemize}
 \item functions dedicated to communication between physically separate parts of the aggregator infrastructure or communication with 3rd party entities, i.e. enablers of the distributed nature of the system.
-\m functions which perform decisions with regards to flexibility asset behavior and portfolio composition.
+\item functions which perform decisions with regards to flexibility asset behavior and portfolio composition.
 \item functions which interpret information and support the decision making functions. 
 \end{itemize}
 These categories represent requirements for different architectural paradigms: Communication functions are layered or hierarchical, and, in the case of communication between aggregator and client, require an identically layered counterpart at the opposite end. The decision making and interpreter functions on the other hand require many hierarchical and non-hierarchical consumer-producer relations. % The interpreter functions generally exist in direct relationship with the decision making functions. %The knowledge exchange function, storing the different elements of system state, provides a link between these two worlds.  
